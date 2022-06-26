@@ -1,6 +1,5 @@
 package com.dscoding.takenoteapp.feature_note.presentation.list_notes.components
 
-import android.support.v4.os.IResultReceiver
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width

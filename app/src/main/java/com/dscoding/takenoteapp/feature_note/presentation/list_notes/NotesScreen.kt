@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.dscoding.takenoteapp.feature_note.presentation.Screen
 import com.dscoding.takenoteapp.feature_note.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.feature_note.presentation.list_notes.components.OrderSection
+import com.dscoding.takenoteapp.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
@@ -55,8 +55,8 @@ fun NotesScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Your note",
-                        style = MaterialTheme.typography.h4
+                        text = "Take Note!",
+                        style = MaterialTheme.typography.h5
                     )
                     IconButton(
                         onClick = {

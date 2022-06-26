@@ -6,7 +6,7 @@ import com.dscoding.takenoteapp.feature_note.domain.model.Note
 
 @Database(entities = [Note::class], version = 1)
 
-abstract class NoteDatabase: RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
     abstract val noteDao: NoteDao
 
     companion object {

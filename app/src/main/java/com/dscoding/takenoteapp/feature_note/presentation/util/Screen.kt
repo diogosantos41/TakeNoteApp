@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.feature_note.presentation
+package com.dscoding.takenoteapp.feature_note.presentation.util
 
 sealed class Screen(val route: String) {
     object NotesScreen: Screen("notes_screen")
