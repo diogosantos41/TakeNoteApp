@@ -2,10 +2,10 @@ package com.dscoding.takenoteapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.dscoding.takenoteapp.feature_note.data.data_source.NoteDatabase
-import com.dscoding.takenoteapp.feature_note.data.repository.NoteRepositoryImpl
-import com.dscoding.takenoteapp.feature_note.domain.repository.NoteRepository
-import com.dscoding.takenoteapp.feature_note.domain.use_case.*
+import com.dscoding.takenoteapp.data.data_source.NoteDatabase
+import com.dscoding.takenoteapp.data.repository.NoteRepositoryImpl
+import com.dscoding.takenoteapp.domain.repository.NoteRepository
+import com.dscoding.takenoteapp.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
