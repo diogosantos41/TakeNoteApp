@@ -7,9 +7,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -19,9 +23,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -35,7 +41,7 @@ fun AddEditNoteScreen(
 ) {
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
-
+    val isEditingNoteState = viewModel.isEditingNote
     val scaffoldState = rememberScaffoldState()
 
     val noteBackgroundAnimatable = remember {
@@ -44,6 +50,9 @@ fun AddEditNoteScreen(
         )
     }
     val scope = rememberCoroutineScope()
+
+    val generalMargin = dimensionResource(R.dimen.general_margin)
+
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -61,14 +70,48 @@ fun AddEditNoteScreen(
     }
 
     Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    viewModel.onEvent(AddEditNoteEvent.SaveNote)
+        topBar = {
+            TopAppBar(
+                title = {
+
                 },
-                backgroundColor = MaterialTheme.colors.primary
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigateUp() }) {
+                        Icon(Icons.Default.ArrowBack, "BacK Arrow")
+                    }
+                },
+                backgroundColor = noteBackgroundAnimatable.value,
+                elevation = 0.dp
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                viewModel.onEvent(AddEditNoteEvent.SaveNote)
+            }) {
+                if (isEditingNoteState.value) {
+                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit note")
+                } else {
+                    Icon(imageVector = Icons.Default.Done, contentDescription = "Save note")
+                }
+            }
+        },
+        isFloatingActionButtonDocked = true,
+        bottomBar = {
+            BottomAppBar(
+                cutoutShape = MaterialTheme.shapes.small.copy(
+                    CornerSize(percent = 50)
+                )
             ) {
-                Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
+                if (isEditingNoteState.value) {
+                    IconButton(
+                        onClick = { },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete note",
+                        )
+                    }
+                }
             }
         },
         scaffoldState = scaffoldState,
@@ -77,7 +120,12 @@ fun AddEditNoteScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(noteBackgroundAnimatable.value)
-                    .padding(16.dp)
+                    .padding(
+                        generalMargin,
+                        generalMargin,
+                        generalMargin,
+                        padding.calculateBottomPadding()
+                    )
             ) {
                 Row(
                     modifier = Modifier
@@ -139,6 +187,7 @@ fun AddEditNoteScreen(
                         viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                     },
                     isHintVisible = contentState.isHintVisible,
+                    singleLine = false,
                     textStyle = MaterialTheme.typography.body1,
                     modifier = Modifier.fillMaxHeight()
                 )

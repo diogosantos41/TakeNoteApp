@@ -5,18 +5,21 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
+import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
@@ -32,15 +35,48 @@ fun NotesScreen(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    val generalMargin = dimensionResource(R.dimen.general_margin)
+
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(Screen.AddEditNoteScreen.route)
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            ) {
+            FloatingActionButton(onClick = {
+                navController.navigate(Screen.AddEditNoteScreen.route)
+            }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
+            }
+        },
+        isFloatingActionButtonDocked = true,
+        bottomBar = {
+            BottomAppBar(
+                // Defaults to null, that is, No cutout
+                cutoutShape = MaterialTheme.shapes.small.copy(
+                    CornerSize(percent = 50)
+                )
+            ) {
+                IconButton(
+                    onClick = { },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search notes",
+                    )
+                }
+                IconButton(
+                    onClick = { },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Label,
+                        contentDescription = "Label",
+                    )
+                }
+                IconButton(
+                    onClick = { },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = "Settings",
+                    )
+                }
             }
         },
         scaffoldState = scaffoldState,
@@ -48,15 +84,22 @@ fun NotesScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(
+                        generalMargin,
+                        0.dp,
+                        generalMargin,
+                        padding.calculateBottomPadding()
+                    )
             ) {
+                GreetingSection()
+                Spacer(modifier = Modifier.height(generalMargin))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Take Note!",
+                        text = "Notes",
                         style = MaterialTheme.typography.h5
                     )
                     IconButton(
@@ -78,14 +121,14 @@ fun NotesScreen(
                     OrderSection(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 16.dp),
+                            .padding(vertical = generalMargin),
                         noteOrder = state.noteOrder,
                         onOrderChange = {
                             viewModel.onEvent(NotesEvent.Order(it))
                         }
                     )
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(generalMargin))
                 if (state.notes.isEmpty()) {
                     EmptyListAlert()
                 } else {
@@ -114,7 +157,7 @@ fun NotesScreen(
                                     }
                                 }
                             )
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(generalMargin))
                         }
                     }
                 }
@@ -122,5 +165,7 @@ fun NotesScreen(
         }
     )
 }
+
+
 
 

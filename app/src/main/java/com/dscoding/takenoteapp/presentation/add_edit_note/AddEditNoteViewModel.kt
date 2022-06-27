@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.domain.model.InvalidNoteException
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
+import com.dscoding.takenoteapp.presentation.list_notes.NotesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -35,8 +36,16 @@ class AddEditNoteViewModel @Inject constructor(
     )
     val noteContent: State<NoteTextFieldState> = _noteContent
 
-    private val _noteColor = mutableStateOf<Int>(Note.noteColors.random().toArgb())
+    private val _state = mutableStateOf(AddEditNoteState(
+        noteColor = Note.noteColors.random().toArgb(),
+        isEditingNote = false))
+    val state: State<AddEditNoteState> = _state
+
+    private val _noteColor = mutableStateOf(Note.noteColors.random().toArgb())
     val noteColor: State<Int> = _noteColor
+
+    private val _isEditingNote = mutableStateOf(false)
+    val isEditingNote: State<Boolean> = _isEditingNote
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
@@ -58,6 +67,7 @@ class AddEditNoteViewModel @Inject constructor(
                             isHintVisible = false
                         )
                         _noteColor.value = note.color
+                        _isEditingNote.value = true
                     }
                 }
             }
@@ -112,6 +122,9 @@ class AddEditNoteViewModel @Inject constructor(
                         )
                     }
                 }
+            }
+            is AddEditNoteEvent.DeleteNote -> {
+                // TODO Delete Note
             }
         }
     }

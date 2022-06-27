@@ -41,8 +41,6 @@ fun TransparentHintTextField(
                 .onFocusChanged {
                     onFocusChange(it)
                 },
-            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Text),
         )
         if (isHintVisible) {
             Text(text = hint, style = textStyle, color = Color.DarkGray)
