@@ -48,7 +48,6 @@ fun NotesScreen(
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
-                // Defaults to null, that is, No cutout
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -70,7 +69,7 @@ fun NotesScreen(
                     )
                 }
                 IconButton(
-                    onClick = { },
+                    onClick = { navController.navigate(Screen.SettingsScreen.route) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Settings,
