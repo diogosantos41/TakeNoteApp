@@ -2,10 +2,7 @@ package com.dscoding.takenoteapp.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dscoding.takenoteapp.ui.theme.blue
-import com.dscoding.takenoteapp.ui.theme.green
-import com.dscoding.takenoteapp.ui.theme.pink
-import com.dscoding.takenoteapp.ui.theme.red
+import com.dscoding.takenoteapp.ui.theme.*
 
 @Entity
 data class Note(
@@ -16,7 +13,7 @@ data class Note(
     @PrimaryKey val id: Int? = null
 ) {
     companion object {
-        val noteColors = listOf(pink, red, blue, green)
+        val noteColors = listOf(darkGrey, pink, red, blue, green)
     }
 }
 

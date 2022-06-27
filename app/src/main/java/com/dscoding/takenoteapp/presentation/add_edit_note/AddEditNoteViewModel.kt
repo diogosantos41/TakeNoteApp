@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.domain.model.InvalidNoteException
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
-import com.dscoding.takenoteapp.presentation.list_notes.NotesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -36,28 +35,26 @@ class AddEditNoteViewModel @Inject constructor(
     )
     val noteContent: State<NoteTextFieldState> = _noteContent
 
-    private val _state = mutableStateOf(AddEditNoteState(
-        noteColor = Note.noteColors.random().toArgb(),
-        isEditingNote = false))
+    private val _state = mutableStateOf(
+        AddEditNoteState(
+            noteColor = Note.noteColors.random().toArgb(),
+            isEditingNote = false
+        )
+    )
+
     val state: State<AddEditNoteState> = _state
-
-    private val _noteColor = mutableStateOf(Note.noteColors.random().toArgb())
-    val noteColor: State<Int> = _noteColor
-
-    private val _isEditingNote = mutableStateOf(false)
-    val isEditingNote: State<Boolean> = _isEditingNote
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private var currentNoteId: Int? = null
+    private var currentSelectedNote: Note? = null
 
     init {
         saveStateHandle.get<Int>("noteId")?.let { noteId ->
             if (noteId != -1) {
                 viewModelScope.launch {
                     noteUseCases.getNote(noteId)?.also { note ->
-                        currentNoteId = note.id
+                        currentSelectedNote = note
                         _noteTitle.value = noteTitle.value.copy(
                             text = note.title,
                             isHintVisible = false
@@ -66,8 +63,10 @@ class AddEditNoteViewModel @Inject constructor(
                             text = note.content,
                             isHintVisible = false
                         )
-                        _noteColor.value = note.color
-                        _isEditingNote.value = true
+                        _state.value = state.value.copy(
+                            noteColor = note.color,
+                            isEditingNote = true
+                        )
                     }
                 }
             }
@@ -99,7 +98,9 @@ class AddEditNoteViewModel @Inject constructor(
                 )
             }
             is AddEditNoteEvent.ChangeColor -> {
-                _noteColor.value = event.color
+                _state.value = state.value.copy(
+                    noteColor = event.color
+                )
             }
             is AddEditNoteEvent.SaveNote -> {
                 viewModelScope.launch {
@@ -109,8 +110,8 @@ class AddEditNoteViewModel @Inject constructor(
                                 title = noteTitle.value.text,
                                 content = noteContent.value.text,
                                 timestamp = System.currentTimeMillis(),
-                                color = noteColor.value,
-                                id = currentNoteId
+                                color = state.value.noteColor,
+                                id = currentSelectedNote?.id
                             )
                         )
                         _eventFlow.emit(UiEvent.SaveNote)
@@ -124,7 +125,18 @@ class AddEditNoteViewModel @Inject constructor(
                 }
             }
             is AddEditNoteEvent.DeleteNote -> {
-                // TODO Delete Note
+                viewModelScope.launch {
+                    try {
+                        currentSelectedNote?.let { noteUseCases.deleteNote(it) }
+                        _eventFlow.emit(UiEvent.DeleteNote)
+                    } catch (e: InvalidNoteException) {
+                        _eventFlow.emit(
+                            UiEvent.ShowSnackbar(
+                                message = e.message ?: "Unknown error"
+                            )
+                        )
+                    }
+                }
             }
         }
     }
@@ -132,5 +144,6 @@ class AddEditNoteViewModel @Inject constructor(
     sealed class UiEvent {
         data class ShowSnackbar(val message: String) : UiEvent()
         object SaveNote : UiEvent()
+        object DeleteNote : UiEvent()
     }
 }

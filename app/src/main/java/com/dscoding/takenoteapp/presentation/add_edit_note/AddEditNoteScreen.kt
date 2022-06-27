@@ -41,12 +41,12 @@ fun AddEditNoteScreen(
 ) {
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
-    val isEditingNoteState = viewModel.isEditingNote
+    val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
 
     val noteBackgroundAnimatable = remember {
         Animatable(
-            Color(if (noteColor != -1) noteColor else viewModel.noteColor.value)
+            Color(if (noteColor != -1) noteColor else state.noteColor)
         )
     }
     val scope = rememberCoroutineScope()
@@ -65,6 +65,9 @@ fun AddEditNoteScreen(
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
                     navController.navigateUp()
                 }
+                is AddEditNoteViewModel.UiEvent.DeleteNote -> {
+                    navController.navigateUp()
+                }
             }
         }
     }
@@ -77,7 +80,7 @@ fun AddEditNoteScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Default.ArrowBack, "BacK Arrow")
+                        Icon(Icons.Default.ArrowBack, "Back Arrow")
                     }
                 },
                 backgroundColor = noteBackgroundAnimatable.value,
@@ -88,7 +91,7 @@ fun AddEditNoteScreen(
             FloatingActionButton(onClick = {
                 viewModel.onEvent(AddEditNoteEvent.SaveNote)
             }) {
-                if (isEditingNoteState.value) {
+                if (state.isEditingNote) {
                     Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit note")
                 } else {
                     Icon(imageVector = Icons.Default.Done, contentDescription = "Save note")
@@ -102,9 +105,9 @@ fun AddEditNoteScreen(
                     CornerSize(percent = 50)
                 )
             ) {
-                if (isEditingNoteState.value) {
+                if (state.isEditingNote) {
                     IconButton(
-                        onClick = { },
+                        onClick = { viewModel.onEvent(AddEditNoteEvent.DeleteNote) },
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
@@ -143,7 +146,7 @@ fun AddEditNoteScreen(
                                 .background(color)
                                 .border(
                                     width = 3.dp,
-                                    color = if (viewModel.noteColor.value == colorInt) {
+                                    color = if (state.noteColor == colorInt) {
                                         Color.Black
                                     } else Color.Transparent,
                                     shape = CircleShape
