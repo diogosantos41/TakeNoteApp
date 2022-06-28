@@ -44,6 +44,14 @@ class SettingsViewModel @Inject constructor(
                     )
                 }
             }
+            is SettingsEvent.ShowDialog -> {
+                _state.value = state.value.copy(
+                    showDialog = event.toShowDialog
+                )
+            }
+            is SettingsEvent.SelectDialogOption -> {
+                event.option
+            }
         }
     }
 

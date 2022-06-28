@@ -1,4 +1,5 @@
 package com.dscoding.takenoteapp.presentation.settings
 
-class SettingsState {
-}
+data class SettingsState(
+    val showDialog: Boolean = false
+)

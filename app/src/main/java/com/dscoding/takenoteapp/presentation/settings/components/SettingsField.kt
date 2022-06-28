@@ -19,7 +19,9 @@ fun SettingsField(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick },
+            .clickable(
+                onClick = onClick
+            ),
         verticalArrangement = Arrangement.Center
     ) {
         Text(

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.settings.components.OptionsDialog
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
@@ -24,6 +25,7 @@ fun SettingsScreen(
 ) {
 
     val showGreetingState = viewModel.showGreetingFieldState.value
+    val state = viewModel.state.value
 
     val generalMargin = dimensionResource(R.dimen.general_margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
@@ -56,25 +58,36 @@ fun SettingsScreen(
                     generalMargin,
                     generalMargin
                 )
+            if (state.showDialog) {
+                OptionsDialog(
+                    viewModel,
+                    "Choose Theme",
+                    listOf("Option 1", "Option 2", "Option3")
+                )
+            }
             Column(modifier = Modifier.padding(generalMargin, 0.dp)) {
                 Column(settingsColumnModifier) {
 
                     Spacer(modifier = Modifier.height(headerTopMargin))
                     SettingsHeader(text = "User Interface")
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField("Theme", "System default", onClick = { })
+                    SettingsField(
+                        "Theme",
+                        "System default",
+                        onClick = { viewModel.onEvent(SettingsEvent.ShowDialog(true)) })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SwitchField(
                         "Show greeting",
                         showGreetingState.value,
                         showGreetingState.isActive,
                         onSelect = {
-                            viewModel.onEvent(
-                                SettingsEvent.ChangeShowGreetingState(!showGreetingState.isActive)
-                            )
+                            viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
                         })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField("Grid layout rows", "2", onClick = { })
+                    SettingsField(
+                        "Grid layout rows",
+                        "2",
+                        onClick = { viewModel.onEvent(SettingsEvent.ShowDialog(true)) })
                 }
                 Divider()
                 Column(settingsColumnModifier) {
