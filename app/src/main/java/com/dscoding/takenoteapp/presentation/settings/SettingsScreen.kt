@@ -10,13 +10,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(
+    navController: NavController,
+    viewModel: SettingsViewModel = hiltViewModel()
+) {
+
+    val showGreetingState = viewModel.showGreetingFieldState.value
 
     val generalMargin = dimensionResource(R.dimen.general_margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
@@ -51,29 +58,38 @@ fun SettingsScreen(navController: NavController) {
                 )
             Column(modifier = Modifier.padding(generalMargin, 0.dp)) {
                 Column(settingsColumnModifier) {
+
                     Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(text = "UI")
+                    SettingsHeader(text = "User Interface")
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Show Greeting", "Active", true, onSelect = { })
+                    SettingsField("Theme", "System default", onClick = { })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Name", "Diogo", false, onSelect = { })
+                    SwitchField(
+                        "Show greeting",
+                        showGreetingState.value,
+                        showGreetingState.isActive,
+                        onSelect = {
+                            viewModel.onEvent(
+                                SettingsEvent.ChangeShowGreetingState(!showGreetingState.isActive)
+                            )
+                        })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Theme", "System", false, onSelect = { })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Grid layout notes", "2", false, onSelect = { })
+                    SettingsField("Grid layout rows", "2", onClick = { })
                 }
                 Divider()
                 Column(settingsColumnModifier) {
                     Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(text = "About")
+                    SettingsHeader(text = "Support")
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Show Greeting", "Active", true, onSelect = { })
+                    SettingsField(
+                        "Rate the application",
+                        "Reviews make us very happy. Thank you.",
+                        onClick = { })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Name", "Diogo", false, onSelect = { })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Theme", "System", false, onSelect = { })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField("Grid layout notes", "2", false, onSelect = { })
+                    SettingsField(
+                        "Share app",
+                        "Feel free to share the app with your friends.",
+                        onClick = { })
                 }
             }
         })

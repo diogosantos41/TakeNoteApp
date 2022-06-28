@@ -17,7 +17,6 @@ fun SwitchField(
     value: String,
     active: Boolean,
     onSelect: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),

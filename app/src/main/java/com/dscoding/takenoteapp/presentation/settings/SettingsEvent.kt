@@ -1,4 +1,5 @@
 package com.dscoding.takenoteapp.presentation.settings
 
-class SettingsEvent {
+sealed class SettingsEvent {
+    object ChangeShowGreetingState : SettingsEvent()
 }
