@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SwitchField(
-    text: String,
+    title: String,
+    value: String,
     active: Boolean,
     onSelect: (Boolean) -> Unit,
     modifier: Modifier = Modifier
@@ -23,12 +24,30 @@ fun SwitchField(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = text, style = MaterialTheme.typography.body1)
+        Column(
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.body1,
+                color = Color.Black
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.body2,
+                color = Color.Gray
+            )
+        }
         Spacer(modifier = Modifier.width(8.dp))
         Switch(
             checked = active,
             onCheckedChange = onSelect,
-            colors = SwitchDefaults.colors(Color.Blue)
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color.Blue,
+                uncheckedThumbColor = Color.Gray,
+                checkedTrackColor = Color.Gray,
+                uncheckedTrackColor = Color.LightGray,
+            )
         )
     }
 }

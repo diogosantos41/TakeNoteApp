@@ -2,5 +2,9 @@
 <resources>
      <dimen name="general_margin">15dp</dimen>
 
+
      <dimen name="margin_vertical_greeting_section">25dp</dimen>
+
+     <dimen name="settings_margin_header_top">10dp</dimen>
+     <dimen name="settings_margin_between_fields">22dp</dimen>
 </resources>
