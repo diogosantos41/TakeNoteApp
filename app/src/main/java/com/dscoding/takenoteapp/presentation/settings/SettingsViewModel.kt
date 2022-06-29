@@ -4,8 +4,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.UserPreferences
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
+import com.dscoding.takenoteapp.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -38,19 +40,35 @@ class SettingsViewModel @Inject constructor(
                         UserPreferences(
                             show_greeting = !showGreetingFieldState.value.isActive,
                             user_name = "",
-                            theme = 0,
-                            grid_layout_rows = 2
+                            theme = getThemeIdFromText(state.value.selectedTheme),
                         )
                     )
                 }
             }
-            is SettingsEvent.ShowDialog -> {
+            is SettingsEvent.ShowThemeOptionsDialog -> {
                 _state.value = state.value.copy(
-                    showDialog = event.toShowDialog
+                    showThemeOptionsDialog = event.toShowDialog
                 )
             }
-            is SettingsEvent.SelectDialogOption -> {
-                event.option
+            is SettingsEvent.SelectThemeOption -> {
+                _state.value = state.value.copy(
+                    showThemeOptionsDialog = false
+                )
+                viewModelScope.launch {
+                    preferencesUseCases.updateUserPreference(
+                        UserPreferences(
+                            show_greeting = showGreetingFieldState.value.isActive,
+                            user_name = "",
+                            theme = event.option
+                        )
+                    )
+                }
+            }
+            is SettingsEvent.SelectRateTheApp -> {
+
+            }
+            is SettingsEvent.SelectShareTheApp -> {
+
             }
         }
     }
@@ -60,10 +78,53 @@ class SettingsViewModel @Inject constructor(
         getPreferencesJob = preferencesUseCases.getUserPreference()
             .onEach { preferences ->
                 _showGreetingFieldState.value = showGreetingFieldState.value.copy(
-                    value = if (preferences.show_greeting) "Enabled" else "Disabled",
+                    value = if (preferences.show_greeting)
+                        UiText.StringResource(
+                            R.string.settings_show_greeting_enabled
+                        )
+                    else UiText.StringResource(
+                        R.string.settings_show_greeting_disabled
+                    ),
                     isActive = preferences.show_greeting
+                )
+                _state.value = state.value.copy(
+                    selectedTheme = getThemeTextFromId(preferences.theme)
                 )
             }
             .launchIn(viewModelScope)
+    }
+
+    private fun getThemeIdFromText(text: UiText): Int {
+        return when (text) {
+            UiText.StringResource(R.string.settings_theme_option_system_default) -> {
+                UserPreferences.Theme.SYSTEM_DEFAULT.id
+            }
+            UiText.StringResource(R.string.settings_theme_option_light) -> {
+                UserPreferences.Theme.LIGHT.id
+            }
+            UiText.StringResource(R.string.settings_theme_option_dark) -> {
+                UserPreferences.Theme.DARK.id
+            }
+            else -> {
+                UserPreferences.Theme.SYSTEM_DEFAULT.id
+            }
+        }
+    }
+
+    private fun getThemeTextFromId(id: Int): UiText {
+        return when (id) {
+            UserPreferences.Theme.SYSTEM_DEFAULT.id -> {
+                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
+            }
+            UserPreferences.Theme.LIGHT.id -> {
+                UiText.StringResource(resId = R.string.settings_theme_option_light)
+            }
+            UserPreferences.Theme.DARK.id -> {
+                UiText.StringResource(resId = R.string.settings_theme_option_dark)
+            }
+            else -> {
+                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
+            }
+        }
     }
 }

@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">TakeNoteApp</string>
+
+    <string name="empty_string" />
+    <string name="error_unknown">Unknown error</string>
+
+    <string name="settings_show_greeting">Show greeting</string>
+    <string name="settings_show_greeting_enabled">Enabled</string>
+    <string name="settings_show_greeting_disabled">Disabled</string>
+
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_dialog_title">Choose Theme</string>
+    <string name="settings_theme_option_system_default">System default</string>
+    <string name="settings_theme_option_light">Light</string>
+    <string name="settings_theme_option_dark">Dark</string>
+
+    <string-array name="ThemeOptions">
+        <item>@string/settings_theme_option_system_default</item>
+        <item>@string/settings_theme_option_light</item>
+        <item>@string/settings_theme_option_dark</item>
+    </string-array>
 </resources>

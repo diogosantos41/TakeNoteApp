@@ -19,6 +19,8 @@ import com.dscoding.takenoteapp.presentation.list_notes.NotesScreen
 import com.dscoding.takenoteapp.presentation.settings.SettingsScreen
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
+import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
+import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,8 +31,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContent {
-            TakeNoteAppTheme() {
-                Surface(color = MaterialTheme.colors.background) {
+            TakeNoteAppTheme {
+                Surface {
                     Navigation()
                 }
             }
@@ -51,23 +53,23 @@ fun Navigation() {
         }
         composable(
             route = Screen.AddEditNoteScreen.route +
-                    "?noteId={noteId}&noteColor={noteColor}",
+                    "?$NOTE_ID_ARG={$NOTE_ID_ARG}&$NOTE_COLOR_ARG={$NOTE_COLOR_ARG}",
             arguments = listOf(
                 navArgument(
-                    name = "noteId"
+                    name = NOTE_ID_ARG
                 ) {
                     type = NavType.IntType
                     defaultValue = -1
                 },
                 navArgument(
-                    name = "noteColor"
+                    name = NOTE_COLOR_ARG
                 ) {
                     type = NavType.IntType
                     defaultValue = -1
                 },
             )
         ) {
-            val color = it.arguments?.getInt("noteColor") ?: -1
+            val color = it.arguments?.getInt(NOTE_COLOR_ARG) ?: -1
             AddEditNoteScreen(
                 navController = navController,
                 noteColor = color

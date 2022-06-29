@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.domain.model.InvalidNoteException
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
+import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -50,7 +51,7 @@ class AddEditNoteViewModel @Inject constructor(
     private var currentSelectedNote: Note? = null
 
     init {
-        saveStateHandle.get<Int>("noteId")?.let { noteId ->
+        saveStateHandle.get<Int>(NOTE_ID_ARG)?.let { noteId ->
             if (noteId != -1) {
                 viewModelScope.launch {
                     noteUseCases.getNote(noteId)?.also { note ->

@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -30,7 +32,6 @@ fun SettingsScreen(
     val generalMargin = dimensionResource(R.dimen.general_margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
     val betweenFieldsMargin = dimensionResource(R.dimen.general_margin)
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -58,13 +59,6 @@ fun SettingsScreen(
                     generalMargin,
                     generalMargin
                 )
-            if (state.showDialog) {
-                OptionsDialog(
-                    viewModel,
-                    "Choose Theme",
-                    listOf("Option 1", "Option 2", "Option3")
-                )
-            }
             Column(modifier = Modifier.padding(generalMargin, 0.dp)) {
                 Column(settingsColumnModifier) {
 
@@ -72,22 +66,17 @@ fun SettingsScreen(
                     SettingsHeader(text = "User Interface")
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
-                        "Theme",
-                        "System default",
-                        onClick = { viewModel.onEvent(SettingsEvent.ShowDialog(true)) })
+                        stringResource(R.string.settings_theme),
+                        state.selectedTheme.asString(),
+                        onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SwitchField(
                         "Show greeting",
-                        showGreetingState.value,
+                        showGreetingState.value.asString(),
                         showGreetingState.isActive,
                         onSelect = {
                             viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
                         })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        "Grid layout rows",
-                        "2",
-                        onClick = { viewModel.onEvent(SettingsEvent.ShowDialog(true)) })
                 }
                 Divider()
                 Column(settingsColumnModifier) {
@@ -104,6 +93,17 @@ fun SettingsScreen(
                         "Feel free to share the app with your friends.",
                         onClick = { })
                 }
+            }
+            if (state.showThemeOptionsDialog) {
+                OptionsDialog(
+                    title = stringResource(id = R.string.settings_theme_dialog_title),
+                    options = stringArrayResource(R.array.ThemeOptions).toList(),
+                    selected = state.selectedTheme.asString(),
+                    onOptionSelected = {
+                        viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
+                    },
+                    dismissDialog = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false)) }
+                )
             }
         })
 }

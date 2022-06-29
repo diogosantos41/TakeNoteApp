@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.dscoding.takenoteapp.domain.model.UserPreferences
-import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.GRID_LAYOUT_ROWS
 import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.SHOW_GREETING
 import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.THEME
 import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.USER_NAME
@@ -25,7 +24,6 @@ class PreferencesRepositoryImpl(
             preferences[SHOW_GREETING] = userPreferences.show_greeting
             preferences[USER_NAME] = userPreferences.user_name
             preferences[THEME] = userPreferences.theme
-            preferences[GRID_LAYOUT_ROWS] = userPreferences.grid_layout_rows
         }
     }
 
@@ -33,8 +31,7 @@ class PreferencesRepositoryImpl(
         UserPreferences(
             show_greeting = userPreferences[SHOW_GREETING] ?: true,
             user_name = userPreferences[USER_NAME] ?: "",
-            theme = userPreferences[THEME] ?: UserPreferences.Theme.SYSTEM_DEFAULT.int,
-            grid_layout_rows = userPreferences[GRID_LAYOUT_ROWS] ?: 2
+            theme = userPreferences[THEME] ?: UserPreferences.Theme.SYSTEM_DEFAULT.id,
         )
     }
 }
