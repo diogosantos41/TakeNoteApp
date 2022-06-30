@@ -10,11 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EmptyListAlert() {
+fun EmptyListAlert(emptyMessage: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -32,7 +33,7 @@ fun EmptyListAlert() {
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "You have no notes added. Press '+' to add a note!",
+                text = emptyMessage,
                 style = MaterialTheme.typography.h6,
                 color = Color.DarkGray,
                 textAlign = TextAlign.Center

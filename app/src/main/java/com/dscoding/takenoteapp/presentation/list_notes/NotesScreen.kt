@@ -13,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -23,6 +25,8 @@ import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSecti
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
+import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
+import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
@@ -42,7 +46,11 @@ fun NotesScreen(
             FloatingActionButton(onClick = {
                 navController.navigate(Screen.AddEditNoteScreen.route)
             }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add note",
+                    tint = Color.White
+                )
             }
         },
         isFloatingActionButtonDocked = true,
@@ -98,7 +106,7 @@ fun NotesScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Notes",
+                        text = stringResource(id = R.string.notes_list_title),
                         style = MaterialTheme.typography.h5
                     )
                     IconButton(
@@ -129,7 +137,9 @@ fun NotesScreen(
                 }
                 Spacer(modifier = Modifier.height(generalMargin))
                 if (state.notes.isEmpty()) {
-                    EmptyListAlert()
+                    EmptyListAlert(
+                        stringResource(id = R.string.notes_empty_list_message)
+                    )
                 } else {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(state.notes) { note ->
@@ -140,7 +150,7 @@ fun NotesScreen(
                                     .clickable {
                                         navController.navigate(
                                             Screen.AddEditNoteScreen.route +
-                                                    "?noteId=${note.id}&noteColor=${note.color}"
+                                                    "?$NOTE_ID_ARG=${note.id}&$NOTE_COLOR_ARG=${note.color}"
                                         )
                                     },
                                 onDeleteClick = {

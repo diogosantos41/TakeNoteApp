@@ -6,10 +6,13 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dscoding.takenoteapp.domain.model.InvalidNoteException
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.utils.Failure
+import com.dscoding.takenoteapp.utils.Resource
+import com.dscoding.takenoteapp.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -24,14 +27,14 @@ class AddEditNoteViewModel @Inject constructor(
 
     private val _noteTitle = mutableStateOf(
         NoteTextFieldState(
-            hint = "Enter title..."
+            hint = UiText.StringResource(resId = R.string.add_edit_note_title_hint)
         )
     )
     val noteTitle: State<NoteTextFieldState> = _noteTitle
 
     private val _noteContent = mutableStateOf(
         NoteTextFieldState(
-            hint = "Enter content..."
+            hint = UiText.StringResource(resId = R.string.add_edit_note_content_hint)
         )
     )
     val noteContent: State<NoteTextFieldState> = _noteContent
@@ -104,46 +107,54 @@ class AddEditNoteViewModel @Inject constructor(
                 )
             }
             is AddEditNoteEvent.SaveNote -> {
+                var addNoteResult: Resource<Any?>
                 viewModelScope.launch {
-                    try {
-                        noteUseCases.addNote(
-                            Note(
-                                title = noteTitle.value.text,
-                                content = noteContent.value.text,
-                                timestamp = System.currentTimeMillis(),
-                                color = state.value.noteColor,
-                                id = currentSelectedNote?.id
-                            )
+                    addNoteResult = noteUseCases.addNote(
+                        Note(
+                            title = noteTitle.value.text,
+                            content = noteContent.value.text,
+                            timestamp = System.currentTimeMillis(),
+                            color = state.value.noteColor,
+                            id = currentSelectedNote?.id
                         )
-                        _eventFlow.emit(UiEvent.SaveNote)
-                    } catch (e: InvalidNoteException) {
-                        _eventFlow.emit(
-                            UiEvent.ShowSnackbar(
-                                message = e.message ?: "Unknown error"
+                    )
+                    when (addNoteResult) {
+                        is Resource.Success -> {
+                            _eventFlow.emit(UiEvent.SaveNote)
+                        }
+                        is Resource.Error -> {
+                            var errorMessage = when (addNoteResult.failure) {
+                                is Failure.EmptyNoteTitle -> {
+                                    UiText.StringResource(R.string.error_add_note_empty_title)
+                                }
+                                is Failure.EmptyNoteContent -> {
+                                    UiText.StringResource(R.string.error_add_note_empty_content)
+                                }
+                                else -> {
+                                    UiText.StringResource(R.string.error_unknown)
+                                }
+                            }
+                            _eventFlow.emit(
+                                UiEvent.ShowSnackbar(
+                                    message = errorMessage
+                                )
                             )
-                        )
+                        }
                     }
                 }
+
             }
             is AddEditNoteEvent.DeleteNote -> {
                 viewModelScope.launch {
-                    try {
-                        currentSelectedNote?.let { noteUseCases.deleteNote(it) }
-                        _eventFlow.emit(UiEvent.DeleteNote)
-                    } catch (e: InvalidNoteException) {
-                        _eventFlow.emit(
-                            UiEvent.ShowSnackbar(
-                                message = e.message ?: "Unknown error"
-                            )
-                        )
-                    }
+                    currentSelectedNote?.let { noteUseCases.deleteNote(it) }
+                    _eventFlow.emit(UiEvent.DeleteNote)
                 }
             }
         }
     }
 
     sealed class UiEvent {
-        data class ShowSnackbar(val message: String) : UiEvent()
+        data class ShowSnackbar(val message: UiText) : UiEvent()
         object SaveNote : UiEvent()
         object DeleteNote : UiEvent()
     }

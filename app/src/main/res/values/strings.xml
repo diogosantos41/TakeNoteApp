@@ -1,22 +1,51 @@
 <resources>
     <string name="app_name">TakeNoteApp</string>
-
     <string name="empty_string" />
+
+    <!-- Generic String -->
+    <string name="generic_dismiss">Dismiss</string>
+
+    <!-- Generic Error -->
     <string name="error_unknown">Unknown error</string>
 
+    <!-- Notes Screen -->
+    <string name="notes_greeting_title_with_name">Hey there %s!</string>
+    <string name="notes_greeting_message">We wish you have a good day!</string>
+    <string name="notes_list_title">Notes</string>
+    <string name="notes_empty_list_message">You have no notes added. Press \'+\' to add a note!</string>
+    <string name="notes_order_section_title">Title</string>
+    <string name="notes_order_section_date">Date</string>
+    <string name="notes_order_section_color">Color</string>
+    <string name="notes_order_section_ascending">Ascending</string>
+    <string name="notes_order_section_descending">Descending</string>
+
+    <!-- Add/Edit Note Screen -->
+    <string name="add_edit_note_title_hint">Enter title…</string>
+    <string name="add_edit_note_content_hint">Enter content…</string>
+    <string name="error_add_note_empty_title">The title of the note can\'t be empty</string>
+    <string name="error_add_note_empty_content">The content of the note can\'t be empty</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_header_user_interface">User interface</string>
     <string name="settings_show_greeting">Show greeting</string>
     <string name="settings_show_greeting_enabled">Enabled</string>
     <string name="settings_show_greeting_disabled">Disabled</string>
-
     <string name="settings_theme">Theme</string>
     <string name="settings_theme_dialog_title">Choose Theme</string>
     <string name="settings_theme_option_system_default">System default</string>
     <string name="settings_theme_option_light">Light</string>
     <string name="settings_theme_option_dark">Dark</string>
+    <string name="settings_header_support">Support</string>
+    <string name="settings_rate_app_title">Rate app</string>
+    <string name="settings_rate_app_message">Reviews help us a lot. Thank you!</string>
+    <string name="settings_share_app_title">Share app</string>
+    <string name="settings_share_app_message">Love taking notes? Your friends do too!</string>
 
-    <string-array name="ThemeOptions">
+    <string-array name="settings_theme_options_array">
         <item>@string/settings_theme_option_system_default</item>
         <item>@string/settings_theme_option_light</item>
         <item>@string/settings_theme_option_dark</item>
     </string-array>
+
 </resources>

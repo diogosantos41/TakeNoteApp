@@ -32,12 +32,13 @@ fun SettingsScreen(
     val generalMargin = dimensionResource(R.dimen.general_margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
     val betweenFieldsMargin = dimensionResource(R.dimen.general_margin)
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Settings", color = Color.White
+                        text = stringResource(id = R.string.settings_title), color = Color.White
                     )
                 },
                 navigationIcon = {
@@ -63,7 +64,7 @@ fun SettingsScreen(
                 Column(settingsColumnModifier) {
 
                     Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(text = "User Interface")
+                    SettingsHeader(text = stringResource(id = R.string.settings_header_user_interface))
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
                         stringResource(R.string.settings_theme),
@@ -71,7 +72,7 @@ fun SettingsScreen(
                         onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SwitchField(
-                        "Show greeting",
+                        stringResource(id = R.string.settings_show_greeting),
                         showGreetingState.value.asString(),
                         showGreetingState.isActive,
                         onSelect = {
@@ -81,23 +82,23 @@ fun SettingsScreen(
                 Divider()
                 Column(settingsColumnModifier) {
                     Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(text = "Support")
+                    SettingsHeader(stringResource(id = R.string.settings_header_support))
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
-                        "Rate the application",
-                        "Reviews make us very happy. Thank you.",
+                        stringResource(id = R.string.settings_rate_app_title),
+                        stringResource(id = R.string.settings_rate_app_message),
                         onClick = { })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
-                        "Share app",
-                        "Feel free to share the app with your friends.",
+                        stringResource(id = R.string.settings_share_app_title),
+                        stringResource(id = R.string.settings_share_app_message),
                         onClick = { })
                 }
             }
             if (state.showThemeOptionsDialog) {
                 OptionsDialog(
                     title = stringResource(id = R.string.settings_theme_dialog_title),
-                    options = stringArrayResource(R.array.ThemeOptions).toList(),
+                    options = stringArrayResource(R.array.settings_theme_options_array).toList(),
                     selected = state.selectedTheme.asString(),
                     onOptionSelected = {
                         viewModel.onEvent(SettingsEvent.SelectThemeOption(it))

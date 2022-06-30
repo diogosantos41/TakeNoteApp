@@ -1,19 +1,20 @@
 package com.dscoding.takenoteapp.domain.use_case
 
-import com.dscoding.takenoteapp.domain.model.InvalidNoteException
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.repository.NoteRepository
+import com.dscoding.takenoteapp.utils.Failure
+import com.dscoding.takenoteapp.utils.Resource
 
 class AddNoteUseCase(private val repository: NoteRepository) {
 
-    @Throws(InvalidNoteException::class)
-    suspend operator fun invoke(note: Note) {
+    suspend operator fun invoke(note: Note): Resource<Any?> {
         if (note.title.isBlank()) {
-            throw InvalidNoteException("The title of the note can't be empty")
+            return Resource.Error(Failure.EmptyNoteTitle)
         }
         if (note.content.isBlank()) {
-            throw InvalidNoteException("The content of the note can't be empty")
+            return Resource.Error(Failure.EmptyNoteTitle)
         }
         repository.insertNote(note)
+        return Resource.Success(null)
     }
 }

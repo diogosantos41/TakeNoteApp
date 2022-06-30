@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +40,8 @@ fun AddEditNoteScreen(
     noteColor: Int,
     viewModel: AddEditNoteViewModel = hiltViewModel()
 ) {
+
+    val context = LocalContext.current
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
     val state = viewModel.state.value
@@ -59,7 +62,7 @@ fun AddEditNoteScreen(
             when (event) {
                 is AddEditNoteViewModel.UiEvent.ShowSnackbar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
-                        message = event.message
+                        message = event.message.asString(context)
                     )
                 }
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
@@ -92,9 +95,17 @@ fun AddEditNoteScreen(
                 viewModel.onEvent(AddEditNoteEvent.SaveNote)
             }) {
                 if (state.isEditingNote) {
-                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit note")
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit note",
+                        tint = Color.White
+                    )
                 } else {
-                    Icon(imageVector = Icons.Default.Done, contentDescription = "Save note")
+                    Icon(
+                        imageVector = Icons.Default.Done,
+                        contentDescription = "Save note",
+                        tint = Color.White
+                    )
                 }
             }
         },
@@ -168,7 +179,7 @@ fun AddEditNoteScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 TransparentHintTextField(
                     text = titleState.text,
-                    hint = titleState.hint,
+                    hint = titleState.hint.asString(),
                     onValueChange = {
                         viewModel.onEvent(AddEditNoteEvent.EnteredTitle(it))
                     },
@@ -182,7 +193,7 @@ fun AddEditNoteScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 TransparentHintTextField(
                     text = contentState.text,
-                    hint = contentState.hint,
+                    hint = contentState.hint.asString(),
                     onValueChange = {
                         viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
                     },
