@@ -6,6 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
@@ -19,6 +20,8 @@ import com.dscoding.takenoteapp.presentation.settings.components.OptionsDialog
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SettingsScreen(
@@ -32,6 +35,16 @@ fun SettingsScreen(
     val generalMargin = dimensionResource(R.dimen.general_margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
     val betweenFieldsMargin = dimensionResource(R.dimen.general_margin)
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is SettingsViewModel.UiEvent.UpdateTheme -> {
+                    ThemeManager.takeNoteTheme = event.theme
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {

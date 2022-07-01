@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.UserPreferences
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
+import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -25,6 +28,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _state = mutableStateOf(SettingsState())
     val state: State<SettingsState> = _state
+
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     private var getPreferencesJob: Job? = null
 
@@ -62,6 +68,7 @@ class SettingsViewModel @Inject constructor(
                             theme = event.option
                         )
                     )
+                    _eventFlow.emit(UiEvent.UpdateTheme(TakeNoteTheme.DARK)) // TODO change to the actual selected theme
                 }
             }
             is SettingsEvent.SelectRateTheApp -> {
@@ -126,5 +133,9 @@ class SettingsViewModel @Inject constructor(
                 UiText.StringResource(resId = R.string.settings_theme_option_system_default)
             }
         }
+    }
+
+    sealed class UiEvent {
+        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent()
     }
 }

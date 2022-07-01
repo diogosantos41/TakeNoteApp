@@ -1,6 +1,5 @@
 package com.dscoding.takenoteapp.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -30,14 +29,14 @@ private val DarkColorPalette = darkColors(
 )
  */
 
-private val CustomLightColors = CustomColors(
+private val LightColors = CustomColors(
     backgroundColor = Color.White,
     buttonBackgroundColor = Coral,
     buttonTextColor = Color.White,
     textColor = Color.White
 )
 
-private val CustomDarkColors = CustomColors(
+private val DarkColors = CustomColors(
     backgroundColor = DarkerGrey,
     buttonBackgroundColor = NavyBlue,
     buttonTextColor = Color.White,
@@ -45,11 +44,11 @@ private val CustomDarkColors = CustomColors(
 )
 
 private val LocalColorsProvider = staticCompositionLocalOf {
-    CustomLightColors
+    LightColors
 }
 
 @Composable
-private fun CustomLocalProvider(
+private fun LocalProvider(
     colors: CustomColors,
     content: @Composable () -> Unit
 ) {
@@ -61,38 +60,37 @@ private fun CustomLocalProvider(
     CompositionLocalProvider(LocalColorsProvider provides colorPalette, content = content)
 }
 
-private val CustomTheme.colors: Pair<Colors, CustomColors>
+private val TakeNoteTheme.colors: Pair<Colors, CustomColors>
     get() = when (this) {
-        CustomTheme.DARK -> darkColors() to CustomDarkColors
-        CustomTheme.LIGHT -> lightColors() to CustomLightColors
+        TakeNoteTheme.DARK -> darkColors() to DarkColors
+        TakeNoteTheme.LIGHT -> lightColors() to LightColors
     }
 
-object CustomThemeManager {
+object ThemeManager {
     val colors: CustomColors
         @Composable
         get() = LocalColorsProvider.current
 
-    var customTheme by mutableStateOf(CustomTheme.LIGHT)
+    var takeNoteTheme by mutableStateOf(TakeNoteTheme.LIGHT)
 
     fun isSystemInDarkTheme(): Boolean {
-        return customTheme == CustomTheme.DARK
+        return takeNoteTheme == TakeNoteTheme.DARK
     }
 }
 
 @Composable
 fun TakeNoteAppTheme(
-    customTheme: CustomTheme = CustomThemeManager.customTheme,
+    takeNoteTheme: TakeNoteTheme = ThemeManager.takeNoteTheme,
     content: @Composable () -> Unit
 ) {
-    val (colorPalette, lcColor) = customTheme.colors
+    val (colorPalette, colors) = takeNoteTheme.colors
 
-    CustomLocalProvider(colors = lcColor) {
+    LocalProvider(colors = colors) {
         MaterialTheme(
             colors = colorPalette,
             typography = Typography,
             shapes = Shapes,
             content = content
         )
-
     }
 }

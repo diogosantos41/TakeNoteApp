@@ -17,7 +17,7 @@ import com.dscoding.takenoteapp.presentation.add_edit_note.AddEditNoteScreen
 import com.dscoding.takenoteapp.presentation.list_notes.NotesScreen
 import com.dscoding.takenoteapp.presentation.settings.SettingsScreen
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.ui.theme.CustomThemeManager
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContent {
             TakeNoteAppTheme {
-                Surface(color = CustomThemeManager.colors.backgroundColor) {
+                Surface(color = ThemeManager.colors.backgroundColor) {
                     Navigation()
                 }
             }
