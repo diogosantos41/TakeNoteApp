@@ -35,10 +35,6 @@ onBackground = Color.Black,
 onSurface = Color.Black,
 */
 
-enum class TakeNoteTheme {
-    DARK, LIGHT
-}
-
 @Stable
 class CustomColors(
     backgroundColor: Color,

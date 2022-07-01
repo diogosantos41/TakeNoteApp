@@ -68,7 +68,7 @@ class SettingsViewModel @Inject constructor(
                             theme = event.option
                         )
                     )
-                    _eventFlow.emit(UiEvent.UpdateTheme(TakeNoteTheme.DARK)) // TODO change to the actual selected theme
+                    _eventFlow.emit(UiEvent.UpdateTheme(getThemeFromId(event.option)))
                 }
             }
             is SettingsEvent.SelectRateTheApp -> {
@@ -131,6 +131,23 @@ class SettingsViewModel @Inject constructor(
             }
             else -> {
                 UiText.StringResource(resId = R.string.settings_theme_option_system_default)
+            }
+        }
+    }
+
+    private fun getThemeFromId(id: Int): TakeNoteTheme {
+        return when (id) {
+            UserPreferences.Theme.SYSTEM_DEFAULT.id -> {
+                TakeNoteTheme.SYSTEM_DEFAULT
+            }
+            UserPreferences.Theme.LIGHT.id -> {
+                TakeNoteTheme.LIGHT
+            }
+            UserPreferences.Theme.DARK.id -> {
+                TakeNoteTheme.DARK
+            }
+            else -> {
+                TakeNoteTheme.DARK
             }
         }
     }

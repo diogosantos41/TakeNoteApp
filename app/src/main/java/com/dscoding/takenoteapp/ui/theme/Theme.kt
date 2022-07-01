@@ -1,5 +1,6 @@
 package com.dscoding.takenoteapp.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -60,10 +61,15 @@ private fun LocalProvider(
     CompositionLocalProvider(LocalColorsProvider provides colorPalette, content = content)
 }
 
+enum class TakeNoteTheme {
+    SYSTEM_DEFAULT, LIGHT, DARK
+}
+
 private val TakeNoteTheme.colors: Pair<Colors, CustomColors>
     get() = when (this) {
         TakeNoteTheme.DARK -> darkColors() to DarkColors
         TakeNoteTheme.LIGHT -> lightColors() to LightColors
+        else -> lightColors() to LightColors
     }
 
 object ThemeManager {
@@ -72,10 +78,6 @@ object ThemeManager {
         get() = LocalColorsProvider.current
 
     var takeNoteTheme by mutableStateOf(TakeNoteTheme.LIGHT)
-
-    fun isSystemInDarkTheme(): Boolean {
-        return takeNoteTheme == TakeNoteTheme.DARK
-    }
 }
 
 @Composable
@@ -83,7 +85,16 @@ fun TakeNoteAppTheme(
     takeNoteTheme: TakeNoteTheme = ThemeManager.takeNoteTheme,
     content: @Composable () -> Unit
 ) {
-    val (colorPalette, colors) = takeNoteTheme.colors
+    val (colorPalette, colors) = if (takeNoteTheme == TakeNoteTheme.SYSTEM_DEFAULT) {
+        if (isSystemInDarkTheme()) {
+            darkColors() to DarkColors
+        } else {
+            lightColors() to LightColors
+        }
+    } else {
+        takeNoteTheme.colors
+    }
+
 
     LocalProvider(colors = colors) {
         MaterialTheme(
