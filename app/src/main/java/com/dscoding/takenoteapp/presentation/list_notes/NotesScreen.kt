@@ -1,11 +1,13 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun NotesScreen(
@@ -48,8 +50,8 @@ fun NotesScreen(
             FloatingActionButton(
                 backgroundColor = ThemeManager.colors.mainColor,
                 onClick = {
-                navController.navigate(Screen.AddEditNoteScreen.route)
-            }) {
+                    navController.navigate(Screen.AddEditNoteScreen.route)
+                }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add note",
@@ -75,11 +77,13 @@ fun NotesScreen(
                     )
                 }
                 IconButton(
-                    onClick = { },
+                    onClick = {
+                        viewModel.onEvent(NotesEvent.ToggleGridList)
+                    },
                 ) {
                     Icon(
-                        imageVector = Icons.Default.GridView,
-                        contentDescription = "Grid View",
+                        imageVector = if (state.isGridListSelected) Icons.Default.List else Icons.Default.GridView,
+                        contentDescription = "Toggle Grid/List View",
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -160,11 +164,21 @@ fun NotesScreen(
                         stringResource(id = R.string.notes_empty_list_message)
                     )
                 } else {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    LazyVerticalGrid(
+                        modifier = Modifier.fillMaxSize(),
+                        columns = GridCells.Fixed(if (state.isGridListSelected) 2 else 1),
+                        verticalArrangement = Arrangement.spacedBy(generalMargin),
+                        horizontalArrangement = Arrangement.spacedBy(generalMargin)
+                    ) {
                         items(state.notes) { note ->
                             NoteItem(
                                 note = note,
                                 modifier = Modifier
+                                    .animateItemPlacement(
+                                        animationSpec = tween(
+                                            durationMillis = 300
+                                        )
+                                    )
                                     .fillMaxWidth()
                                     .clickable {
                                         navController.navigate(

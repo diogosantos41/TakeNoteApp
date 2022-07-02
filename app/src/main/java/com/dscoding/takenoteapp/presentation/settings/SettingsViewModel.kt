@@ -46,7 +46,7 @@ class SettingsViewModel @Inject constructor(
                         UserPreferences(
                             show_greeting = !showGreetingFieldState.value.isActive,
                             user_name = "",
-                            theme = getThemeIdFromText(state.value.selectedTheme),
+                            theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
                         )
                     )
                 }
@@ -102,20 +102,15 @@ class SettingsViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun getThemeIdFromText(text: UiText): Int {
-        return when (text) {
-            UiText.StringResource(R.string.settings_theme_option_system_default) -> {
-                UserPreferences.Theme.SYSTEM_DEFAULT.id
-            }
-            UiText.StringResource(R.string.settings_theme_option_light) -> {
-                UserPreferences.Theme.LIGHT.id
-            }
-            UiText.StringResource(R.string.settings_theme_option_dark) -> {
-                UserPreferences.Theme.DARK.id
-            }
-            else -> {
-                UserPreferences.Theme.SYSTEM_DEFAULT.id
-            }
+    private fun getThemeIdFromText(text: UiText.StringResource): Int {
+        return if (text.equals(R.string.settings_theme_option_system_default)) {
+            UserPreferences.Theme.SYSTEM_DEFAULT.id
+        } else if (text.equals(R.string.settings_theme_option_light)) {
+            UserPreferences.Theme.LIGHT.id
+        } else if (text.equals(R.string.settings_theme_option_dark)) {
+            UserPreferences.Theme.DARK.id
+        } else {
+            UserPreferences.Theme.SYSTEM_DEFAULT.id
         }
     }
 
@@ -157,3 +152,4 @@ class SettingsViewModel @Inject constructor(
         data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent()
     }
 }
+

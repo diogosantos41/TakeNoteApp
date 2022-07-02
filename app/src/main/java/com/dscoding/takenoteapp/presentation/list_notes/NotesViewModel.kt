@@ -55,6 +55,11 @@ class NotesViewModel @Inject constructor(private val noteUseCases: NoteUseCases)
                     isOrderSectionVisible = !state.value.isOrderSectionVisible
                 )
             }
+            is NotesEvent.ToggleGridList -> {
+                _state.value = state.value.copy(
+                    isGridListSelected = !state.value.isGridListSelected
+                )
+            }
         }
     }
 
