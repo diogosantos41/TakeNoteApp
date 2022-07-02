@@ -30,7 +30,6 @@ fun TransparentHintTextField(
     Box(
         modifier = modifier
     ) {
-        val focusManager = LocalFocusManager.current
         BasicTextField(
             value = text,
             onValueChange = onValueChange,

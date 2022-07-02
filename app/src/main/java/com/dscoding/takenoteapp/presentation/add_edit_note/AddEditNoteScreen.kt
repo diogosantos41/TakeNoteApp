@@ -31,6 +31,8 @@ import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
+import com.dscoding.takenoteapp.ui.theme.DarkerGrey
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -83,7 +85,11 @@ fun AddEditNoteScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Default.ArrowBack, "Back Arrow")
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back Arrow",
+                            tint = DarkerGrey
+                        )
                     }
                 },
                 backgroundColor = noteBackgroundAnimatable.value,
@@ -91,20 +97,22 @@ fun AddEditNoteScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
+            FloatingActionButton(
+                backgroundColor = ThemeManager.colors.mainColor,
+                onClick = {
                 viewModel.onEvent(AddEditNoteEvent.SaveNote)
             }) {
                 if (state.isEditingNote) {
                     Icon(
                         imageVector = Icons.Default.Edit,
                         contentDescription = "Edit note",
-                        tint = Color.White
+                        tint = ThemeManager.colors.iconColor
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Default.Done,
                         contentDescription = "Save note",
-                        tint = Color.White
+                        tint = ThemeManager.colors.iconColor
                     )
                 }
             }
@@ -112,6 +120,7 @@ fun AddEditNoteScreen(
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
+                backgroundColor = ThemeManager.colors.mainColor,
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -123,6 +132,7 @@ fun AddEditNoteScreen(
                         Icon(
                             imageVector = Icons.Default.Delete,
                             contentDescription = "Delete note",
+                            tint = ThemeManager.colors.iconColor
                         )
                     }
                 }
@@ -158,7 +168,7 @@ fun AddEditNoteScreen(
                                 .border(
                                     width = 3.dp,
                                     color = if (state.noteColor == colorInt) {
-                                        Color.Black
+                                        DarkerGrey
                                     } else Color.Transparent,
                                     shape = CircleShape
                                 )

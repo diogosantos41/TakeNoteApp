@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 @Composable
 fun SettingsField(
@@ -27,7 +28,7 @@ fun SettingsField(
         Text(
             text = title,
             style = MaterialTheme.typography.body1,
-            color = Color.Black
+            color = ThemeManager.colors.textColor
         )
         Text(
             text = value,

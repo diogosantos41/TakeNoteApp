@@ -17,8 +17,8 @@ import com.dscoding.takenoteapp.presentation.add_edit_note.AddEditNoteScreen
 import com.dscoding.takenoteapp.presentation.list_notes.NotesScreen
 import com.dscoding.takenoteapp.presentation.settings.SettingsScreen
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint

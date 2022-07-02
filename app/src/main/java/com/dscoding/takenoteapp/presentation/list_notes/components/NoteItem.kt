@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
 import com.dscoding.takenoteapp.domain.model.Note
+import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 
 @Composable
 fun NoteItem(
@@ -68,7 +69,7 @@ fun NoteItem(
             Text(
                 text = note.title,
                 style = MaterialTheme.typography.h6,
-                color = MaterialTheme.colors.onSurface,
+                color = DarkerGrey,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -76,7 +77,7 @@ fun NoteItem(
             Text(
                 text = note.content,
                 style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.onSurface,
+                color = DarkerGrey,
                 maxLines = 10,
                 overflow = TextOverflow.Ellipsis
             )
@@ -88,7 +89,7 @@ fun NoteItem(
             Icon(
                 imageVector = Icons.Default.Delete,
                 contentDescription = "Delete note",
-                tint = MaterialTheme.colors.onSurface
+                tint = DarkerGrey
             )
         }
     }

@@ -8,40 +8,26 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 
-/*private val LightColorPalette = lightColors(
-   primary = Coral,
-   primaryVariant = Coral,
-   secondary = NavyBlue
-)
-
-private val DarkColorPalette = darkColors(
-   primary = DarkerGrey,
-   primaryVariant = DarkerGrey,
-   secondary = Coral
-
-   Other default colors to override
-   background = Color.White,
-   surface = Color.White,
-   onPrimary = Color.White,
-   onSecondary = Color.Black,
-   onBackground = Color.Black,
-   onSurface = Color.Black,
-
-)
- */
-
 private val LightColors = CustomColors(
-    backgroundColor = Color.White,
-    buttonBackgroundColor = Coral,
-    buttonTextColor = Color.White,
-    textColor = Color.White
+    backgroundColor = White,
+    containerBackgroundColor = DirtWhite,
+    iconColor = DarkerGrey,
+    toolbarColor = DarkGrey,
+    secondaryButtonBackgroundColor = Grey,
+    secondaryButtonTextColor = White,
+    textColor = DarkGrey,
+    mainColor = Coral
 )
 
 private val DarkColors = CustomColors(
     backgroundColor = DarkerGrey,
-    buttonBackgroundColor = NavyBlue,
-    buttonTextColor = Color.White,
-    textColor = Color.White
+    containerBackgroundColor = DarkGrey,
+    iconColor = White,
+    toolbarColor = DarkGrey,
+    secondaryButtonBackgroundColor = Grey,
+    secondaryButtonTextColor = White,
+    textColor = White,
+    mainColor = Coral
 )
 
 private val LocalColorsProvider = staticCompositionLocalOf {

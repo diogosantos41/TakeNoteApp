@@ -1,6 +1,5 @@
 package com.dscoding.takenoteapp.presentation.settings
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -8,7 +7,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -21,6 +19,7 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.ui.theme.White
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -51,22 +50,26 @@ fun SettingsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.settings_title), color = Color.White
+                        text = stringResource(id = R.string.settings_title),
+                        color = White
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Default.ArrowBack, "Back Arrow", tint = Color.White)
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            "Back Arrow",
+                            tint = White
+                        )
                     }
                 },
-                backgroundColor = Color.DarkGray,
+                backgroundColor = ThemeManager.colors.toolbarColor,
                 elevation = 0.dp
             )
         },
         content = { padding ->
             val settingsColumnModifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
                 .padding(
                     generalMargin,
                     generalMargin,
@@ -115,9 +118,8 @@ fun SettingsScreen(
                     selected = state.selectedTheme.asString(),
                     onOptionSelected = {
                         viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
-                    },
-                    dismissDialog = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false)) }
-                )
+                    }
+                ) { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false)) }
             }
         })
 }

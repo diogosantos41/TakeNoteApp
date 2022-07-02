@@ -58,7 +58,8 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.SelectThemeOption -> {
                 _state.value = state.value.copy(
-                    showThemeOptionsDialog = false
+                    showThemeOptionsDialog = false,
+                    selectedTheme = getThemeTextFromId(event.option)
                 )
                 viewModelScope.launch {
                     preferencesUseCases.updateUserPreference(

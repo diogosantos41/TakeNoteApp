@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.list_notes.components.DefaultRadioButton
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 @Composable
 fun OptionsDialog(
@@ -52,7 +53,10 @@ fun OptionsDialog(
             ) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = ThemeManager.colors.secondaryButtonBackground,
+                        contentColor = ThemeManager.colors.secondaryTextButtonBackground
+                    ),
                     onClick = { dismissDialog() }
                 ) {
                     Text(stringResource(id = R.string.generic_dismiss))

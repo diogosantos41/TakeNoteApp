@@ -1,6 +1,7 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +26,7 @@ import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSecti
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import kotlinx.coroutines.launch
@@ -43,19 +45,22 @@ fun NotesScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {
+            FloatingActionButton(
+                backgroundColor = ThemeManager.colors.mainColor,
+                onClick = {
                 navController.navigate(Screen.AddEditNoteScreen.route)
             }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add note",
-                    tint = Color.White
+                    tint = ThemeManager.colors.iconColor
                 )
             }
         },
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
+                backgroundColor = ThemeManager.colors.mainColor,
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -66,6 +71,16 @@ fun NotesScreen(
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search notes",
+                        tint = ThemeManager.colors.iconColor
+                    )
+                }
+                IconButton(
+                    onClick = { },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.GridView,
+                        contentDescription = "Grid View",
+                        tint = ThemeManager.colors.iconColor
                     )
                 }
                 IconButton(
@@ -74,6 +89,7 @@ fun NotesScreen(
                     Icon(
                         imageVector = Icons.Default.Label,
                         contentDescription = "Label",
+                        tint = ThemeManager.colors.iconColor
                     )
                 }
                 IconButton(
@@ -82,6 +98,7 @@ fun NotesScreen(
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "Settings",
+                        tint = ThemeManager.colors.iconColor
                     )
                 }
             }
@@ -107,7 +124,8 @@ fun NotesScreen(
                 ) {
                     Text(
                         text = stringResource(id = R.string.notes_list_title),
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h5,
+                        color = ThemeManager.colors.textColor
                     )
                     IconButton(
                         onClick = {
@@ -116,7 +134,8 @@ fun NotesScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Sort,
-                            contentDescription = "Sort"
+                            contentDescription = "Sort",
+                            tint = ThemeManager.colors.iconColor
                         )
                     }
                 }
