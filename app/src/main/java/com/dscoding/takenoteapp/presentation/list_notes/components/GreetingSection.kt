@@ -9,14 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 @Composable
-fun GreetingSection(
-    name: String = "Diogo"
-) {
+fun GreetingSection() {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -33,14 +32,14 @@ fun GreetingSection(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(id = R.string.notes_greeting_title_with_name, name),
+                text = stringResource(id = R.string.notes_greeting_title_with_name),
                 style = MaterialTheme.typography.h6,
                 color = ThemeManager.colors.textColor
             )
             Text(
                 text = stringResource(id = R.string.notes_greeting_message),
                 style = MaterialTheme.typography.body1,
-                color = ThemeManager.colors.textColor
+                color = ThemeManager.colors.mainColor,
             )
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margin_vertical_greeting_section)))
             Divider()

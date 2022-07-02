@@ -6,26 +6,40 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
+import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
+import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
+import com.dscoding.takenoteapp.utils.ThemeUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotesViewModel @Inject constructor(private val noteUseCases: NoteUseCases) : ViewModel() {
+class NotesViewModel @Inject constructor(
+    private val noteUseCases: NoteUseCases,
+    private val preferencesUseCases: PreferencesUseCases
+) : ViewModel() {
 
     private val _state = mutableStateOf(NotesState())
     val state: State<NotesState> = _state
 
     private var recentlyDeleteNote: Note? = null
 
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+    private var getPreferencesJob: Job? = null
+
     private var getNotesJob: Job? = null
 
     init {
+        getPreferences()
         getNotes(NoteOrder.Date(OrderType.Descending))
     }
 
@@ -63,6 +77,26 @@ class NotesViewModel @Inject constructor(private val noteUseCases: NoteUseCases)
         }
     }
 
+    private fun getPreferences() {
+        getPreferencesJob?.cancel()
+        getPreferencesJob = preferencesUseCases.getUserPreference()
+            .onEach { preferences ->
+                _state.value = state.value.copy(
+                    isGreetingSectionVisible = preferences.show_greeting
+                )
+                _eventFlow.emit(
+                    UiEvent.UpdateTheme(
+                        ThemeUtils.getThemeFromId(
+                            preferences.theme
+                        )
+                    )
+                )
+
+
+            }
+            .launchIn(viewModelScope)
+    }
+
     private fun getNotes(noteOrder: NoteOrder) {
         getNotesJob?.cancel()
         getNotesJob = noteUseCases.getNotes(noteOrder)
@@ -73,5 +107,9 @@ class NotesViewModel @Inject constructor(private val noteUseCases: NoteUseCases)
                 )
             }
             .launchIn(viewModelScope)
+    }
+
+    sealed class UiEvent {
+        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent()
     }
 }

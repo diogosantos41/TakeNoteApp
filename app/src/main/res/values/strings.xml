@@ -9,8 +9,8 @@
     <string name="error_unknown">Unknown error</string>
 
     <!-- Notes Screen -->
-    <string name="notes_greeting_title_with_name">Hey there %s!</string>
-    <string name="notes_greeting_message">We wish you have a good day!</string>
+    <string name="notes_greeting_title_with_name">Hey there!</string>
+    <string name="notes_greeting_message">It\'s great to see you taking some notes!</string>
     <string name="notes_list_title">Notes</string>
     <string name="notes_empty_list_message">You have no notes added. Press \'+\' to add a note!</string>
     <string name="notes_order_section_title">Title</string>

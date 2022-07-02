@@ -8,6 +8,9 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.UserPreferences
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
+import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeFromId
+import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeIdFromText
+import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeTextFromId
 import com.dscoding.takenoteapp.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -45,7 +48,6 @@ class SettingsViewModel @Inject constructor(
                     preferencesUseCases.updateUserPreference(
                         UserPreferences(
                             show_greeting = !showGreetingFieldState.value.isActive,
-                            user_name = "",
                             theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
                         )
                     )
@@ -65,7 +67,6 @@ class SettingsViewModel @Inject constructor(
                     preferencesUseCases.updateUserPreference(
                         UserPreferences(
                             show_greeting = showGreetingFieldState.value.isActive,
-                            user_name = "",
                             theme = event.option
                         )
                     )
@@ -100,52 +101,6 @@ class SettingsViewModel @Inject constructor(
                 )
             }
             .launchIn(viewModelScope)
-    }
-
-    private fun getThemeIdFromText(text: UiText.StringResource): Int {
-        return if (text.equals(R.string.settings_theme_option_system_default)) {
-            UserPreferences.Theme.SYSTEM_DEFAULT.id
-        } else if (text.equals(R.string.settings_theme_option_light)) {
-            UserPreferences.Theme.LIGHT.id
-        } else if (text.equals(R.string.settings_theme_option_dark)) {
-            UserPreferences.Theme.DARK.id
-        } else {
-            UserPreferences.Theme.SYSTEM_DEFAULT.id
-        }
-    }
-
-    private fun getThemeTextFromId(id: Int): UiText {
-        return when (id) {
-            UserPreferences.Theme.SYSTEM_DEFAULT.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
-            }
-            UserPreferences.Theme.LIGHT.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_light)
-            }
-            UserPreferences.Theme.DARK.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_dark)
-            }
-            else -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
-            }
-        }
-    }
-
-    private fun getThemeFromId(id: Int): TakeNoteTheme {
-        return when (id) {
-            UserPreferences.Theme.SYSTEM_DEFAULT.id -> {
-                TakeNoteTheme.SYSTEM_DEFAULT
-            }
-            UserPreferences.Theme.LIGHT.id -> {
-                TakeNoteTheme.LIGHT
-            }
-            UserPreferences.Theme.DARK.id -> {
-                TakeNoteTheme.DARK
-            }
-            else -> {
-                TakeNoteTheme.DARK
-            }
-        }
     }
 
     sealed class UiEvent {

@@ -7,6 +7,7 @@ import com.dscoding.takenoteapp.domain.util.OrderType
 data class NotesState(
     val notes: List<Note> = emptyList(),
     val noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending),
+    val isGreetingSectionVisible: Boolean = false,
     val isOrderSectionVisible: Boolean = false,
     val isGridListSelected: Boolean = false
 )

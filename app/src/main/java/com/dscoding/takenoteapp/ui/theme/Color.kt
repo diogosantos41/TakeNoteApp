@@ -7,17 +7,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
 val Coral = Color(0xFFFF7F50)
-val DarkerGrey = Color(0xFF151515)
-val DarkGrey = Color(0xFF303030)
 
 val White = Color(0xFFFFFFFF)
 val DirtWhite = Color(0xFFFAFAFA)
-
 val Grey = Color(0xFF808080)
-val pink = Color(0xFFFFC0CB)
-val red = Color(0xFFFF7F7F)
-val blue = Color(0xFF87CEEB)
-val green = Color(0xFFAED9B2)
+val DarkGrey = Color(0xFF303030)
+val DarkerGrey = Color(0xFF151515)
+
+val pink = Color(0xFFf8c6ff)
+val red = Color(0xFFffc6c6)
+val blue = Color(0xFFc6d9ff)
+val green = Color(0xFFcdffc6)
+val yellow = Color(0xFFfff4c6)
 
 @Stable
 class CustomColors(

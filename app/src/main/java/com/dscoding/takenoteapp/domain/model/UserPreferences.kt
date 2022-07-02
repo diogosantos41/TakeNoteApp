@@ -7,12 +7,10 @@ import com.dscoding.takenoteapp.R
 
 data class UserPreferences(
     val show_greeting: Boolean,
-    val user_name: String,
     val theme: Int,
 ) {
     companion object {
         val SHOW_GREETING = booleanPreferencesKey("show_greeting")
-        val USER_NAME = stringPreferencesKey("user_name")
         val THEME = intPreferencesKey("theme")
     }
 

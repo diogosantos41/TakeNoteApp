@@ -13,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,7 @@ import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -44,6 +46,16 @@ fun NotesScreen(
     val scope = rememberCoroutineScope()
 
     val generalMargin = dimensionResource(R.dimen.general_margin)
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is NotesViewModel.UiEvent.UpdateTheme -> {
+                    ThemeManager.takeNoteTheme = event.theme
+                }
+            }
+        }
+    }
 
     Scaffold(
         floatingActionButton = {
@@ -116,10 +128,13 @@ fun NotesScreen(
                         generalMargin,
                         0.dp,
                         generalMargin,
-                        padding.calculateBottomPadding()
+                        0.dp
                     )
             ) {
-                GreetingSection()
+
+                if (state.isGreetingSectionVisible) {
+                    GreetingSection()
+                }
                 Spacer(modifier = Modifier.height(generalMargin))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -199,7 +214,6 @@ fun NotesScreen(
                                     }
                                 }
                             )
-                            Spacer(modifier = Modifier.height(generalMargin))
                         }
                     }
                 }
