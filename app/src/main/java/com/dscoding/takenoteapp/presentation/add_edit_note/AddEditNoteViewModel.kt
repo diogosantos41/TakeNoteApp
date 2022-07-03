@@ -118,6 +118,7 @@ class AddEditNoteViewModel @Inject constructor(
                         Note(
                             title = noteTitle.value.text,
                             content = noteContent.value.text,
+                            labelName = "",
                             createdTime = if (state.value.isEditingNote) currentSelectedNote?.createdTime
                             else System.currentTimeMillis(),
                             editedTime = System.currentTimeMillis(),

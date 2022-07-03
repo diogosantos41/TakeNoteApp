@@ -101,7 +101,7 @@ fun NotesScreen(
                     )
                 }
                 IconButton(
-                    onClick = { },
+                    onClick = { navController.navigate(Screen.LabelsScreen.route) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Label,
