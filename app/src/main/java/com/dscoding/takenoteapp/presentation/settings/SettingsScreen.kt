@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -20,6 +21,8 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
+import com.dscoding.takenoteapp.utils.launchReviewFlow
+import com.dscoding.takenoteapp.utils.launchShareAppIntent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -27,6 +30,8 @@ fun SettingsScreen(
     navController: NavController,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
+
+    val context = LocalContext.current
 
     val showGreetingState = viewModel.showGreetingFieldState.value
     val state = viewModel.state.value
@@ -103,12 +108,12 @@ fun SettingsScreen(
                     SettingsField(
                         stringResource(id = R.string.settings_rate_app_title),
                         stringResource(id = R.string.settings_rate_app_message),
-                        onClick = { })
+                        onClick = { context.launchReviewFlow() })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
                         stringResource(id = R.string.settings_share_app_title),
                         stringResource(id = R.string.settings_share_app_message),
-                        onClick = { })
+                        onClick = { context.launchShareAppIntent() })
                 }
             }
             if (state.showThemeOptionsDialog) {

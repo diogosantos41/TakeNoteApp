@@ -42,6 +42,7 @@
     <string name="settings_rate_app_message">Reviews help us a lot. Thank you!</string>
     <string name="settings_share_app_title">Share app</string>
     <string name="settings_share_app_message">Love taking notes? Your friends do too!</string>
+    <string name="settings_share_app_intent_message">Check out \'Take Note! App\': https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin</string>
 
     <string-array name="settings_theme_options_array">
         <item>@string/settings_theme_option_system_default</item>
