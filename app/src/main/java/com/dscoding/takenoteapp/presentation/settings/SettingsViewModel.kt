@@ -1,10 +1,7 @@
 package com.dscoding.takenoteapp.presentation.settings
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
@@ -32,6 +29,10 @@ class SettingsViewModel @Inject constructor(
     private val _showGreetingFieldState = mutableStateOf(SettingsFieldState())
     val showGreetingFieldState: State<SettingsFieldState> = _showGreetingFieldState
 
+    private val _isTwentyFourHourClockFieldState = mutableStateOf(SettingsFieldState())
+    val twentyFourHourClockFieldState: State<SettingsFieldState> =
+        _isTwentyFourHourClockFieldState
+
     private val _state = mutableStateOf(SettingsState())
     val state: State<SettingsState> = _state
 
@@ -52,6 +53,18 @@ class SettingsViewModel @Inject constructor(
                         UserPreferences(
                             show_greeting = !showGreetingFieldState.value.isActive,
                             theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
+                            twenty_four_hour_clock = twentyFourHourClockFieldState.value.isActive
+                        )
+                    )
+                }
+            }
+            is SettingsEvent.ChangeTwentyFourHourClockState -> {
+                viewModelScope.launch {
+                    preferencesUseCases.updateUserPreference(
+                        UserPreferences(
+                            show_greeting = showGreetingFieldState.value.isActive,
+                            theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
+                            twenty_four_hour_clock = !twentyFourHourClockFieldState.value.isActive
                         )
                     )
                 }
@@ -70,7 +83,8 @@ class SettingsViewModel @Inject constructor(
                     preferencesUseCases.updateUserPreference(
                         UserPreferences(
                             show_greeting = showGreetingFieldState.value.isActive,
-                            theme = event.option
+                            theme = event.option,
+                            twenty_four_hour_clock = true
                         )
                     )
                     _eventFlow.emit(UiEvent.UpdateTheme(getThemeFromId(event.option)))
@@ -92,12 +106,22 @@ class SettingsViewModel @Inject constructor(
                 _showGreetingFieldState.value = showGreetingFieldState.value.copy(
                     value = if (preferences.show_greeting)
                         UiText.StringResource(
-                            R.string.settings_show_greeting_enabled
+                            R.string.generic_enabled
                         )
                     else UiText.StringResource(
-                        R.string.settings_show_greeting_disabled
+                        R.string.generic_disabled
                     ),
                     isActive = preferences.show_greeting
+                )
+                _isTwentyFourHourClockFieldState.value = twentyFourHourClockFieldState.value.copy(
+                    value = if (preferences.twenty_four_hour_clock)
+                        UiText.StringResource(
+                            R.string.generic_enabled
+                        )
+                    else UiText.StringResource(
+                        R.string.generic_disabled
+                    ),
+                    isActive = preferences.twenty_four_hour_clock
                 )
                 _state.value = state.value.copy(
                     selectedTheme = getThemeTextFromId(preferences.theme)

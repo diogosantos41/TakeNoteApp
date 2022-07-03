@@ -8,6 +8,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.dscoding.takenoteapp.domain.model.UserPreferences
 import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.SHOW_GREETING
 import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.THEME
+import com.dscoding.takenoteapp.domain.model.UserPreferences.Companion.TWENTY_FOUR_HOUR_CLOCK
 import com.dscoding.takenoteapp.domain.repository.PreferencesRepository
 import com.dscoding.takenoteapp.utils.Constants.DATASTORE_NAME
 import kotlinx.coroutines.flow.map
@@ -22,6 +23,7 @@ class PreferencesRepositoryImpl(
         context.dataStore.edit { preferences ->
             preferences[SHOW_GREETING] = userPreferences.show_greeting
             preferences[THEME] = userPreferences.theme
+            preferences[TWENTY_FOUR_HOUR_CLOCK] = userPreferences.twenty_four_hour_clock
         }
     }
 
@@ -29,6 +31,7 @@ class PreferencesRepositoryImpl(
         UserPreferences(
             show_greeting = userPreferences[SHOW_GREETING] ?: true,
             theme = userPreferences[THEME] ?: UserPreferences.Theme.SYSTEM_DEFAULT.id,
+            twenty_four_hour_clock = userPreferences[TWENTY_FOUR_HOUR_CLOCK] ?: true
         )
     }
 }

@@ -4,9 +4,10 @@ import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.Grey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.ui.theme.White
 
 @Composable
 fun SnackbarHostController(
@@ -15,7 +16,7 @@ fun SnackbarHostController(
     SnackbarHost(snackbarHostState) { data ->
         Snackbar(
             actionColor = ThemeManager.colors.mainColor,
-            contentColor = ThemeManager.colors.textColor,
+            contentColor = White,
             backgroundColor = Grey,
             snackbarData = data
         )

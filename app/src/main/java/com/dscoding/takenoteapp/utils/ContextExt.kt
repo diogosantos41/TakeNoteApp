@@ -2,27 +2,28 @@ package com.dscoding.takenoteapp.utils
 
 import android.content.Context
 import android.content.Intent
+import androidx.activity.ComponentActivity
 import com.dscoding.takenoteapp.R
+import com.google.android.play.core.review.ReviewManagerFactory
 
 
 fun Context.launchReviewFlow() {
-    /* val manager = ReviewManagerFactory.create(this)
+    val reviewManager = ReviewManagerFactory.create(this)
+    val requestReviewFlow = reviewManager.requestReviewFlow()
+    requestReviewFlow.addOnCompleteListener { request ->
+        if (request.isSuccessful) {
+            // We got the ReviewInfo object
+            val reviewInfo = request.result
+            val flow = reviewManager.launchReviewFlow(this as ComponentActivity, reviewInfo)
+            flow.addOnCompleteListener {
+                
+            }
+        } else {
 
-     val request = manager.requestReviewFlow()
-     request.addOnCompleteListener { task ->
-         if (task.isSuccessful) {
-             // We got the ReviewInfo object
-             val flow = task.result?.let { manager.launchReviewFlow(this as ComponentActivity, it) }
-             flow?.addOnCompleteListener { _ ->
-                 // The flow has finished. The API does not indicate whether the user
-                 // reviewed or not, or even whether the review dialog was shown. Thus, no
-                 // matter the result, we continue our app flow.
-             }
-         } else {
-             // There was some problem, log or handle the error code.
-         }
-     } */
+        }
+    }
 }
+
 
 fun Context.launchShareAppIntent() {
     val sendIntent: Intent = Intent().apply {

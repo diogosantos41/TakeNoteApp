@@ -2,16 +2,16 @@ package com.dscoding.takenoteapp.domain.model
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import com.dscoding.takenoteapp.R
 
 data class UserPreferences(
     val show_greeting: Boolean,
     val theme: Int,
+    val twenty_four_hour_clock: Boolean
 ) {
     companion object {
         val SHOW_GREETING = booleanPreferencesKey("show_greeting")
         val THEME = intPreferencesKey("theme")
+        val TWENTY_FOUR_HOUR_CLOCK = booleanPreferencesKey("twenty_four_hour_clock")
     }
 
     enum class Theme(val id: Int) {

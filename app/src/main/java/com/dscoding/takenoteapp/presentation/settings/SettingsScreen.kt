@@ -34,6 +34,7 @@ fun SettingsScreen(
     val context = LocalContext.current
 
     val showGreetingState = viewModel.showGreetingFieldState.value
+    val twentyFourHourClockState = viewModel.twentyFourHourClockFieldState.value
     val state = viewModel.state.value
 
     val generalMargin = dimensionResource(R.dimen.general_margin)
@@ -99,6 +100,14 @@ fun SettingsScreen(
                         onSelect = {
                             viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
                         })
+                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                    SwitchField(
+                        stringResource(id = R.string.settings_twenty_four_hour_clock),
+                        twentyFourHourClockState.value.asString(),
+                        twentyFourHourClockState.isActive,
+                        onSelect = {
+                            viewModel.onEvent(SettingsEvent.ChangeTwentyFourHourClockState)
+                        })
                 }
                 Divider()
                 Column(settingsColumnModifier) {
@@ -114,6 +123,11 @@ fun SettingsScreen(
                         stringResource(id = R.string.settings_share_app_title),
                         stringResource(id = R.string.settings_share_app_message),
                         onClick = { context.launchShareAppIntent() })
+                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                    SettingsField(
+                        stringResource(id = R.string.settings_app_version_title),
+                        stringResource(id = R.string.settings_app_version_message),
+                        onClick = { })
                 }
             }
             if (state.showThemeOptionsDialog) {

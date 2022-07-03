@@ -136,8 +136,9 @@ fun NotesScreen(
 
                 if (state.isGreetingSectionVisible) {
                     GreetingSection()
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
-                Spacer(modifier = Modifier.height(generalMargin))
+                Spacer(modifier = Modifier.height(5.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -166,9 +167,7 @@ fun NotesScreen(
                     exit = fadeOut() + slideOutVertically()
                 ) {
                     OrderSection(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = generalMargin),
+                        modifier = Modifier.fillMaxWidth(),
                         noteOrder = state.noteOrder,
                         onOrderChange = {
                             viewModel.onEvent(NotesEvent.Order(it))

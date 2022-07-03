@@ -4,6 +4,8 @@
 
     <!-- Generic String -->
     <string name="generic_dismiss">Dismiss</string>
+    <string name="generic_enabled">Enabled</string>
+    <string name="generic_disabled">Disabled</string>
 
     <!-- Generic Error -->
     <string name="error_unknown">Unknown error</string>
@@ -29,8 +31,6 @@
     <string name="settings_title">Settings</string>
     <string name="settings_header_user_interface">User interface</string>
     <string name="settings_show_greeting">Show greeting</string>
-    <string name="settings_show_greeting_enabled">Enabled</string>
-    <string name="settings_show_greeting_disabled">Disabled</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_theme_dialog_title">Choose Theme</string>
     <string name="settings_theme_option_system_default">System default</string>
@@ -43,6 +43,9 @@
     <string name="settings_share_app_title">Share app</string>
     <string name="settings_share_app_message">Love taking notes? Your friends do too!</string>
     <string name="settings_share_app_intent_message">Check out \'Take Note! App\': https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin</string>
+    <string name="settings_twenty_four_hour_clock">24-hour clock</string>
+    <string name="settings_app_version_title">Version</string>
+    <string name="settings_app_version_message">1.0</string>
 
     <string-array name="settings_theme_options_array">
         <item>@string/settings_theme_option_system_default</item>
