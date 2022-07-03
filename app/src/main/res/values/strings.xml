@@ -22,6 +22,8 @@
     <string name="notes_order_section_descending">Descending</string>
 
     <!-- Add/Edit Note Screen -->
+    <string name="add_edit_note_add_title">Add Note</string>
+    <string name="add_edit_note_edit_title">Edit Note</string>
     <string name="add_edit_note_title_hint">Enter title…</string>
     <string name="add_edit_note_content_hint">Enter content…</string>
     <string name="error_add_note_empty_title">The title of the note can\'t be empty</string>
@@ -46,6 +48,7 @@
     <string name="settings_twenty_four_hour_clock">24-hour clock</string>
     <string name="settings_app_version_title">Version</string>
     <string name="settings_app_version_message">1.0</string>
+    <string name="add_edit_note_edited_on">Last Edited: %s</string>
 
     <string-array name="settings_theme_options_array">
         <item>@string/settings_theme_option_system_default</item>

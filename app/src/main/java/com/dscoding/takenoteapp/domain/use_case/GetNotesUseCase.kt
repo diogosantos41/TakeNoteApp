@@ -15,7 +15,7 @@ class GetNotesUseCase(private val repository: NoteRepository) {
                 is OrderType.Ascending -> {
                     when (noteOrder) {
                         is NoteOrder.Title -> notes.sortedBy { it.title.lowercase() }
-                        is NoteOrder.Date -> notes.sortedBy { it.timestamp }
+                        is NoteOrder.Date -> notes.sortedBy { it.createdTime }
                         is NoteOrder.Color -> notes.sortedBy { it.color }
                     }
 
@@ -23,7 +23,7 @@ class GetNotesUseCase(private val repository: NoteRepository) {
                 is OrderType.Descending -> {
                     when (noteOrder) {
                         is NoteOrder.Title -> notes.sortedByDescending { it.title.lowercase() }
-                        is NoteOrder.Date -> notes.sortedByDescending { it.timestamp }
+                        is NoteOrder.Date -> notes.sortedByDescending { it.createdTime }
                         is NoteOrder.Color -> notes.sortedByDescending { it.color }
                     }
                 }

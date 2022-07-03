@@ -12,11 +12,10 @@ fun Context.launchReviewFlow() {
     val requestReviewFlow = reviewManager.requestReviewFlow()
     requestReviewFlow.addOnCompleteListener { request ->
         if (request.isSuccessful) {
-            // We got the ReviewInfo object
             val reviewInfo = request.result
             val flow = reviewManager.launchReviewFlow(this as ComponentActivity, reviewInfo)
             flow.addOnCompleteListener {
-                
+
             }
         } else {
 

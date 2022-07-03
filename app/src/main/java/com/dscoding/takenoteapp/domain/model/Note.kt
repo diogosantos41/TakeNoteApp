@@ -8,7 +8,8 @@ import com.dscoding.takenoteapp.ui.theme.*
 data class Note(
     val title: String,
     val content: String,
-    val timestamp: Long,
+    val createdTime: Long?,
+    val editedTime: Long?,
     val color: Int,
     @PrimaryKey val id: Int? = null
 ) {

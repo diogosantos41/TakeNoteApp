@@ -22,10 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -35,6 +36,7 @@ import com.dscoding.takenoteapp.presentation.add_edit_note.components.Transparen
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.ui.theme.White
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -83,18 +85,21 @@ fun AddEditNoteScreen(
         topBar = {
             TopAppBar(
                 title = {
-
+                    Text(
+                        text = state.pageTitle.asString(),
+                        color = White
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back Arrow",
-                            tint = DarkerGrey
+                            tint = White
                         )
                     }
                 },
-                backgroundColor = noteBackgroundAnimatable.value,
+                backgroundColor = ThemeManager.colors.toolbarColor,
                 elevation = 0.dp
             )
         },
@@ -154,6 +159,19 @@ fun AddEditNoteScreen(
                         padding.calculateBottomPadding()
                     )
             ) {
+                if (state.isEditingNote) {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(
+                            id = R.string.add_edit_note_edited_on,
+                            state.lastTimeEdited
+                        ),
+                        style = MaterialTheme.typography.body1,
+                        color = DarkerGrey,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(modifier = Modifier.height(generalMargin))
+                }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -189,7 +207,7 @@ fun AddEditNoteScreen(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(generalMargin))
                 TransparentHintTextField(
                     text = titleState.text,
                     hint = titleState.hint.asString(),
@@ -203,7 +221,7 @@ fun AddEditNoteScreen(
                     singleLine = true,
                     textStyle = MaterialTheme.typography.h5
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(generalMargin))
                 TransparentHintTextField(
                     text = contentState.text,
                     hint = contentState.hint.asString(),

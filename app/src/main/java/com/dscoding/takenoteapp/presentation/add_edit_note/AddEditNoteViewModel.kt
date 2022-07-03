@@ -10,6 +10,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.utils.DateUtils
 import com.dscoding.takenoteapp.utils.Failure
 import com.dscoding.takenoteapp.utils.Resource
 import com.dscoding.takenoteapp.utils.UiText
@@ -41,8 +42,10 @@ class AddEditNoteViewModel @Inject constructor(
 
     private val _state = mutableStateOf(
         AddEditNoteState(
+            pageTitle = UiText.StringResource(R.string.add_edit_note_add_title),
             noteColor = Note.noteColors.random().toArgb(),
-            isEditingNote = false
+            isEditingNote = false,
+            lastTimeEdited = ""
         )
     )
 
@@ -68,8 +71,10 @@ class AddEditNoteViewModel @Inject constructor(
                             isHintVisible = false
                         )
                         _state.value = state.value.copy(
+                            pageTitle = UiText.StringResource(R.string.add_edit_note_edit_title),
                             noteColor = note.color,
-                            isEditingNote = true
+                            isEditingNote = true,
+                            lastTimeEdited = DateUtils.convertTimeMillisToStringDate(timeMillis = note.editedTime)
                         )
                     }
                 }
@@ -113,7 +118,9 @@ class AddEditNoteViewModel @Inject constructor(
                         Note(
                             title = noteTitle.value.text,
                             content = noteContent.value.text,
-                            timestamp = System.currentTimeMillis(),
+                            createdTime = if (state.value.isEditingNote) currentSelectedNote?.createdTime
+                            else System.currentTimeMillis(),
+                            editedTime = System.currentTimeMillis(),
                             color = state.value.noteColor,
                             id = currentSelectedNote?.id
                         )
