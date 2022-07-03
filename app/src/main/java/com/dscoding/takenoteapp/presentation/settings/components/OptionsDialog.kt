@@ -55,7 +55,7 @@ fun OptionsDialog(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = ThemeManager.colors.secondaryButtonBackground,
-                        contentColor = ThemeManager.colors.secondaryTextButtonBackground
+                        contentColor = ThemeManager.colors.secondaryButtonTextColor
                     ),
                     onClick = { dismissDialog() }
                 ) {

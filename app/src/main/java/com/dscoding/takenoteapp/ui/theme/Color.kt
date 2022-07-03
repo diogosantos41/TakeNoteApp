@@ -7,18 +7,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
 val Coral = Color(0xFFFF7F50)
+val Yellow = Color(0xFFFCD535)
 
 val White = Color(0xFFFFFFFF)
 val DirtWhite = Color(0xFFFAFAFA)
 val Grey = Color(0xFF808080)
 val DarkGrey = Color(0xFF303030)
 val DarkerGrey = Color(0xFF151515)
+val BlackBlue = Color(0xFF0b0E11)
 
-val pink = Color(0xFFf8c6ff)
-val red = Color(0xFFffc6c6)
-val blue = Color(0xFFc6d9ff)
-val green = Color(0xFFcdffc6)
-val yellow = Color(0xFFfff4c6)
+val LightPink = Color(0xFFf8C6FF)
+val LightRed = Color(0xFFFFC6C6)
+val LightBlue = Color(0xFFC6D9FF)
+val LightGreen = Color(0xFFCDFFC6)
+val LightYellow = Color(0xFFFFF4C6)
 
 @Stable
 class CustomColors(
@@ -41,7 +43,7 @@ class CustomColors(
         private set
     var secondaryButtonBackground by mutableStateOf(secondaryButtonBackgroundColor)
         private set
-    var secondaryTextButtonBackground by mutableStateOf(secondaryButtonTextColor)
+    var secondaryButtonTextColor by mutableStateOf(secondaryButtonTextColor)
         private set
     var textColor by mutableStateOf(textColor)
         private set
@@ -54,7 +56,7 @@ class CustomColors(
         this.iconColor = colors.iconColor
         this.toolbarColor = colors.toolbarColor
         this.secondaryButtonBackground = colors.secondaryButtonBackground
-        this.secondaryTextButtonBackground = colors.secondaryTextButtonBackground
+        this.secondaryButtonTextColor = colors.secondaryButtonTextColor
         this.textColor = colors.textColor
         this.mainColor = colors.mainColor
 
@@ -66,7 +68,7 @@ class CustomColors(
         iconColor,
         toolbarColor,
         secondaryButtonBackground,
-        secondaryTextButtonBackground,
+        secondaryButtonTextColor,
         textColor,
         mainColor
     )

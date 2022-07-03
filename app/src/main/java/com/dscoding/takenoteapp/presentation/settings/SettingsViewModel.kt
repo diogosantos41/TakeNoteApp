@@ -1,5 +1,6 @@
 package com.dscoding.takenoteapp.presentation.settings
 
+import android.net.Uri
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeFromId
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeIdFromText
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeTextFromId
 import com.dscoding.takenoteapp.utils.UiText
+import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -74,6 +76,7 @@ class SettingsViewModel @Inject constructor(
                 }
             }
             is SettingsEvent.SelectRateTheApp -> {
+                val manager = ReviewManagerFactory.create(context)
 
             }
             is SettingsEvent.SelectShareTheApp -> {

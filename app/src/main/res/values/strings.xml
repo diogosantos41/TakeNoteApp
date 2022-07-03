@@ -36,6 +36,7 @@
     <string name="settings_theme_option_system_default">System default</string>
     <string name="settings_theme_option_light">Light</string>
     <string name="settings_theme_option_dark">Dark</string>
+    <string name="settings_theme_option_yellow">Dark Yellow</string>
     <string name="settings_header_support">Support</string>
     <string name="settings_rate_app_title">Rate app</string>
     <string name="settings_rate_app_message">Reviews help us a lot. Thank you!</string>
@@ -46,6 +47,7 @@
         <item>@string/settings_theme_option_system_default</item>
         <item>@string/settings_theme_option_light</item>
         <item>@string/settings_theme_option_dark</item>
+        <item>@string/settings_theme_option_yellow</item>
     </string-array>
 
 </resources>

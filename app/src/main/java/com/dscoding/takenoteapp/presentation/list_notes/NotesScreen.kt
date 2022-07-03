@@ -7,7 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -185,9 +185,10 @@ fun NotesScreen(
                         verticalArrangement = Arrangement.spacedBy(generalMargin),
                         horizontalArrangement = Arrangement.spacedBy(generalMargin)
                     ) {
-                        items(state.notes) { note ->
+                        itemsIndexed(state.notes) { index, note ->
                             NoteItem(
                                 note = note,
+                                isLastItem = index == state.notes.size - 1,
                                 modifier = Modifier
                                     .animateItemPlacement(
                                         animationSpec = tween(

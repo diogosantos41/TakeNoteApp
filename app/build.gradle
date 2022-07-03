@@ -89,4 +89,8 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.2"
+
+    // In-App Review
+    implementation("com.google.android.play:review:2.0.0")
+    implementation("com.google.android.play:review-ktx:2.0.0")
 }

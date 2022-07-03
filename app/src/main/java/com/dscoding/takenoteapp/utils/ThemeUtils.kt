@@ -13,6 +13,8 @@ object ThemeUtils {
             UserPreferences.Theme.LIGHT.id
         } else if (text.equals(R.string.settings_theme_option_dark)) {
             UserPreferences.Theme.DARK.id
+        } else if (text.equals(R.string.settings_theme_option_yellow)) {
+            UserPreferences.Theme.YELLOW.id
         } else {
             UserPreferences.Theme.SYSTEM_DEFAULT.id
         }
@@ -28,6 +30,9 @@ object ThemeUtils {
             }
             UserPreferences.Theme.DARK.id -> {
                 UiText.StringResource(resId = R.string.settings_theme_option_dark)
+            }
+            UserPreferences.Theme.YELLOW.id -> {
+                UiText.StringResource(resId = R.string.settings_theme_option_yellow)
             }
             else -> {
                 UiText.StringResource(resId = R.string.settings_theme_option_system_default)
@@ -45,6 +50,9 @@ object ThemeUtils {
             }
             UserPreferences.Theme.DARK.id -> {
                 TakeNoteTheme.DARK
+            }
+            UserPreferences.Theme.YELLOW.id -> {
+                TakeNoteTheme.YELLOW
             }
             else -> {
                 TakeNoteTheme.DARK

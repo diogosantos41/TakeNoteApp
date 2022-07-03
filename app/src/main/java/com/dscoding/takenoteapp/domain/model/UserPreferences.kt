@@ -17,6 +17,7 @@ data class UserPreferences(
     enum class Theme(val id: Int) {
         SYSTEM_DEFAULT(0),
         LIGHT(1),
-        DARK(2)
+        DARK(2),
+        YELLOW(3)
     }
 }
