@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -31,6 +32,7 @@ import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
+import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import kotlinx.coroutines.flow.collectLatest
@@ -100,8 +102,8 @@ fun AddEditNoteScreen(
             FloatingActionButton(
                 backgroundColor = ThemeManager.colors.mainColor,
                 onClick = {
-                viewModel.onEvent(AddEditNoteEvent.SaveNote)
-            }) {
+                    viewModel.onEvent(AddEditNoteEvent.SaveNote)
+                }) {
                 if (state.isEditingNote) {
                     Icon(
                         imageVector = Icons.Default.Edit,
@@ -139,6 +141,7 @@ fun AddEditNoteScreen(
             }
         },
         scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHostController(it) },
         content = { padding ->
             Column(
                 modifier = Modifier

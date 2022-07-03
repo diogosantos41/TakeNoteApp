@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
 import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
@@ -120,6 +121,7 @@ fun NotesScreen(
             }
         },
         scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHostController(it) },
         content = { padding ->
             Column(
                 modifier = Modifier

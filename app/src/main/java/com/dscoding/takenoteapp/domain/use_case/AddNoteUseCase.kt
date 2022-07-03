@@ -12,7 +12,7 @@ class AddNoteUseCase(private val repository: NoteRepository) {
             return Resource.Error(Failure.EmptyNoteTitle)
         }
         if (note.content.isBlank()) {
-            return Resource.Error(Failure.EmptyNoteTitle)
+            return Resource.Error(Failure.EmptyNoteContent)
         }
         repository.insertNote(note)
         return Resource.Success(null)
