@@ -1,11 +1,18 @@
 package com.dscoding.takenoteapp.utils
 
+import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 object DateUtils {
-    fun convertTimeMillisToStringDate(timeMillis: Long?): String {
-        val simpleDateFormat = SimpleDateFormat("MMM d, HH:mm ");
+
+    const val TWENTY_FOUR_HOUR_DATE_FORMAT = "MMMM d, HH:mm"
+    const val THIRTEEN_HOUR_DATE_FORMAT = "MMMM d, hh:mm"
+
+    @SuppressLint("SimpleDateFormat")
+    fun convertTimeMillisToStringDate(timeMillis: Long?, format: String): String {
+        val simpleDateFormat = SimpleDateFormat(format)
         val date = timeMillis?.let { Date(it) };
         return simpleDateFormat.format(date)
     }

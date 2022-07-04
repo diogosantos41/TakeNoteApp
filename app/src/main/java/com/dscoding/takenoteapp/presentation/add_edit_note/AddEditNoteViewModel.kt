@@ -9,20 +9,25 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
+import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import com.dscoding.takenoteapp.utils.DateUtils
 import com.dscoding.takenoteapp.utils.Failure
 import com.dscoding.takenoteapp.utils.Resource
 import com.dscoding.takenoteapp.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddEditNoteViewModel @Inject constructor(
     private val noteUseCases: NoteUseCases,
+    private val preferencesUseCases: PreferencesUseCases,
     saveStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -56,7 +61,12 @@ class AddEditNoteViewModel @Inject constructor(
 
     private var currentSelectedNote: Note? = null
 
+    private var dateFormat: String = DateUtils.TWENTY_FOUR_HOUR_DATE_FORMAT
+
+    private var getPreferencesJob: Job? = null
+
     init {
+        getPreferences()
         saveStateHandle.get<Int>(NOTE_ID_ARG)?.let { noteId ->
             if (noteId != -1) {
                 viewModelScope.launch {
@@ -74,7 +84,10 @@ class AddEditNoteViewModel @Inject constructor(
                             pageTitle = UiText.StringResource(R.string.add_edit_note_edit_title),
                             noteColor = note.color,
                             isEditingNote = true,
-                            lastTimeEdited = DateUtils.convertTimeMillisToStringDate(timeMillis = note.editedTime)
+                            lastTimeEdited = DateUtils.convertTimeMillisToStringDate(
+                                timeMillis = note.editedTime,
+                                dateFormat
+                            )
                         )
                     }
                 }
@@ -168,6 +181,19 @@ class AddEditNoteViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    private fun getPreferences() {
+        getPreferencesJob?.cancel()
+        getPreferencesJob = preferencesUseCases.getUserPreference()
+            .onEach { preferences ->
+                dateFormat = if (preferences.twenty_four_hour_clock) {
+                    DateUtils.TWENTY_FOUR_HOUR_DATE_FORMAT
+                } else {
+                    DateUtils.THIRTEEN_HOUR_DATE_FORMAT
+                }
+            }
+            .launchIn(viewModelScope)
     }
 
     sealed class UiEvent {

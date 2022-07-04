@@ -35,6 +35,7 @@ import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
+import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
@@ -73,10 +74,18 @@ fun AddEditNoteScreen(
                     )
                 }
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
-                    navController.navigateUp()
+                    navController.navigate(Screen.NotesScreen.route) {
+                        popUpTo(Screen.NotesScreen.route) {
+                            inclusive = true
+                        }
+                    }
                 }
                 is AddEditNoteViewModel.UiEvent.DeleteNote -> {
-                    navController.navigateUp()
+                    navController.navigate(Screen.NotesScreen.route) {
+                        popUpTo(Screen.NotesScreen.route) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
         }
@@ -92,7 +101,13 @@ fun AddEditNoteScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.NotesScreen.route) {
+                            popUpTo(Screen.NotesScreen.route) {
+                                inclusive = true
+                            }
+                        }
+                    }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back Arrow",

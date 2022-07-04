@@ -44,8 +44,6 @@ fun NotesScreen(
 ) {
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-
     val generalMargin = dimensionResource(R.dimen.general_margin)
 
     LaunchedEffect(key1 = true) {
@@ -81,7 +79,7 @@ fun NotesScreen(
                 )
             ) {
                 IconButton(
-                    onClick = { },
+                    onClick = { navController.navigate(Screen.SearchNotesScreen.route) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,

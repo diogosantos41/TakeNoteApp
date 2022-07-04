@@ -30,11 +30,12 @@ import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 @Composable
 fun NoteItem(
     note: Note,
-    isLastItem: Boolean,
+    isLastItem: Boolean = false,
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 10.dp,
     cutCornerSize: Dp = 30.dp,
-    onDeleteClick: () -> Unit
+    showDeleteButton: Boolean = true,
+    onDeleteClick: () -> Unit = {}
 ) {
     Box(
         modifier = if (isLastItem) modifier.padding(
@@ -91,15 +92,17 @@ fun NoteItem(
                 overflow = TextOverflow.Ellipsis
             )
         }
-        IconButton(
-            onClick = onDeleteClick,
-            modifier = Modifier.align(Alignment.BottomEnd)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete note",
-                tint = DarkerGrey
-            )
+        if (showDeleteButton) {
+            IconButton(
+                onClick = onDeleteClick,
+                modifier = Modifier.align(Alignment.BottomEnd)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete note",
+                    tint = DarkerGrey
+                )
+            }
         }
     }
 }
