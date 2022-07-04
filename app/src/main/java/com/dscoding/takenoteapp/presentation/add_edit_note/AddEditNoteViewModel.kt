@@ -151,11 +151,21 @@ class AddEditNoteViewModel @Inject constructor(
                 }
 
             }
-            is AddEditNoteEvent.DeleteNote -> {
+            is AddEditNoteEvent.ClickDeleteNote -> {
+                _state.value = state.value.copy(
+                    showDeleteConfirmationDialog = true
+                )
+            }
+            is AddEditNoteEvent.ConfirmDeleteNote -> {
                 viewModelScope.launch {
                     currentSelectedNote?.let { noteUseCases.deleteNote(it) }
                     _eventFlow.emit(UiEvent.DeleteNote)
                 }
+            }
+            is AddEditNoteEvent.ShowConfirmDeleteNoteDialog -> {
+                _state.value = state.value.copy(
+                    showDeleteConfirmationDialog = event.toShowDialog
+                )
             }
         }
     }

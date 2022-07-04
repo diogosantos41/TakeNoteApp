@@ -29,7 +29,7 @@ class NotesViewModel @Inject constructor(
     private val _state = mutableStateOf(NotesState())
     val state: State<NotesState> = _state
 
-    private var recentlyDeleteNote: Note? = null
+    private lateinit var noteToDelete: Note
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
@@ -53,16 +53,25 @@ class NotesViewModel @Inject constructor(
                 }
                 getNotes(event.noteOrder)
             }
-            is NotesEvent.DeleteNote -> {
-                viewModelScope.launch {
-                    noteUseCases.deleteNote(event.note)
-                    recentlyDeleteNote = event.note
-                }
+            is NotesEvent.ClickDeleteNote -> {
+                _state.value = state.value.copy(
+                    showDeleteConfirmationDialog = true
+                )
+                noteToDelete = event.note
+
             }
-            is NotesEvent.RestoreNote -> {
+            is NotesEvent.ConfirmDeleteNote -> {
                 viewModelScope.launch {
-                    noteUseCases.addNote(recentlyDeleteNote ?: return@launch)
+                    noteUseCases.deleteNote(noteToDelete)
                 }
+                _state.value = state.value.copy(
+                    showDeleteConfirmationDialog = false
+                )
+            }
+            is NotesEvent.ShowConfirmDeleteNoteDialog -> {
+                _state.value = state.value.copy(
+                    showDeleteConfirmationDialog = event.toShowDialog
+                )
             }
             is NotesEvent.ToggleOrderSection -> {
                 _state.value = state.value.copy(

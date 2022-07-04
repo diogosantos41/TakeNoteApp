@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
 import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
@@ -33,7 +34,6 @@ import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -124,7 +124,6 @@ fun NotesScreen(
                         0.dp
                     )
             ) {
-
                 if (state.isGreetingSectionVisible) {
                     GreetingSection()
                     Spacer(modifier = Modifier.height(8.dp))
@@ -195,20 +194,16 @@ fun NotesScreen(
                                         )
                                     },
                                 onDeleteClick = {
-                                    viewModel.onEvent(NotesEvent.DeleteNote(note))
-                                    scope.launch {
-                                        val result = scaffoldState.snackbarHostState.showSnackbar(
-                                            message = "Note deleted",
-                                            actionLabel = "Undo"
-                                        )
-                                        if (result == SnackbarResult.ActionPerformed) {
-                                            viewModel.onEvent(NotesEvent.RestoreNote)
-                                        }
-                                    }
+                                    viewModel.onEvent(NotesEvent.ClickDeleteNote(note))
                                 }
                             )
                         }
                     }
+                }
+                if (state.showDeleteConfirmationDialog) {
+                    ConfirmationDialog(message = stringResource(id = R.string.notes_delete_confirmation_message),
+                        onConfirm = { viewModel.onEvent(NotesEvent.ConfirmDeleteNote) },
+                        onDismiss = { viewModel.onEvent(NotesEvent.ShowConfirmDeleteNoteDialog(false)) })
                 }
             }
         }

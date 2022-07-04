@@ -138,7 +138,10 @@ fun SettingsScreen(
                     onOptionSelected = {
                         viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
                     }
-                ) { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false)) }
+                )
+                {
+                    viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false))
+                }
             }
         })
 }

@@ -6,5 +6,6 @@ data class AddEditNoteState(
     val pageTitle: UiText.StringResource,
     val noteColor: Int,
     val isEditingNote: Boolean,
-    val lastTimeEdited: String
+    val lastTimeEdited: String,
+    val showDeleteConfirmationDialog: Boolean = false
 )

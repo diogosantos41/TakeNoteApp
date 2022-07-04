@@ -33,6 +33,7 @@ import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
+import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
@@ -134,7 +135,7 @@ fun AddEditNoteScreen(
             ) {
                 if (state.isEditingNote) {
                     IconButton(
-                        onClick = { viewModel.onEvent(AddEditNoteEvent.DeleteNote) },
+                        onClick = { viewModel.onEvent(AddEditNoteEvent.ClickDeleteNote) },
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
@@ -236,6 +237,17 @@ fun AddEditNoteScreen(
                     textStyle = MaterialTheme.typography.body1,
                     modifier = Modifier.fillMaxHeight()
                 )
+                if (state.showDeleteConfirmationDialog) {
+                    ConfirmationDialog(message = stringResource(id = R.string.notes_delete_confirmation_message),
+                        onConfirm = { viewModel.onEvent(AddEditNoteEvent.ConfirmDeleteNote) },
+                        onDismiss = {
+                            viewModel.onEvent(
+                                AddEditNoteEvent.ShowConfirmDeleteNoteDialog(
+                                    false
+                                )
+                            )
+                        })
+                }
             }
         }
     )

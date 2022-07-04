@@ -9,5 +9,7 @@ data class NotesState(
     val noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending),
     val isGreetingSectionVisible: Boolean = false,
     val isOrderSectionVisible: Boolean = false,
-    val isGridListSelected: Boolean = false
+    val isGridListSelected: Boolean = false,
+    val showDeleteConfirmationDialog: Boolean = false
+
 )

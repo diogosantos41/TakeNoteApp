@@ -1,7 +1,7 @@
 package com.dscoding.takenoteapp.presentation.add_edit_note
 
 import androidx.compose.ui.focus.FocusState
-import com.dscoding.takenoteapp.domain.model.Note
+import com.dscoding.takenoteapp.presentation.list_notes.NotesEvent
 
 sealed class AddEditNoteEvent {
     data class EnteredTitle(val value: String) : AddEditNoteEvent()
@@ -9,6 +9,9 @@ sealed class AddEditNoteEvent {
     data class EnteredContent(val value: String) : AddEditNoteEvent()
     data class ChangeContentFocus(val focusState: FocusState) : AddEditNoteEvent()
     data class ChangeColor(val color: Int) : AddEditNoteEvent()
+    data class ShowConfirmDeleteNoteDialog(val toShowDialog: Boolean) : AddEditNoteEvent()
     object SaveNote : AddEditNoteEvent()
-    object DeleteNote : AddEditNoteEvent()
+    object ClickDeleteNote : AddEditNoteEvent()
+    object ConfirmDeleteNote : AddEditNoteEvent()
+
 }
