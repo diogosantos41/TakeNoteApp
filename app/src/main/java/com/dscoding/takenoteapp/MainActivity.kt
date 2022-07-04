@@ -15,7 +15,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dscoding.takenoteapp.presentation.add_edit_note.AddEditNoteScreen
-import com.dscoding.takenoteapp.presentation.labels.LabelsScreen
 import com.dscoding.takenoteapp.presentation.list_notes.NotesScreen
 import com.dscoding.takenoteapp.presentation.settings.SettingsScreen
 import com.dscoding.takenoteapp.presentation.util.Screen
@@ -77,9 +76,6 @@ fun Navigation() {
                 navController = navController,
                 noteColor = color
             )
-        }
-        composable(route = Screen.LabelsScreen.route) {
-            LabelsScreen(navController = navController)
         }
         composable(route = Screen.SettingsScreen.route) {
             SettingsScreen(navController = navController)

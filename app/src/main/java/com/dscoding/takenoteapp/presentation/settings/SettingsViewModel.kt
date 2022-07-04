@@ -90,12 +90,6 @@ class SettingsViewModel @Inject constructor(
                     _eventFlow.emit(UiEvent.UpdateTheme(getThemeFromId(event.option)))
                 }
             }
-            is SettingsEvent.SelectRateTheApp -> {
-
-            }
-            is SettingsEvent.SelectShareTheApp -> {
-
-            }
         }
     }
 

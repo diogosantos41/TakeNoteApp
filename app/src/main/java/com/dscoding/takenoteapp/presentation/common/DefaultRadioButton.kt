@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.presentation.list_notes.components
+package com.dscoding.takenoteapp.presentation.common
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

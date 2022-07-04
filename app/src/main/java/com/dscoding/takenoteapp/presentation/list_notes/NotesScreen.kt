@@ -101,15 +101,6 @@ fun NotesScreen(
                     )
                 }
                 IconButton(
-                    onClick = { navController.navigate(Screen.LabelsScreen.route) },
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Label,
-                        contentDescription = "Label",
-                        tint = ThemeManager.colors.iconColor
-                    )
-                }
-                IconButton(
                     onClick = { navController.navigate(Screen.SettingsScreen.route) },
                 ) {
                     Icon(
