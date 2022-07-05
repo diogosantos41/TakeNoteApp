@@ -8,7 +8,7 @@ import java.util.*
 object DateUtils {
 
     const val TWENTY_FOUR_HOUR_DATE_FORMAT = "MMMM d, HH:mm"
-    const val THIRTEEN_HOUR_DATE_FORMAT = "MMMM d, hh:mm"
+    const val THIRTEEN_HOUR_DATE_FORMAT = "MMMM d, hh:mm aa"
 
     @SuppressLint("SimpleDateFormat")
     fun convertTimeMillisToStringDate(timeMillis: Long?, format: String): String {

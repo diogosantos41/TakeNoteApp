@@ -84,7 +84,7 @@ class SettingsViewModel @Inject constructor(
                         UserPreferences(
                             show_greeting = showGreetingFieldState.value.isActive,
                             theme = event.option,
-                            twenty_four_hour_clock = true
+                            twenty_four_hour_clock = twentyFourHourClockFieldState.value.isActive
                         )
                     )
                     _eventFlow.emit(UiEvent.UpdateTheme(getThemeFromId(event.option)))

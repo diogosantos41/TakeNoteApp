@@ -2,6 +2,7 @@ package com.dscoding.takenoteapp.presentation.common
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
@@ -25,6 +26,7 @@ fun DefaultRadioButton(
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
+            modifier = Modifier.size(20.dp),
             selected = selected,
             onClick = onSelect,
             colors = RadioButtonDefaults.colors(

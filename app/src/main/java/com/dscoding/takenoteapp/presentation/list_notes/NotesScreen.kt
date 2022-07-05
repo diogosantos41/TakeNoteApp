@@ -14,7 +14,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -33,6 +32,7 @@ import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.utils.safeNavigate
 import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalFoundationApi
@@ -61,7 +61,7 @@ fun NotesScreen(
             FloatingActionButton(
                 backgroundColor = ThemeManager.colors.mainColor,
                 onClick = {
-                    navController.navigate(Screen.AddEditNoteScreen.route)
+                    navController.safeNavigate(Screen.AddEditNoteScreen.route)
                 }) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -79,7 +79,7 @@ fun NotesScreen(
                 )
             ) {
                 IconButton(
-                    onClick = { navController.navigate(Screen.SearchNotesScreen.route) },
+                    onClick = { navController.safeNavigate(Screen.SearchNotesScreen.route) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -99,7 +99,7 @@ fun NotesScreen(
                     )
                 }
                 IconButton(
-                    onClick = { navController.navigate(Screen.SettingsScreen.route) },
+                    onClick = { navController.safeNavigate(Screen.SettingsScreen.route) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Settings,
@@ -155,7 +155,9 @@ fun NotesScreen(
                     exit = fadeOut() + slideOutVertically()
                 ) {
                     OrderSection(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = generalMargin),
                         noteOrder = state.noteOrder,
                         onOrderChange = {
                             viewModel.onEvent(NotesEvent.Order(it))
@@ -186,7 +188,7 @@ fun NotesScreen(
                                     )
                                     .fillMaxWidth()
                                     .clickable {
-                                        navController.navigate(
+                                        navController.safeNavigate(
                                             Screen.AddEditNoteScreen.route +
                                                     "?$NOTE_ID_ARG=${note.id}&$NOTE_COLOR_ARG=${note.color}"
                                         )

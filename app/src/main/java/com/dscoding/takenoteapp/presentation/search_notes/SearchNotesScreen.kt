@@ -22,6 +22,8 @@ import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.utils.Constants
+import com.dscoding.takenoteapp.utils.popBackToDashboard
+import com.dscoding.takenoteapp.utils.safeNavigate
 
 @Composable
 fun SearchNotesScreen(
@@ -48,7 +50,9 @@ fun SearchNotesScreen(
                 onCloseClicked = {
                     viewModel.onEvent(SearchNotesEvent.CleanSearchText)
                 },
-                onBackPressed = { navController.navigateUp() },
+                onBackPressed = {
+                    navController.popBackToDashboard()
+                },
                 focusRequester = focusRequester
             )
         },
@@ -64,7 +68,7 @@ fun SearchNotesScreen(
             ) {
                 if (state.notes.isEmpty()) {
                     EmptyListAlert(
-                        stringResource(id = R.string.notes_empty_list_message)
+                        stringResource(id = R.string.notes_search_empty_message)
                     )
                 } else {
                     LazyColumn(
@@ -76,7 +80,7 @@ fun SearchNotesScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clickable {
-                                        navController.navigate(
+                                        navController.safeNavigate(
                                             Screen.AddEditNoteScreen.route +
                                                     "?${Constants.NOTE_ID_ARG}=${note.id}&${Constants.NOTE_COLOR_ARG}=${note.color}"
                                         )

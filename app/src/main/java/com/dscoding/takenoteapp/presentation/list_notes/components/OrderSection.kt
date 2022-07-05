@@ -27,21 +27,21 @@ fun OrderSection(
                 selected = noteOrder is NoteOrder.Title,
                 onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(25.dp))
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_date),
                 selected = noteOrder is NoteOrder.Date,
                 onSelect = { onOrderChange(NoteOrder.Date(noteOrder.orderType)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(25.dp))
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_color),
                 selected = noteOrder is NoteOrder.Color,
                 onSelect = { onOrderChange(NoteOrder.Color(noteOrder.orderType)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(25.dp))
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -50,7 +50,7 @@ fun OrderSection(
                 selected = noteOrder.orderType is OrderType.Ascending,
                 onSelect = { onOrderChange(noteOrder.copy(OrderType.Ascending)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(25.dp))
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_descending),
                 selected = noteOrder.orderType is OrderType.Descending,
