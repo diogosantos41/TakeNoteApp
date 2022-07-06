@@ -34,7 +34,7 @@ fun SearchNotesScreen(
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val focusRequester = remember { FocusRequester() }
-    val generalMargin = dimensionResource(R.dimen.general_margin)
+    val generalMargin = dimensionResource(R.dimen.margin)
 
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
@@ -87,7 +87,7 @@ fun SearchNotesScreen(
                                     },
                                 showDeleteButton = false
                             )
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.search_notes_margin_between_notes)))
                         }
                     }
                 }

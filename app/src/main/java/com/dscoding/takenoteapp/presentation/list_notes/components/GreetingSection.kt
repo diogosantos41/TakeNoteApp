@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
@@ -23,7 +22,7 @@ fun GreetingSection() {
             .fillMaxWidth()
             .padding(
                 0.dp,
-                dimensionResource(R.dimen.margin_vertical_greeting_section),
+                dimensionResource(R.dimen.notes_margin_vertical_greeting_section),
                 0.dp,
                 0.dp
             )
@@ -41,7 +40,7 @@ fun GreetingSection() {
                 style = MaterialTheme.typography.body1,
                 color = ThemeManager.colors.mainColor,
             )
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margin_vertical_greeting_section)))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.notes_margin_vertical_greeting_section)))
             Divider()
         }
     }

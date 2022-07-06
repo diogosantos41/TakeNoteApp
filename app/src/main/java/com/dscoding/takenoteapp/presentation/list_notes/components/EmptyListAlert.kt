@@ -13,8 +13,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 
 @Composable
@@ -30,12 +30,12 @@ fun EmptyListAlert(emptyMessage: String) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(dimensionResource(id = R.dimen.empty_message_icon_size)),
                 imageVector = Icons.Default.Info,
                 contentDescription = "Info",
                 tint = ThemeManager.colors.iconColor
             )
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.general_margin)))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin)))
             Text(
                 text = emptyMessage,
                 style = MaterialTheme.typography.body1,
@@ -44,7 +44,7 @@ fun EmptyListAlert(emptyMessage: String) {
                 fontWeight = FontWeight.Bold
 
             )
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.empty_message_margin_bottom)))
         }
     }
 }

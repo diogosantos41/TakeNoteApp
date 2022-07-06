@@ -23,6 +23,7 @@ import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.utils.launchReviewFlow
 import com.dscoding.takenoteapp.utils.launchShareAppIntent
+import com.dscoding.takenoteapp.utils.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -37,9 +38,9 @@ fun SettingsScreen(
     val twentyFourHourClockState = viewModel.twentyFourHourClockFieldState.value
     val state = viewModel.state.value
 
-    val generalMargin = dimensionResource(R.dimen.general_margin)
+    val generalMargin = dimensionResource(R.dimen.margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
-    val betweenFieldsMargin = dimensionResource(R.dimen.general_margin)
+    val betweenFieldsMargin = dimensionResource(R.dimen.margin)
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -61,7 +62,7 @@ fun SettingsScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
+                    IconButton(onClick = { navController.popBackToDashboard() }) {
                         Icon(
                             Icons.Default.ArrowBack,
                             "Back Arrow",

@@ -44,7 +44,7 @@ fun NotesScreen(
 ) {
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
-    val generalMargin = dimensionResource(R.dimen.general_margin)
+    val generalMargin = dimensionResource(R.dimen.margin)
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->

@@ -35,7 +35,6 @@ import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
-import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
@@ -63,7 +62,7 @@ fun AddEditNoteScreen(
     }
     val scope = rememberCoroutineScope()
 
-    val generalMargin = dimensionResource(R.dimen.general_margin)
+    val generalMargin = dimensionResource(R.dimen.margin)
 
 
     LaunchedEffect(key1 = true) {
@@ -180,19 +179,19 @@ fun AddEditNoteScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(dimensionResource(id = R.dimen.add_note_color_row_padding)),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Note.noteColors.forEach { color ->
                         val colorInt = color.toArgb()
                         Box(
                             modifier = Modifier
-                                .size(50.dp)
-                                .shadow(15.dp, CircleShape)
+                                .size(dimensionResource(id = R.dimen.add_note_color_circle_size))
+                                .shadow(dimensionResource(id = R.dimen.add_note_color_circle_shadow_size), CircleShape)
                                 .clip(CircleShape)
                                 .background(color)
                                 .border(
-                                    width = 3.dp,
+                                    width = dimensionResource(id = R.dimen.add_note_color_circle_selected_border_size),
                                     color = if (state.noteColor == colorInt) {
                                         DarkerGrey
                                     } else Color.Transparent,
