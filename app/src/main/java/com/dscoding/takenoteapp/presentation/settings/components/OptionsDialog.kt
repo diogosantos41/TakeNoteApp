@@ -4,13 +4,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
@@ -31,7 +32,10 @@ fun OptionsDialog(
             dismissDialog()
         },
         title = {
-            Text(text = title)
+            Column {
+                Text(text = title, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(10.dp))
+            }
         },
         buttons = {
             LazyColumn(
@@ -44,22 +48,22 @@ fun OptionsDialog(
                         text = option,
                         selected = option == selected,
                         onSelect = { onOptionSelected(index) })
-                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
+                    if (index != options.size - 1) {
+                        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
+                    }
                 }
             }
             Row(
-                modifier = Modifier.padding(all = padding),
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier.padding(all = padding)
             ) {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = ThemeManager.colors.secondaryButtonBackground,
-                        contentColor = ThemeManager.colors.secondaryButtonTextColor
-                    ),
-                    onClick = { dismissDialog() }
-                ) {
-                    Text(stringResource(id = R.string.generic_dismiss))
+                TextButton(onClick = dismissDialog)
+                {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.generic_cancel),
+                        color = ThemeManager.colors.mainColor,
+                        textAlign = TextAlign.End,
+                    )
                 }
             }
         }

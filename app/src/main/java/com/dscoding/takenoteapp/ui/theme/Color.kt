@@ -28,8 +28,6 @@ class CustomColors(
     containerBackgroundColor: Color,
     iconColor: Color,
     toolbarColor: Color,
-    secondaryButtonBackgroundColor: Color,
-    secondaryButtonTextColor: Color,
     textColor: Color,
     mainColor: Color
 ) {
@@ -41,10 +39,6 @@ class CustomColors(
         private set
     var toolbarColor by mutableStateOf(toolbarColor)
         private set
-    var secondaryButtonBackground by mutableStateOf(secondaryButtonBackgroundColor)
-        private set
-    var secondaryButtonTextColor by mutableStateOf(secondaryButtonTextColor)
-        private set
     var textColor by mutableStateOf(textColor)
         private set
     var mainColor by mutableStateOf(mainColor)
@@ -55,8 +49,6 @@ class CustomColors(
         this.containerBackgroundColor = colors.containerBackgroundColor
         this.iconColor = colors.iconColor
         this.toolbarColor = colors.toolbarColor
-        this.secondaryButtonBackground = colors.secondaryButtonBackground
-        this.secondaryButtonTextColor = colors.secondaryButtonTextColor
         this.textColor = colors.textColor
         this.mainColor = colors.mainColor
 
@@ -67,8 +59,6 @@ class CustomColors(
         containerBackgroundColor,
         iconColor,
         toolbarColor,
-        secondaryButtonBackground,
-        secondaryButtonTextColor,
         textColor,
         mainColor
     )

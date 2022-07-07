@@ -12,8 +12,6 @@ private val LightColors = CustomColors(
     containerBackgroundColor = DirtWhite,
     iconColor = DarkerGrey,
     toolbarColor = DarkGrey,
-    secondaryButtonBackgroundColor = Grey,
-    secondaryButtonTextColor = White,
     textColor = DarkGrey,
     mainColor = Coral
 )
@@ -23,8 +21,6 @@ private val DarkColors = CustomColors(
     containerBackgroundColor = DarkGrey,
     iconColor = White,
     toolbarColor = DarkGrey,
-    secondaryButtonBackgroundColor = Grey,
-    secondaryButtonTextColor = White,
     textColor = White,
     mainColor = Coral
 )
@@ -34,8 +30,6 @@ private val YellowColors = CustomColors(
     containerBackgroundColor = DarkGrey,
     iconColor = White,
     toolbarColor = DarkGrey,
-    secondaryButtonBackgroundColor = Grey,
-    secondaryButtonTextColor = White,
     textColor = White,
     mainColor = Yellow
 )
