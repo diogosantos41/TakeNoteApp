@@ -1,6 +1,8 @@
 package com.dscoding.takenoteapp.presentation.settings
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -84,7 +86,11 @@ fun SettingsScreen(
                     generalMargin,
                     generalMargin
                 )
-            Column(modifier = Modifier.padding(generalMargin, 0.dp)) {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(generalMargin, 0.dp)
+            ) {
                 Column(settingsColumnModifier) {
 
                     Spacer(modifier = Modifier.height(headerTopMargin))

@@ -94,7 +94,7 @@ fun NotesScreen(
                 ) {
                     Icon(
                         imageVector = if (state.isGridListSelected) Icons.Default.List else Icons.Default.GridView,
-                        contentDescription = "Toggle Grid/List View",
+                        contentDescription = "Toggle Grid View/List View",
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -144,7 +144,7 @@ fun NotesScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Sort,
-                            contentDescription = "Sort",
+                            contentDescription = "Sort Notes",
                             tint = ThemeManager.colors.iconColor
                         )
                     }
