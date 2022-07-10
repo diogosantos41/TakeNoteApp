@@ -14,7 +14,7 @@
 
     <!-- Notes Screen -->
     <string name="notes_greeting_title_with_name">Hey there!</string>
-    <string name="notes_greeting_message">It\'s great to see you taking some notes!</string>
+    <string name="notes_greeting_message">It\'s great to see you taking notes!</string>
     <string name="notes_list_title">Notes</string>
     <string name="notes_empty_list_message">You have no notes added. Press \'+\' to add a note!</string>
     <string name="notes_order_section_title">Title</string>
@@ -55,7 +55,6 @@
     <string name="settings_share_app_intent_message">Check out \'Take Note! App\': https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin</string>
     <string name="settings_twenty_four_hour_clock">24-hour clock</string>
     <string name="settings_app_version_title">Version</string>
-    <string name="settings_app_version_message">1.0</string>
 
     <string-array name="settings_theme_options_array">
         <item>@string/settings_theme_option_system_default</item>

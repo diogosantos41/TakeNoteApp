@@ -8,7 +8,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

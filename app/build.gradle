@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -49,21 +51,21 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "androidx.core:core-ktx:1.8.0"
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
-    implementation 'androidx.activity:activity-compose:1.5.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
+    implementation "androidx.activity:activity-compose:1.5.0"
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
     // Splash Screen (needed to support < 12 versions)
-    implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
+    implementation "androidx.core:core-splashscreen:1.0.0-rc01"
 
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
@@ -76,8 +78,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-animation:0.24.13-rc"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.41"
@@ -92,6 +94,12 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.2"
 
     // In-App Review
-    implementation 'com.google.android.play:core:1.10.3'
-    implementation 'com.google.android.play:core-ktx:1.8.1'
+    implementation "com.google.android.play:core:1.10.3"
+    implementation "com.google.android.play:core-ktx:1.8.1"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-analytics-ktx:21.0.0"
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
+
+
 }

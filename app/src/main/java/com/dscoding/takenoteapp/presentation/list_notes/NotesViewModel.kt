@@ -11,6 +11,9 @@ import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
 import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.ThemeUtils
+import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -61,6 +64,7 @@ class NotesViewModel @Inject constructor(
 
             }
             is NotesEvent.ConfirmDeleteNote -> {
+                Firebase.analytics.logDeleteNote()
                 viewModelScope.launch {
                     noteUseCases.deleteNote(noteToDelete)
                 }

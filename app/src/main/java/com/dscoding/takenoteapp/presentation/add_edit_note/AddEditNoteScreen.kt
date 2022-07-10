@@ -187,7 +187,10 @@ fun AddEditNoteScreen(
                         Box(
                             modifier = Modifier
                                 .size(dimensionResource(id = R.dimen.add_note_color_circle_size))
-                                .shadow(dimensionResource(id = R.dimen.add_note_color_circle_shadow_size), CircleShape)
+                                .shadow(
+                                    dimensionResource(id = R.dimen.add_note_color_circle_shadow_size),
+                                    CircleShape
+                                )
                                 .clip(CircleShape)
                                 .background(color)
                                 .border(

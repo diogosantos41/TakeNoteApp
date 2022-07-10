@@ -12,6 +12,9 @@ import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeFromId
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeIdFromText
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeTextFromId
 import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.utils.extensions.logSwapTheme
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -75,6 +78,9 @@ class SettingsViewModel @Inject constructor(
                 )
             }
             is SettingsEvent.SelectThemeOption -> {
+                if (state.value.selectedTheme != getThemeTextFromId(event.option)) {
+                    Firebase.analytics.logSwapTheme(getThemeFromId(event.option).name)
+                }
                 _state.value = state.value.copy(
                     showThemeOptionsDialog = false,
                     selectedTheme = getThemeTextFromId(event.option)

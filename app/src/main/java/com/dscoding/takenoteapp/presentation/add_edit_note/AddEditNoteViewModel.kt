@@ -15,6 +15,11 @@ import com.dscoding.takenoteapp.utils.DateUtils
 import com.dscoding.takenoteapp.utils.Failure
 import com.dscoding.takenoteapp.utils.Resource
 import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.utils.extensions.logAddNote
+import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
+import com.dscoding.takenoteapp.utils.extensions.logEditNote
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -125,6 +130,11 @@ class AddEditNoteViewModel @Inject constructor(
                 )
             }
             is AddEditNoteEvent.SaveNote -> {
+                if (state.value.isEditingNote) {
+                    Firebase.analytics.logEditNote()
+                } else {
+                    Firebase.analytics.logAddNote(state.value.noteColor.toString())
+                }
                 var addNoteResult: Resource<Any?>
                 viewModelScope.launch {
                     addNoteResult = noteUseCases.addNote(
@@ -170,6 +180,7 @@ class AddEditNoteViewModel @Inject constructor(
                 )
             }
             is AddEditNoteEvent.ConfirmDeleteNote -> {
+                Firebase.analytics.logDeleteNote()
                 viewModelScope.launch {
                     currentSelectedNote?.let { noteUseCases.deleteNote(it) }
                     _eventFlow.emit(UiEvent.DeleteNote)

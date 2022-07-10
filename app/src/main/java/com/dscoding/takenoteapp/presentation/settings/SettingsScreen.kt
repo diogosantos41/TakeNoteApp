@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.dscoding.takenoteapp.BuildConfig
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.settings.components.OptionsDialog
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
@@ -127,7 +128,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
                         stringResource(id = R.string.settings_app_version_title),
-                        stringResource(id = R.string.settings_app_version_message),
+                        BuildConfig.VERSION_NAME,
                         onClick = { })
                 }
             }
