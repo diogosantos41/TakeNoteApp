@@ -1,11 +1,9 @@
-package com.dscoding.takenoteapp.utils
+package com.dscoding.takenoteapp.utils.extensions
 
 import android.content.Context
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.utils.extensions.logRateApp
-import com.dscoding.takenoteapp.utils.extensions.logShareApp
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase

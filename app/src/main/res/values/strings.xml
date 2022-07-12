@@ -3,7 +3,6 @@
     <string name="empty_string" />
 
     <!-- Generic String -->
-    <string name="generic_dismiss">Dismiss</string>
     <string name="generic_enabled">Enabled</string>
     <string name="generic_disabled">Disabled</string>
     <string name="generic_cancel">Cancel</string>

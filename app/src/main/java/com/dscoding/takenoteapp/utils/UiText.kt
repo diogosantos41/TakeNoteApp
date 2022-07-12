@@ -11,7 +11,7 @@ sealed class UiText {
         @StringRes val resId: Int,
         vararg val args: Any
     ) : UiText() {
-        fun equals(resourceId: Int): Boolean {
+        fun isTheSameAs(resourceId: Int): Boolean {
             return resId == resourceId
         }
     }

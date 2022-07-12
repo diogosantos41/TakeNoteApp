@@ -22,8 +22,8 @@ import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.utils.Constants
-import com.dscoding.takenoteapp.utils.popBackToDashboard
-import com.dscoding.takenoteapp.utils.safeNavigate
+import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
+import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 
 @Composable
 fun SearchNotesScreen(

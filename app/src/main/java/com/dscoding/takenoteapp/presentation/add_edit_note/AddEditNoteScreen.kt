@@ -36,7 +36,7 @@ import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.popBackToDashboard
+import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

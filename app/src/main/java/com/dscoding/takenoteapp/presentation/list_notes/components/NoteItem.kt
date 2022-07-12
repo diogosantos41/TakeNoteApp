@@ -29,9 +29,9 @@ import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 
 @Composable
 fun NoteItem(
+    modifier: Modifier = Modifier,
     note: Note,
     isLastItem: Boolean = false,
-    modifier: Modifier = Modifier,
     cornerRadius: Dp = 10.dp,
     cutCornerSize: Dp = 30.dp,
     showDeleteButton: Boolean = true,

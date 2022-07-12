@@ -13,7 +13,7 @@ object DateUtils {
     @SuppressLint("SimpleDateFormat")
     fun convertTimeMillisToStringDate(timeMillis: Long?, format: String): String {
         val simpleDateFormat = SimpleDateFormat(format)
-        val date = timeMillis?.let { Date(it) };
+        val date = timeMillis?.let { Date(it) }
         return simpleDateFormat.format(date)
     }
 }

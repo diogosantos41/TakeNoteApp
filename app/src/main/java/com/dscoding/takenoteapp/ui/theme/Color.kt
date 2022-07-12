@@ -31,10 +31,8 @@ class CustomColors(
     textColor: Color,
     mainColor: Color
 ) {
-    var backgroundColor by mutableStateOf(backgroundColor)
-        private set
-    var containerBackgroundColor by mutableStateOf(containerBackgroundColor)
-        private set
+    private var backgroundColor by mutableStateOf(backgroundColor)
+    private var containerBackgroundColor by mutableStateOf(containerBackgroundColor)
     var iconColor by mutableStateOf(iconColor)
         private set
     var toolbarColor by mutableStateOf(toolbarColor)

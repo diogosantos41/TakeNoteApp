@@ -153,7 +153,7 @@ class AddEditNoteViewModel @Inject constructor(
                             _eventFlow.emit(UiEvent.SaveNote)
                         }
                         is Resource.Error -> {
-                            var errorMessage = when (addNoteResult.failure) {
+                            val errorMessage = when (addNoteResult.failure) {
                                 is Failure.EmptyNoteTitle -> {
                                     UiText.StringResource(R.string.error_add_note_empty_title)
                                 }

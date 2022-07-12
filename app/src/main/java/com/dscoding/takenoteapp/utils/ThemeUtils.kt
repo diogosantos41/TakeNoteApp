@@ -7,13 +7,13 @@ import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
 object ThemeUtils {
 
     fun getThemeIdFromText(text: UiText.StringResource): Int {
-        return if (text.equals(R.string.settings_theme_option_system_default)) {
+        return if (text.isTheSameAs(R.string.settings_theme_option_system_default)) {
             UserPreferences.Theme.SYSTEM_DEFAULT.id
-        } else if (text.equals(R.string.settings_theme_option_light)) {
+        } else if (text.isTheSameAs(R.string.settings_theme_option_light)) {
             UserPreferences.Theme.LIGHT.id
-        } else if (text.equals(R.string.settings_theme_option_dark)) {
+        } else if (text.isTheSameAs(R.string.settings_theme_option_dark)) {
             UserPreferences.Theme.DARK.id
-        } else if (text.equals(R.string.settings_theme_option_yellow)) {
+        } else if (text.isTheSameAs(R.string.settings_theme_option_yellow)) {
             UserPreferences.Theme.YELLOW.id
         } else {
             UserPreferences.Theme.SYSTEM_DEFAULT.id

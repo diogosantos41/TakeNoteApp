@@ -2,9 +2,6 @@ package com.dscoding.takenoteapp.di
 
 import android.app.Application
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.dscoding.takenoteapp.data.data_source.NoteDatabase
 import com.dscoding.takenoteapp.data.repository.NoteRepositoryImpl
@@ -13,7 +10,6 @@ import com.dscoding.takenoteapp.domain.repository.NoteRepository
 import com.dscoding.takenoteapp.domain.repository.PreferencesRepository
 import com.dscoding.takenoteapp.domain.use_case.*
 import com.dscoding.takenoteapp.utils.Constants.DATABASE_NAME
-import com.dscoding.takenoteapp.utils.Constants.DATASTORE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

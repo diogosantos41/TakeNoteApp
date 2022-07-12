@@ -1,7 +1,6 @@
 package com.dscoding.takenoteapp.presentation.add_edit_note
 
 import androidx.compose.ui.focus.FocusState
-import com.dscoding.takenoteapp.presentation.list_notes.NotesEvent
 
 sealed class AddEditNoteEvent {
     data class EnteredTitle(val value: String) : AddEditNoteEvent()

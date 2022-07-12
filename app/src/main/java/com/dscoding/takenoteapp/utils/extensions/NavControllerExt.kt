@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.utils
+package com.dscoding.takenoteapp.utils.extensions
 
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.presentation.util.Screen

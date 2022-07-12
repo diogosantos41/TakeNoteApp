@@ -24,9 +24,9 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.launchReviewFlow
-import com.dscoding.takenoteapp.utils.launchShareAppIntent
-import com.dscoding.takenoteapp.utils.popBackToDashboard
+import com.dscoding.takenoteapp.utils.extensions.launchReviewFlow
+import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
+import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
