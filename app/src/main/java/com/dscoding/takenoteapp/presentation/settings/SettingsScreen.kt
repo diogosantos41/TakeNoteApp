@@ -24,8 +24,8 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.extensions.launchReviewFlow
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
+import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 
@@ -120,12 +120,12 @@ fun SettingsScreen(
                 Divider()
                 Column(settingsColumnModifier) {
                     Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(stringResource(id = R.string.settings_header_support))
+                    SettingsHeader(stringResource(id = R.string.settings_header_about))
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
                         stringResource(id = R.string.settings_rate_app_title),
                         stringResource(id = R.string.settings_rate_app_message),
-                        onClick = { context.launchReviewFlow() })
+                        onClick = { context.openGooglePlayAppPage() })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
                         stringResource(id = R.string.settings_share_app_title),

@@ -46,12 +46,12 @@
     <string name="settings_theme_option_light">Light</string>
     <string name="settings_theme_option_dark">Dark</string>
     <string name="settings_theme_option_yellow">Dark Yellow</string>
-    <string name="settings_header_support">Support</string>
+    <string name="settings_header_about">About</string>
     <string name="settings_rate_app_title">Rate app</string>
     <string name="settings_rate_app_message">Reviews help us a lot. Thank you!</string>
     <string name="settings_share_app_title">Share app</string>
     <string name="settings_share_app_message">Love taking notes? Your friends do too!</string>
-    <string name="settings_share_app_intent_message">Check out \'Take Note! App\': https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin</string>
+    <string name="settings_share_app_intent_message">Check out \'Take Note! App\': %s</string>
     <string name="settings_twenty_four_hour_clock">24-hour clock</string>
     <string name="settings_app_version_title">Version</string>
 

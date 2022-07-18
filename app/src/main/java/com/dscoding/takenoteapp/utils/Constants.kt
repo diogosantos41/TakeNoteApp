@@ -14,4 +14,5 @@ object Constants {
     const val FIREBASE_ANALYTICS_EVENT_RATE_APP = "RATE_APP"
     const val FIREBASE_ANALYTICS_EVENT_SWAP_THEME = "SWAP_THEME"
     const val FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM = "SWAP_THEME_PARAM"
+    const val GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.dscoding.takenoteapp"
 }
