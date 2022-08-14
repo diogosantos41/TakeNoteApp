@@ -196,9 +196,9 @@ class AddEditNoteViewModel @Inject constructor(
 
     private fun getPreferences() {
         getPreferencesJob?.cancel()
-        getPreferencesJob = preferencesUseCases.getUserPreference()
+        getPreferencesJob = preferencesUseCases.getPreferences()
             .onEach { preferences ->
-                dateFormat = if (preferences.twenty_four_hour_clock) {
+                dateFormat = if (preferences.twentyFourHourClock) {
                     DateUtils.TWENTY_FOUR_HOUR_DATE_FORMAT
                 } else {
                     DateUtils.THIRTEEN_HOUR_DATE_FORMAT

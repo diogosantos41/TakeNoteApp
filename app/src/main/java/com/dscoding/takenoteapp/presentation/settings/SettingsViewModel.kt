@@ -5,11 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.domain.model.UserPreferences
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeFromId
-import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeIdFromText
 import com.dscoding.takenoteapp.utils.ThemeUtils.getThemeTextFromId
 import com.dscoding.takenoteapp.utils.UiText
 import com.dscoding.takenoteapp.utils.extensions.logSwapTheme
@@ -44,6 +42,7 @@ class SettingsViewModel @Inject constructor(
 
     private var getPreferencesJob: Job? = null
 
+
     init {
         getPreferences()
     }
@@ -52,24 +51,18 @@ class SettingsViewModel @Inject constructor(
         when (event) {
             is SettingsEvent.ChangeShowGreetingState -> {
                 viewModelScope.launch {
-                    preferencesUseCases.updateUserPreference(
-                        UserPreferences(
-                            show_greeting = !showGreetingFieldState.value.isActive,
-                            theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
-                            twenty_four_hour_clock = twentyFourHourClockFieldState.value.isActive
+                    preferencesUseCases.updatePreferences
+                        .setShowGreeting(
+                            !showGreetingFieldState.value.isActive
                         )
-                    )
                 }
             }
             is SettingsEvent.ChangeTwentyFourHourClockState -> {
                 viewModelScope.launch {
-                    preferencesUseCases.updateUserPreference(
-                        UserPreferences(
-                            show_greeting = showGreetingFieldState.value.isActive,
-                            theme = getThemeIdFromText(state.value.selectedTheme as UiText.StringResource),
-                            twenty_four_hour_clock = !twentyFourHourClockFieldState.value.isActive
+                    preferencesUseCases.updatePreferences
+                        .setTwentyFourHourClock(
+                            !twentyFourHourClockFieldState.value.isActive
                         )
-                    )
                 }
             }
             is SettingsEvent.ShowThemeOptionsDialog -> {
@@ -86,13 +79,10 @@ class SettingsViewModel @Inject constructor(
                     selectedTheme = getThemeTextFromId(event.option)
                 )
                 viewModelScope.launch {
-                    preferencesUseCases.updateUserPreference(
-                        UserPreferences(
-                            show_greeting = showGreetingFieldState.value.isActive,
-                            theme = event.option,
-                            twenty_four_hour_clock = twentyFourHourClockFieldState.value.isActive
+                    preferencesUseCases.updatePreferences
+                        .setTheme(
+                            event.option
                         )
-                    )
                     _eventFlow.emit(UiEvent.UpdateTheme(getThemeFromId(event.option)))
                 }
             }
@@ -101,27 +91,27 @@ class SettingsViewModel @Inject constructor(
 
     private fun getPreferences() {
         getPreferencesJob?.cancel()
-        getPreferencesJob = preferencesUseCases.getUserPreference()
+        getPreferencesJob = preferencesUseCases.getPreferences()
             .onEach { preferences ->
                 _showGreetingFieldState.value = showGreetingFieldState.value.copy(
-                    value = if (preferences.show_greeting)
+                    value = if (preferences.showGreeting)
                         UiText.StringResource(
                             R.string.generic_enabled
                         )
                     else UiText.StringResource(
                         R.string.generic_disabled
                     ),
-                    isActive = preferences.show_greeting
+                    isActive = preferences.showGreeting
                 )
                 _isTwentyFourHourClockFieldState.value = twentyFourHourClockFieldState.value.copy(
-                    value = if (preferences.twenty_four_hour_clock)
+                    value = if (preferences.twentyFourHourClock)
                         UiText.StringResource(
                             R.string.generic_enabled
                         )
                     else UiText.StringResource(
                         R.string.generic_disabled
                     ),
-                    isActive = preferences.twenty_four_hour_clock
+                    isActive = preferences.twentyFourHourClock
                 )
                 _state.value = state.value.copy(
                     selectedTheme = getThemeTextFromId(preferences.theme)

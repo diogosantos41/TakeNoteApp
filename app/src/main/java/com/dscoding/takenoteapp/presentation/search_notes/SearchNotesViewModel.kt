@@ -38,21 +38,10 @@ class SearchNotesViewModel @Inject constructor(
             }
             is SearchNotesEvent.EnteredSearchText -> {
                 _state.value = state.value.copy(
-                    notes = queryNotesList(event.value, unfilteredNotesList),
+                    notes = noteUseCases.searchNotes(event.value, unfilteredNotesList),
                     searchText = event.value,
                 )
             }
-        }
-    }
-
-    private fun queryNotesList(queryText: String, notes: List<Note>): List<Note> {
-        return notes.filter {
-            it.title.contains(
-                queryText, ignoreCase = true
-            )
-                    || it.content.contains(
-                queryText, ignoreCase = true
-            )
         }
     }
 

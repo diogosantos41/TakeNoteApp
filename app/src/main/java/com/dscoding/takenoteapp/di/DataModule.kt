@@ -5,9 +5,9 @@ import android.content.Context
 import androidx.room.Room
 import com.dscoding.takenoteapp.data.data_source.NoteDatabase
 import com.dscoding.takenoteapp.data.repository.NoteRepositoryImpl
-import com.dscoding.takenoteapp.data.repository.PreferencesRepositoryImpl
+import com.dscoding.takenoteapp.data.data_store.SettingsDataStoreImpl
 import com.dscoding.takenoteapp.domain.repository.NoteRepository
-import com.dscoding.takenoteapp.domain.repository.PreferencesRepository
+import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.use_case.*
 import com.dscoding.takenoteapp.utils.Constants.DATABASE_NAME
 import dagger.Module
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object DataModule {
 
     @Provides
     @Singleton
@@ -37,27 +37,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteUseCases(repository: NoteRepository): NoteUseCases {
-        return NoteUseCases(
-            getNotes = GetNotesUseCase(repository),
-            deleteNote = DeleteNoteUseCase(repository),
-            addNote = AddNoteUseCase(repository),
-            getNote = GetNoteUseCase(repository),
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun providePreferencesRepository(@ApplicationContext context: Context): PreferencesRepository {
-        return PreferencesRepositoryImpl(context)
-    }
-
-    @Provides
-    @Singleton
-    fun providePreferencesUseCases(repository: PreferencesRepository): PreferencesUseCases {
-        return PreferencesUseCases(
-            getUserPreference = GetPreferenceUseCase(repository),
-            updateUserPreference = UpdatePreferenceUseCase(repository)
-        )
+    fun provideSettingsDataStore(@ApplicationContext context: Context): SettingsDataStore {
+        return SettingsDataStoreImpl(context)
     }
 }

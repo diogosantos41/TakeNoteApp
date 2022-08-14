@@ -92,10 +92,10 @@ class NotesViewModel @Inject constructor(
 
     private fun getPreferences() {
         getPreferencesJob?.cancel()
-        getPreferencesJob = preferencesUseCases.getUserPreference()
+        getPreferencesJob = preferencesUseCases.getPreferences()
             .onEach { preferences ->
                 _state.value = state.value.copy(
-                    isGreetingSectionVisible = preferences.show_greeting
+                    isGreetingSectionVisible = preferences.showGreeting
                 )
                 _eventFlow.emit(
                     UiEvent.UpdateTheme(
