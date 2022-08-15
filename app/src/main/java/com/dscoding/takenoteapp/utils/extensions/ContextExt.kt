@@ -5,15 +5,24 @@ import android.content.Intent
 import android.net.Uri
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.utils.Constants.GOOGLE_PLAY_APP_URL
+import com.dscoding.takenoteapp.utils.Constants.PRIVACY_POLICY_URL
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 
 fun Context.openGooglePlayAppPage() {
     Firebase.analytics.logRateApp()
-    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_APP_URL))
-    startActivity(browserIntent)
+    openUrl(GOOGLE_PLAY_APP_URL)
 }
 
+fun Context.openPrivacyPolicyPage() {
+    Firebase.analytics.logOpenPrivacyPolicyPage()
+    openUrl(PRIVACY_POLICY_URL)
+}
+
+fun Context.openUrl(url: String) {
+    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    startActivity(browserIntent)
+}
 
 fun Context.launchShareAppIntent() {
     Firebase.analytics.logShareApp()

@@ -26,7 +26,9 @@ import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
 import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
+import com.dscoding.takenoteapp.utils.extensions.openPrivacyPolicyPage
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
+import com.dscoding.takenoteapp.utils.geThemesTextList
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -133,6 +135,11 @@ fun SettingsScreen(
                         onClick = { context.launchShareAppIntent() })
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SettingsField(
+                        stringResource(id = R.string.settings_privacy_policy_title),
+                        stringResource(id = R.string.settings_privacy_policy_message),
+                        onClick = { context.openPrivacyPolicyPage() })
+                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                    SettingsField(
                         stringResource(id = R.string.settings_app_version_title),
                         BuildConfig.VERSION_NAME,
                         onClick = { })
@@ -141,7 +148,7 @@ fun SettingsScreen(
             if (state.showThemeOptionsDialog) {
                 OptionsDialog(
                     title = stringResource(id = R.string.settings_theme_dialog_title),
-                    options = stringArrayResource(R.array.settings_theme_options_array).toList(),
+                    options = geThemesTextList(),
                     selected = state.selectedTheme.asString(),
                     onOptionSelected = {
                         viewModel.onEvent(SettingsEvent.SelectThemeOption(it))

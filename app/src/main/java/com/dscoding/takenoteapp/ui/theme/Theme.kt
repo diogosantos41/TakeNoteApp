@@ -6,6 +6,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
+import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.utils.TakeNoteTheme
+import com.dscoding.takenoteapp.utils.UiText
 
 private val LightColors = CustomColors(
     backgroundColor = White,
@@ -25,7 +28,7 @@ private val DarkColors = CustomColors(
     mainColor = Coral
 )
 
-private val YellowColors = CustomColors(
+private val DarkYellowColors = CustomColors(
     backgroundColor = BlackBlue,
     containerBackgroundColor = DarkGrey,
     iconColor = White,
@@ -51,15 +54,13 @@ private fun LocalProvider(
     CompositionLocalProvider(LocalColorsProvider provides colorPalette, content = content)
 }
 
-enum class TakeNoteTheme {
-    SYSTEM_DEFAULT, LIGHT, DARK, YELLOW
-}
+
 
 private val TakeNoteTheme.colors: Pair<Colors, CustomColors>
     get() = when (this) {
         TakeNoteTheme.DARK -> darkColors() to DarkColors
         TakeNoteTheme.LIGHT -> lightColors() to LightColors
-        TakeNoteTheme.YELLOW -> darkColors() to YellowColors
+        TakeNoteTheme.DARK_YELLOW -> darkColors() to DarkYellowColors
         else -> lightColors() to LightColors
     }
 

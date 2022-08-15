@@ -8,9 +8,9 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
-import com.dscoding.takenoteapp.domain.util.ThemeEnum
 import com.dscoding.takenoteapp.utils.Constants.DATASTORE_NAME
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
+import com.dscoding.takenoteapp.utils.TakeNoteTheme
 import kotlinx.coroutines.flow.map
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
@@ -23,7 +23,7 @@ class SettingsDataStoreImpl(
     override fun getPreferences() = context.dataStore.data.map { preferences ->
         PreferencesDto(
             showGreeting = preferences[SHOW_GREETING] ?: true,
-            theme = preferences[THEME] ?: ThemeEnum.SYSTEM_DEFAULT.id,
+            theme = preferences[THEME] ?: TakeNoteTheme.SYSTEM_DEFAULT.id,
             twentyFourHourClock = preferences[TWENTY_FOUR_HOUR_CLOCK] ?: true
         )
     }

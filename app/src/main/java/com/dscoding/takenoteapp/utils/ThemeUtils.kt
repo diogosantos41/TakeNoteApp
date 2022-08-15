@@ -1,48 +1,24 @@
 package com.dscoding.takenoteapp.utils
 
-import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.domain.util.ThemeEnum
-import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
+import androidx.compose.runtime.Composable
 
-object ThemeUtils {
+@Composable
+fun geThemesTextList(): List<String> {
+    return listOf(
+        TakeNoteTheme.SYSTEM_DEFAULT.uiText.asString(),
+        TakeNoteTheme.LIGHT.uiText.asString(),
+        TakeNoteTheme.DARK.uiText.asString(),
+        TakeNoteTheme.DARK_YELLOW.uiText.asString()
+    )
+}
 
-    fun getThemeTextFromId(id: Int): UiText {
-        return when (id) {
-            ThemeEnum.SYSTEM_DEFAULT.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
-            }
-            ThemeEnum.LIGHT.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_light)
-            }
-            ThemeEnum.DARK.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_dark)
-            }
-            ThemeEnum.DARK_YELLOW.id -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_yellow)
-            }
-            else -> {
-                UiText.StringResource(resId = R.string.settings_theme_option_system_default)
-            }
-        }
+fun getTheme(id: Int): TakeNoteTheme {
+    val map = TakeNoteTheme.values().associateBy(TakeNoteTheme::id)
+    map[id].let {
+        return it!!
     }
+}
 
-    fun getThemeFromId(id: Int): TakeNoteTheme {
-        return when (id) {
-            ThemeEnum.SYSTEM_DEFAULT.id -> {
-                TakeNoteTheme.SYSTEM_DEFAULT
-            }
-            ThemeEnum.LIGHT.id -> {
-                TakeNoteTheme.LIGHT
-            }
-            ThemeEnum.DARK.id -> {
-                TakeNoteTheme.DARK
-            }
-            ThemeEnum.DARK_YELLOW.id -> {
-                TakeNoteTheme.YELLOW
-            }
-            else -> {
-                TakeNoteTheme.DARK
-            }
-        }
-    }
+fun getThemeText(id: Int): UiText {
+    return getTheme(id).uiText
 }

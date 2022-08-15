@@ -9,9 +9,9 @@ import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
-import com.dscoding.takenoteapp.ui.theme.TakeNoteTheme
-import com.dscoding.takenoteapp.utils.ThemeUtils
+import com.dscoding.takenoteapp.utils.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
+import com.dscoding.takenoteapp.utils.getTheme
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -99,9 +99,7 @@ class NotesViewModel @Inject constructor(
                 )
                 _eventFlow.emit(
                     UiEvent.UpdateTheme(
-                        ThemeUtils.getThemeFromId(
-                            preferences.theme
-                        )
+                        getTheme(preferences.theme)
                     )
                 )
             }

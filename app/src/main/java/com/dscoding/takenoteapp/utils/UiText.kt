@@ -10,11 +10,7 @@ sealed class UiText {
     class StringResource(
         @StringRes val resId: Int,
         vararg val args: Any
-    ) : UiText() {
-        fun isTheSameAs(resourceId: Int): Boolean {
-            return resId == resourceId
-        }
-    }
+    ) : UiText()
 
     @Composable
     fun asString(): String {
