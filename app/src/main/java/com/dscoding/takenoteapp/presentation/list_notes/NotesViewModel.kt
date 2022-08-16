@@ -16,6 +16,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
@@ -97,10 +98,9 @@ class NotesViewModel @Inject constructor(
                 _state.value = state.value.copy(
                     isGreetingSectionVisible = preferences.showGreeting
                 )
+                delay(50) // In some situations, the system theme was overriding the select theme, this delay seem to have solved the problem.
                 _eventFlow.emit(
-                    UiEvent.UpdateTheme(
-                        getTheme(preferences.theme)
-                    )
+                    UiEvent.UpdateTheme(getTheme(preferences.theme))
                 )
             }
             .launchIn(viewModelScope)

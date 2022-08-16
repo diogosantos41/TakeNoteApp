@@ -45,8 +45,10 @@ private fun TextStyle.withCustomFontFamily(): TextStyle {
 
 private object CustomTextStyle {
     val customFontFamily = FontFamily(
-        Font(R.font.verdana),
-        Font(R.font.verdana_bold, FontWeight.Bold)
+        Font(R.font.montserrat),
+        Font(R.font.montserrat_bold, FontWeight.Bold),
+        Font(R.font.montserrat_light, FontWeight.Light),
+        Font(R.font.montserrat_medium, FontWeight.Medium)
     )
     val h1 = TextStyle(
         fontWeight = FontWeight.Light,

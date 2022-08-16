@@ -32,7 +32,9 @@ import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.utils.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalFoundationApi
