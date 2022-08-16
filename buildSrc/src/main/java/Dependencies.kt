@@ -23,6 +23,8 @@ object Versions {
     const val firebase_analytics = "21.1.0"
     const val firebase_crashlytics = "18.2.11"
     const val firebase_crashlytics_gradle = "2.9.1"
+    const val leak_canary_version = "2.9.1"
+
 }
 
 object App {
@@ -66,6 +68,11 @@ object AndroidX {
 object Accompanist {
     const val navigation_animation =
         "com.google.accompanist:accompanist-navigation-animation:${Versions.navigation_animation}"
+}
+
+object SquareUp {
+    const val leak_canary =
+        "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary_version}"
 }
 
 object Coroutines {
