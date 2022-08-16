@@ -26,5 +26,5 @@ object Constants {
 
     // Pages URLs
     const val GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.dscoding.takenoteapp"
-    const val PRIVACY_POLICY_URL = "https://pages.flycricket.io/take-note-0/privacy.html"
+    const val PRIVACY_POLICY_URL = "https://htmlpreview.github.io/?https://github.com/diogosantos41/TakeNoteApp/blob/development/privacy_policy.html"
 }
