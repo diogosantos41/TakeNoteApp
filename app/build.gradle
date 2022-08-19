@@ -40,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion Versions.kotlin_compiler_extension
     }
     packagingOptions {
         resources {
@@ -75,6 +75,9 @@ dependencies {
     implementation AndroidX.compose_navigation
     implementation AndroidX.compose_material_icons
     implementation Accompanist.navigation_animation
+
+    // Widgets
+    implementation AndroidX.glance_appwidget
 
     // Coroutines
     implementation Coroutines.coroutines_core

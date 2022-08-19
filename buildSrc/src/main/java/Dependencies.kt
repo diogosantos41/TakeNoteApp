@@ -1,11 +1,11 @@
 object Versions {
     const val jvmTarget = "1.8"
-    const val kotlin_compiler_extension = "1.0.0-beta01"
+    const val kotlin_compiler_extension = "1.3.0"
     const val google_services = "4.3.13"
-    const val dagger_hilt = "2.41"
-    const val dagger_hilt_compiler = "2.38.1"
+    const val dagger_hilt = "2.43.2"
+    const val dagger_hilt_compiler = "2.43.2"
     const val hilt_compiler = "1.0.0"
-    const val core_ktx = "1.8.0"
+    const val core_ktx = "1.7.0"
     const val compose = "1.2.0-rc02"
     const val compose_activity = "1.5.0"
     const val compose_navigation = "2.5.0"
@@ -13,6 +13,7 @@ object Versions {
     const val compose_viewmodel_lifecycle = "2.5.0-rc02"
     const val lifecycle_runtime_ktx = "2.5.0"
     const val splash_screen = "1.0.0"
+    const val glance_appwidget = "1.0.0-alpha03"
     const val navigation_animation = "0.24.13-rc"
     const val coroutines = "1.6.1"
     const val junit = "4.13.2"
@@ -63,6 +64,7 @@ object AndroidX {
     const val lifecycle_runtime_ktx =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime_ktx}"
     const val splash_screen = "androidx.core:core-splashscreen:${Versions.splash_screen}"
+    const val glance_appwidget = "androidx.glance:glance-appwidget:${Versions.glance_appwidget}"
 }
 
 object Accompanist {
@@ -85,7 +87,7 @@ object Coroutines {
 object DependencyInjection {
     const val dagger_hilt_android = "com.google.dagger:hilt-android:${Versions.dagger_hilt}"
     const val dagger_hilt_android_compiler =
-        "com.google.dagger:hilt-android-compiler:${Versions.dagger_hilt_compiler}"
+        "com.google.dagger:hilt-compiler:${Versions.dagger_hilt_compiler}"
     const val hilt_navigation_compose =
         "androidx.hilt:hilt-navigation-compose:${Versions.compose_hilt_navigation}"
 }
