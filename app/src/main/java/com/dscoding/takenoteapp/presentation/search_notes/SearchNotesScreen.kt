@@ -1,9 +1,12 @@
 package com.dscoding.takenoteapp.presentation.search_notes
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -17,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.common.NoteList
 import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
@@ -25,6 +29,8 @@ import com.dscoding.takenoteapp.utils.Constants
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 
+@ExperimentalFoundationApi
+@ExperimentalAnimationApi
 @Composable
 fun SearchNotesScreen(
     navController: NavController,
@@ -66,31 +72,18 @@ fun SearchNotesScreen(
                     0.dp
                 )
             ) {
-                if (state.notes.isEmpty()) {
-                    EmptyListAlert(
-                        stringResource(id = R.string.notes_search_empty_message)
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        items(state.notes) { note ->
-                            NoteItem(
-                                note = note,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        navController.safeNavigate(
-                                            Screen.AddEditNoteScreen.route +
-                                                    "?${Constants.NOTE_ID_ARG}=${note.id}&${Constants.NOTE_COLOR_ARG}=${note.color}"
-                                        )
-                                    },
-                                showDeleteButton = false
-                            )
-                            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.search_notes_margin_between_notes)))
-                        }
+                NoteList(
+                    notes = state.notes,
+                    emptyMessage = stringResource(id = R.string.notes_search_empty_message),
+                    showGridView = false,
+                    showDeleteButton = false,
+                    onNoteClicked = {
+                        navController.safeNavigate(
+                            Screen.AddEditNoteScreen.route +
+                                    "?${Constants.NOTE_ID_ARG}=${it.id}&${Constants.NOTE_COLOR_ARG}=${it.color}"
+                        )
                     }
-                }
+                )
             }
         })
 }

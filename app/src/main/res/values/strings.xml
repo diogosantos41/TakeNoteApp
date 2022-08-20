@@ -56,4 +56,7 @@
     <string name="settings_share_app_intent_message">Check out \'Take Note! App\': %s</string>
     <string name="settings_twenty_four_hour_clock">24-hour clock</string>
     <string name="settings_app_version_title">Version</string>
+
+    <!-- Widget -->
+    <string name="note_widget_description">Single Note Widget</string>
 </resources>

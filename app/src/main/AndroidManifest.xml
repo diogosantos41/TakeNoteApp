@@ -24,6 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".presentation.widgets.NoteWidgetSelectionActivity"
+            android:autoRemoveFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="widget.configuration.affinity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".presentation.widgets.NoteWidgetReceiver"
             android:enabled="true"
