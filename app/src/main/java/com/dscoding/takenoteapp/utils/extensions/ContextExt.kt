@@ -1,9 +1,14 @@
 package com.dscoding.takenoteapp.utils.extensions
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
+import androidx.glance.GlanceId
+import androidx.glance.appwidget.GlanceAppWidgetManager
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget
 import com.dscoding.takenoteapp.utils.Constants.GOOGLE_PLAY_APP_URL
 import com.dscoding.takenoteapp.utils.Constants.PRIVACY_POLICY_URL
 import com.google.firebase.analytics.ktx.analytics
@@ -36,4 +41,17 @@ fun Context.launchShareAppIntent() {
     }
     val shareIntent = Intent.createChooser(sendIntent, null)
     startActivity(shareIntent)
+}
+
+fun Context.findActivity(): Activity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+    throw IllegalStateException("no activity")
+}
+
+suspend fun Context.getGlanceId(): GlanceId? {
+    return GlanceAppWidgetManager(this).getGlanceIds(NoteWidget::class.java).firstOrNull()
 }

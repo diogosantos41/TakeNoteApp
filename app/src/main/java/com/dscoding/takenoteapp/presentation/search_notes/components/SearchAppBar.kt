@@ -17,17 +17,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.CustomTextField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.R
 
 @Composable
 fun SearchAppBar(
     text: String,
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
-    onBackPressed: () -> Unit,
+    showBackButton: Boolean = true,
+    onBackPressed: () -> Unit = {},
     focusRequester: FocusRequester
 ) {
     Surface(
@@ -57,14 +58,16 @@ fun SearchAppBar(
             singleLine = true,
             maxLines = 1,
             leadingIcon = {
-                IconButton(
-                    onClick = onBackPressed
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back Icon",
-                        tint = White,
-                    )
+                if (showBackButton) {
+                    IconButton(
+                        onClick = onBackPressed
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back Icon",
+                            tint = White,
+                        )
+                    }
                 }
             },
             trailingIcon = {

@@ -11,6 +11,7 @@ import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.utils.DateUtils
 import com.dscoding.takenoteapp.utils.Failure
 import com.dscoding.takenoteapp.utils.Resource
@@ -73,7 +74,7 @@ class AddEditNoteViewModel @Inject constructor(
     init {
         getPreferences()
         saveStateHandle.get<Int>(NOTE_ID_ARG)?.let { noteId ->
-            if (noteId != -1) {
+            if (noteId != NOTE_INVALID_ID) {
                 viewModelScope.launch {
                     noteUseCases.getNote(noteId)?.also { note ->
                         currentSelectedNote = note

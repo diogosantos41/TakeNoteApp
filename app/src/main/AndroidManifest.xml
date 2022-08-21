@@ -27,7 +27,7 @@
 
 
         <activity
-            android:name=".presentation.widgets.NoteWidgetSelectionActivity"
+            android:name=".presentation.widgets.note_selection.NoteWidgetSelectionActivity"
             android:autoRemoveFromRecents="true"
             android:exported="false"
             android:taskAffinity="widget.configuration.affinity">
@@ -37,7 +37,7 @@
         </activity>
 
         <receiver
-            android:name=".presentation.widgets.NoteWidgetReceiver"
+            android:name=".presentation.widgets.app_widget.NoteWidgetReceiver"
             android:enabled="true"
             android:exported="false">
 

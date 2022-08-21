@@ -2,6 +2,9 @@ package com.dscoding.takenoteapp.utils
 
 object Constants {
 
+    const val NOTE_INVALID_ID = -1
+    const val NOTE_INVALID_COLOR = -1
+
     // Arguments
     const val NOTE_ID_ARG = "noteId"
     const val NOTE_COLOR_ARG = "noteColor"

@@ -15,6 +15,8 @@ import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.utils.Constants
 import com.dscoding.takenoteapp.utils.Constants.NAVIGATION_ANIMATION_DURATION
 import com.dscoding.takenoteapp.utils.Constants.NAVIGATION_SLIDE_HORIZONTAL_ANIMATION_TARGET_OFFSET
+import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_COLOR
+import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -45,19 +47,19 @@ fun Navigation() {
                     name = Constants.NOTE_ID_ARG
                 ) {
                     type = NavType.IntType
-                    defaultValue = -1
+                    defaultValue = NOTE_INVALID_ID
                 },
                 navArgument(
                     name = Constants.NOTE_COLOR_ARG
                 ) {
                     type = NavType.IntType
-                    defaultValue = -1
+                    defaultValue = NOTE_INVALID_COLOR
                 },
             ),
             exitTransition = { fadeOut(animationSpec = tween(durationMillis = NAVIGATION_ANIMATION_DURATION)) },
             enterTransition = { fadeIn(animationSpec = tween(durationMillis = NAVIGATION_ANIMATION_DURATION)) }
         ) {
-            val color = it.arguments?.getInt(Constants.NOTE_COLOR_ARG) ?: -1
+            val color = it.arguments?.getInt(Constants.NOTE_COLOR_ARG) ?: NOTE_INVALID_COLOR
             AddEditNoteScreen(
                 navController = navController,
                 noteColor = color

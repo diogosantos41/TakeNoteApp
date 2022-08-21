@@ -100,4 +100,5 @@ dependencies {
 
     // Leak Canary
     debugImplementation SquareUp.leak_canary
+
 }
