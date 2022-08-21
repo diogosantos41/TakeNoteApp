@@ -16,7 +16,6 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.dscoding.takenoteapp.MainActivity
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidgetState
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 
 @Composable

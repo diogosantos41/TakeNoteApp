@@ -10,7 +10,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
@@ -24,10 +23,13 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.NoteList
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget
+import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_CONTENT_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_ID_KEY
+import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_TITLE_KEY
 import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.utils.extensions.findActivity
 import com.dscoding.takenoteapp.utils.extensions.getGlanceId
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -38,7 +40,7 @@ fun NoteWidgetSelectionScreen(
 ) {
 
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
+    val coroutineScope = MainScope()
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val focusRequester = remember { FocusRequester() }
@@ -79,18 +81,19 @@ fun NoteWidgetSelectionScreen(
                     showDeleteButton = false,
                     onNoteClicked = { note ->
                         coroutineScope.launch {
-                            val glanceId = context.getGlanceId()
-                            glanceId?.let {
+                            context.getGlanceId()?.let { glanceId ->
                                 updateAppWidgetState(
-                                    context = context,
+                                    context = context.applicationContext,
                                     definition = PreferencesGlanceStateDefinition,
                                     glanceId = glanceId
                                 ) { preferences ->
                                     preferences.toMutablePreferences().apply {
                                         set(NOTE_ID_KEY, note.id ?: NOTE_INVALID_ID)
+                                        set(NOTE_TITLE_KEY, note.title)
+                                        set(NOTE_CONTENT_KEY, note.content)
                                     }
                                 }
-                                NoteWidget().update(context, glanceId)
+                                NoteWidget().update(context.applicationContext, glanceId)
                             }
                         }
                         context.findActivity().setResult(RESULT_OK)
