@@ -6,6 +6,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
 import androidx.glance.ImageProvider
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.background
@@ -17,6 +19,7 @@ import androidx.glance.unit.ColorProvider
 import com.dscoding.takenoteapp.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
+import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
 
 @Composable
 fun NoteWidgetScreen(noteWidgetState: NoteWidgetState) {
@@ -30,7 +33,14 @@ fun NoteWidgetScreen(noteWidgetState: NoteWidgetState) {
                 .fillMaxSize()
                 .padding(16.dp)
                 .padding(end = 32.dp)
-                .clickable(actionStartActivity<MainActivity>())
+                .clickable(
+                    actionStartActivity<MainActivity>(
+                        actionParametersOf(
+                            ActionParameters
+                                .Key<Int>(NOTE_WIDGET_ID_ARG) to noteWidgetState.noteId
+                        )
+                    )
+                )
         ) {
             Text(
                 text = noteWidgetState.noteTitle,
