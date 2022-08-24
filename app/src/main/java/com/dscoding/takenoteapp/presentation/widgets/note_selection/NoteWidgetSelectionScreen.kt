@@ -23,6 +23,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.NoteList
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget
+import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_COLOR_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_CONTENT_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_ID_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_TITLE_KEY
@@ -91,6 +92,7 @@ fun NoteWidgetSelectionScreen(
                                         set(NOTE_ID_KEY, note.id ?: NOTE_INVALID_ID)
                                         set(NOTE_TITLE_KEY, note.title)
                                         set(NOTE_CONTENT_KEY, note.content)
+                                        set(NOTE_COLOR_KEY, note.color)
                                     }
                                 }
                                 NoteWidget().update(context.applicationContext, glanceId)

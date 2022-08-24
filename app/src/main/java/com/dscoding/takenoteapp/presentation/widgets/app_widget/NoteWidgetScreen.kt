@@ -2,6 +2,7 @@ package com.dscoding.takenoteapp.presentation.widgets.app_widget
 
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
@@ -19,10 +20,11 @@ import androidx.glance.unit.ColorProvider
 import com.dscoding.takenoteapp.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
+import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
 
 @Composable
-fun NoteWidgetScreen(noteWidgetState: NoteWidgetState) {
+fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
     Box(
         GlanceModifier
             .width(200.dp).height(150.dp)
@@ -36,14 +38,14 @@ fun NoteWidgetScreen(noteWidgetState: NoteWidgetState) {
                 .clickable(
                     actionStartActivity<MainActivity>(
                         actionParametersOf(
-                            ActionParameters
-                                .Key<Int>(NOTE_WIDGET_ID_ARG) to noteWidgetState.noteId
+                            ActionParameters.Key<Int>(NOTE_WIDGET_ID_ARG) to noteWidgetState.value.noteId,
+                            ActionParameters.Key<Int>(NOTE_WIDGET_COLOR_ARG) to noteWidgetState.value.noteColor
                         )
                     )
                 )
         ) {
             Text(
-                text = noteWidgetState.noteTitle,
+                text = noteWidgetState.value.noteTitle,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
@@ -54,7 +56,7 @@ fun NoteWidgetScreen(noteWidgetState: NoteWidgetState) {
                 )
             Box(modifier = GlanceModifier.height(10.dp)) {}
             Text(
-                text = noteWidgetState.noteContent,
+                text = noteWidgetState.value.noteContent,
                 style = TextStyle(
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,

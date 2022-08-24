@@ -9,6 +9,7 @@ object Constants {
     const val NOTE_ID_ARG = "noteId"
     const val NOTE_COLOR_ARG = "noteColor"
     const val NOTE_WIDGET_ID_ARG = "noteWidgetId"
+    const val NOTE_WIDGET_COLOR_ARG = "noteColorId"
 
     // Data names
     const val DATABASE_NAME = "note_db"
