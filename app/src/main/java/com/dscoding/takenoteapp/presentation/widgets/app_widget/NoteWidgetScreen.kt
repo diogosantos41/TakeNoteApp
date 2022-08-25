@@ -1,6 +1,7 @@
 package com.dscoding.takenoteapp.presentation.widgets.app_widget
 
 
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
@@ -27,7 +28,7 @@ import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
 fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
     Box(
         GlanceModifier
-            .width(200.dp).height(150.dp)
+            .fillMaxSize()
             .background(ImageProvider(R.drawable.background_widget))
     ) {
         Column(
@@ -54,7 +55,12 @@ fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
                 maxLines = 1,
 
                 )
-            Box(modifier = GlanceModifier.height(10.dp)) {}
+            Box(modifier = GlanceModifier.height(4.dp)) {}
+            Box(modifier = GlanceModifier
+                .height(1.dp)
+                .background(ColorProvider(R.color.black))
+                .fillMaxWidth()) {}
+            Box(modifier = GlanceModifier.height(6.dp)) {}
             Text(
                 text = noteWidgetState.value.noteContent,
                 style = TextStyle(

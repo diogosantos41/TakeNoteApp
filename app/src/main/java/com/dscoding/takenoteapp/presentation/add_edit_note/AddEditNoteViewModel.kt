@@ -76,7 +76,7 @@ class AddEditNoteViewModel @Inject constructor(
         saveStateHandle.get<Int>(NOTE_ID_ARG)?.let { noteId ->
             if (noteId != NOTE_INVALID_ID) {
                 viewModelScope.launch {
-                    noteUseCases.getNote(noteId)?.also { note ->
+                    noteUseCases.getNote(noteId)?.let { note ->
                         currentSelectedNote = note
                         _noteTitle.value = noteTitle.value.copy(
                             text = note.title,
@@ -95,7 +95,11 @@ class AddEditNoteViewModel @Inject constructor(
                                 dateFormat
                             )
                         )
-                    }
+                    } ?: _eventFlow.emit(
+                        UiEvent.ShowSnackbar(
+                            message = UiText.StringResource(R.string.error_add_note_invalid_note)
+                        )
+                    )
                 }
             }
         }

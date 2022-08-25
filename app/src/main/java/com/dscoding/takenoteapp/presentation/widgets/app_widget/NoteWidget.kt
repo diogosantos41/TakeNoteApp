@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.SizeMode
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.state.PreferencesGlanceStateDefinition
@@ -20,6 +21,8 @@ class NoteWidget : GlanceAppWidget() {
 
     private val _state = mutableStateOf(NoteWidgetState())
     val state: State<NoteWidgetState> = _state
+
+    override val sizeMode: SizeMode = SizeMode.Exact
 
     @Composable
     override fun Content() {
