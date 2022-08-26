@@ -1,12 +1,13 @@
 package com.dscoding.takenoteapp.presentation.widgets.app_widget
 
 
-import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
+import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.action.ActionParameters
 import androidx.glance.action.actionParametersOf
@@ -20,56 +21,89 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.dscoding.takenoteapp.MainActivity
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.presentation.widgets.components.GlanceSpacer
+import com.dscoding.takenoteapp.presentation.widgets.components.GlanceVerticalDivider
+import com.dscoding.takenoteapp.presentation.widgets.note_selection.NoteWidgetSelectionActivity
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
+
 
 @Composable
 fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
     Box(
         GlanceModifier
             .fillMaxSize()
-            .background(ImageProvider(R.drawable.background_widget))
+            .background(ColorProvider(color = Color(noteWidgetState.value.noteColor)))
     ) {
-        Column(
+        Row(
             modifier = GlanceModifier
                 .fillMaxSize()
-                .padding(16.dp)
-                .padding(end = 32.dp)
-                .clickable(
-                    actionStartActivity<MainActivity>(
-                        actionParametersOf(
-                            ActionParameters.Key<Int>(NOTE_WIDGET_ID_ARG) to noteWidgetState.value.noteId,
-                            ActionParameters.Key<Int>(NOTE_WIDGET_COLOR_ARG) to noteWidgetState.value.noteColor
-                        )
-                    )
-                )
+                .padding(12.dp)
         ) {
-            Text(
-                text = noteWidgetState.value.noteTitle,
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = ColorProvider(color = DarkerGrey),
-                ),
-                maxLines = 1,
-
+            Column(
+                horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
+            ) {
+                Image(
+                    provider = ImageProvider(R.drawable.background_round_edit_icon),
+                    contentDescription = "Widget Edit Note",
+                    modifier = GlanceModifier
+                        .size(28.dp)
+                        .clickable(
+                            actionStartActivity<MainActivity>(
+                                actionParametersOf(
+                                    ActionParameters.Key<Int>(NOTE_WIDGET_ID_ARG) to noteWidgetState.value.noteId,
+                                    ActionParameters.Key<Int>(NOTE_WIDGET_COLOR_ARG) to noteWidgetState.value.noteColor
+                                )
+                            )
+                        )
                 )
-            Box(modifier = GlanceModifier.height(4.dp)) {}
-            Box(modifier = GlanceModifier
-                .height(1.dp)
-                .background(ColorProvider(R.color.black))
-                .fillMaxWidth()) {}
-            Box(modifier = GlanceModifier.height(6.dp)) {}
-            Text(
-                text = noteWidgetState.value.noteContent,
-                style = TextStyle(
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 14.sp,
-                    color = ColorProvider(color = DarkerGrey),
-                ),
-                maxLines = 10,
-            )
+                GlanceSpacer(height = 10.dp)
+                Image(
+                    provider = ImageProvider(R.drawable.background_round_list_icon),
+                    contentDescription = "Widget List Note",
+                    modifier = GlanceModifier
+                        .size(28.dp)
+                        .clickable(actionStartActivity<NoteWidgetSelectionActivity>())
+                )
+                GlanceSpacer(height = 10.dp)
+                Image(
+                    provider = ImageProvider(R.drawable.background_round_refresh_icon),
+                    contentDescription = "Widget Refresh Note",
+                    modifier = GlanceModifier
+                        .size(28.dp)
+                        // TODO .clickable(actionRefreshNoteService<>())
+                )
+            }
+            GlanceSpacer(width = 12.dp)
+            GlanceVerticalDivider()
+            GlanceSpacer(width = 12.dp)
+            Column(
+                modifier = GlanceModifier
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = noteWidgetState.value.noteTitle,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = ColorProvider(color = DarkerGrey)
+                    ),
+                    maxLines = 1
+                )
+                GlanceSpacer(height = 6.dp)
+                Text(
+                    text = noteWidgetState.value.noteContent,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 14.sp,
+                        color = ColorProvider(color = DarkerGrey),
+                    ),
+                    maxLines = 10,
+                )
+                GlanceSpacer(height = 10.dp)
+            }
         }
     }
 }
+

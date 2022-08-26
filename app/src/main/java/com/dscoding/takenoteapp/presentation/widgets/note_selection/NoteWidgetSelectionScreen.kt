@@ -33,8 +33,6 @@ import com.dscoding.takenoteapp.utils.extensions.getGlanceId
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-@ExperimentalFoundationApi
-@ExperimentalAnimationApi
 @Composable
 fun NoteWidgetSelectionScreen(
     viewModel: NoteWidgetSelectionViewModel = hiltViewModel()
