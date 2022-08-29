@@ -1,6 +1,7 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -136,6 +137,11 @@ fun NotesScreen(
                         0.dp
                     )
             ) {
+                // Close the app
+                BackHandler {
+                    context.findActivity().finish()
+                }
+
                 if (state.isGreetingSectionVisible) {
                     GreetingSection()
                     Spacer(modifier = Modifier.height(8.dp))

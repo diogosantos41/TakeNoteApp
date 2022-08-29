@@ -66,14 +66,6 @@ fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
                         .size(28.dp)
                         .clickable(actionStartActivity<NoteWidgetSelectionActivity>())
                 )
-                GlanceSpacer(height = 10.dp)
-                Image(
-                    provider = ImageProvider(R.drawable.background_round_refresh_icon),
-                    contentDescription = "Widget Refresh Note",
-                    modifier = GlanceModifier
-                        .size(28.dp)
-                        // TODO .clickable(actionRefreshNoteService<>())
-                )
             }
             GlanceSpacer(width = 12.dp)
             GlanceVerticalDivider()
