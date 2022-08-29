@@ -137,11 +137,6 @@ fun NotesScreen(
                         0.dp
                     )
             ) {
-                // Close the app
-                BackHandler {
-                    context.findActivity().finish()
-                }
-
                 if (state.isGreetingSectionVisible) {
                     GreetingSection()
                     Spacer(modifier = Modifier.height(8.dp))
