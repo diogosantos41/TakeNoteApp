@@ -58,10 +58,6 @@ dependencies {
     implementation AndroidX.compose_activity
     debugImplementation AndroidX.compose_ui_tooling
     implementation AndroidX.lifecycle_runtime_ktx
-    testImplementation Testing.junit
-    androidTestImplementation Testing.ext_junit
-    androidTestImplementation Testing.espresso_core
-    androidTestImplementation Testing.compose_junit4
     debugImplementation Testing.composes_ui_manifest
 
     // Splash Screen (needed to support < 12 versions)
@@ -100,5 +96,28 @@ dependencies {
 
     // Leak Canary
     debugImplementation SquareUp.leak_canary
+
+    // Local unit tests
+    testImplementation Testing.test_core
+    testImplementation Testing.junit
+    testImplementation Testing.arch_core_testing
+    testImplementation Testing.coroutines_test
+    testImplementation Testing.google_truth
+    testImplementation Testing.mock_web_server
+    testImplementation Testing.mockk
+    debugImplementation Testing.composes_ui_manifest
+
+    // Instrumentation tests
+    androidTestImplementation Testing.hilt_android_testing
+    kaptAndroidTest Testing.hilt_android_compiler
+    androidTestImplementation Testing.junit
+    androidTestImplementation Testing.coroutines_test
+    androidTestImplementation Testing.arch_core_testing
+    androidTestImplementation Testing.google_truth
+    androidTestImplementation Testing.ext_junit
+    androidTestImplementation Testing.test_core_ktx
+    androidTestImplementation Testing.mock_web_server
+    androidTestImplementation Testing.mockk_android
+    androidTestImplementation Testing.test_runner
 
 }

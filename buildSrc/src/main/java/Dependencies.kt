@@ -16,9 +16,6 @@ object Versions {
     const val glance_appwidget = "1.0.0-alpha03"
     const val navigation_animation = "0.24.13-rc"
     const val coroutines = "1.6.1"
-    const val junit = "4.13.2"
-    const val espresso_core = "3.4.0"
-    const val ext_junit = "1.1.3"
     const val room = "2.4.2"
     const val datastore = "1.0.0"
     const val firebase_analytics = "21.1.0"
@@ -111,10 +108,22 @@ object AnnotationProcessing {
 }
 
 object Testing {
-    const val junit = "junit:junit:${Versions.junit}"
-    const val ext_junit = "androidx.test.ext:junit:${Versions.ext_junit}"
-    const val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
-    const val compose_junit4 = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+    // Local unit tests
+    const val test_core = "androidx.test:core:1.4.0"
+    const val junit = "junit:junit:4.13.2"
+    const val arch_core_testing = "androidx.arch.core:core-testing:2.1.0"
+    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    const val google_truth = "com.google.truth:truth:1.1.3"
+    const val mock_web_server = "com.squareup.okhttp3:mockwebserver:4.9.1"
+    const val mockk = "io.mockk:mockk:1.10.5"
+
+    // Instrumentation tests
+    const val hilt_android_testing = "com.google.dagger:hilt-android-testing:2.42"
+    const val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:2.42"
+    const val ext_junit = "androidx.test.ext:junit:1.1.3"
+    const val test_core_ktx = "androidx.test:core-ktx:1.4.0"
+    const val mockk_android = "io.mockk:mockk-android:1.10.5"
+    const val test_runner = "androidx.test:runner:1.4.0"
     const val composes_ui_manifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
 }
 
