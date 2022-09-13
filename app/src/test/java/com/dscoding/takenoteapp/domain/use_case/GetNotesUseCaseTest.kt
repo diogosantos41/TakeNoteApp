@@ -10,10 +10,10 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class GetNotesTest {
+class GetNotesUseCaseTest {
 
-    private lateinit var getNotes: GetNotesUseCase
     private lateinit var fakeNoteRepository: FakeNoteRepository
+    private lateinit var getNotes: GetNotesUseCase
 
     @Before
     fun setUp() {
@@ -32,6 +32,7 @@ class GetNotesTest {
                 )
             )
         }
+
         notesToInsert.shuffle()
         runBlocking {
             notesToInsert.forEach { fakeNoteRepository.insertNote(it) }
