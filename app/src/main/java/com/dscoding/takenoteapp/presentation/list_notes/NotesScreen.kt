@@ -1,7 +1,6 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
 import android.content.Intent
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -14,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -32,6 +32,7 @@ import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_COLOR_ARG
 import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
+import com.dscoding.takenoteapp.utils.TestTags
 import com.dscoding.takenoteapp.utils.extensions.findActivity
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 import kotlinx.coroutines.flow.collectLatest
@@ -80,7 +81,7 @@ fun NotesScreen(
                 }) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add note",
+                    contentDescription = stringResource(id = R.string.notes_content_description_add),
                     tint = ThemeManager.colors.iconColor
                 )
             }
@@ -98,7 +99,7 @@ fun NotesScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Search notes",
+                        contentDescription = stringResource(id = R.string.notes_content_description_search),
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -109,7 +110,7 @@ fun NotesScreen(
                 ) {
                     Icon(
                         imageVector = if (state.isGridListSelected) Icons.Default.List else Icons.Default.GridView,
-                        contentDescription = "Toggle Grid View/List View",
+                        contentDescription = stringResource(id = R.string.notes_content_description_toggle_grid_list_view),
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -118,7 +119,7 @@ fun NotesScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
+                        contentDescription = stringResource(id = R.string.notes_content_description_settings),
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -159,7 +160,7 @@ fun NotesScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Sort,
-                            contentDescription = "Sort Notes",
+                            contentDescription = stringResource(id = R.string.notes_content_description_sort),
                             tint = ThemeManager.colors.iconColor
                         )
                     }
@@ -172,7 +173,8 @@ fun NotesScreen(
                     OrderSection(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = generalMargin),
+                            .padding(vertical = generalMargin)
+                            .testTag(TestTags.ORDER_SECTION),
                         noteOrder = state.noteOrder,
                         onOrderChange = {
                             viewModel.onEvent(NotesEvent.Order(it))

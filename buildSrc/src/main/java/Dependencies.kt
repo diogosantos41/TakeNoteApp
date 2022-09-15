@@ -15,7 +15,7 @@ object Versions {
     const val splash_screen = "1.0.0"
     const val glance_appwidget = "1.0.0-alpha03"
     const val navigation_animation = "0.24.13-rc"
-    const val coroutines = "1.6.1"
+    const val coroutines = "1.6.4"
     const val room = "2.4.2"
     const val datastore = "1.0.0"
     const val firebase_analytics = "21.1.0"
@@ -112,7 +112,7 @@ object Testing {
     const val test_core = "androidx.test:core:1.4.0"
     const val junit = "junit:junit:4.13.2"
     const val arch_core_testing = "androidx.arch.core:core-testing:2.1.0"
-    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val google_truth = "com.google.truth:truth:1.1.3"
     const val mock_web_server = "com.squareup.okhttp3:mockwebserver:4.9.1"
     const val mockk = "io.mockk:mockk:1.10.5"
@@ -125,5 +125,7 @@ object Testing {
     const val mockk_android = "io.mockk:mockk-android:1.10.5"
     const val test_runner = "androidx.test:runner:1.4.0"
     const val composes_ui_manifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
+    const val compose_ui_test_junit4 = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+
 }
 

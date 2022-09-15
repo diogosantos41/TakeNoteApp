@@ -17,7 +17,7 @@ android {
         versionCode App.versionCode
         versionName App.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.dscoding.takenoteapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -119,5 +119,6 @@ dependencies {
     androidTestImplementation Testing.mock_web_server
     androidTestImplementation Testing.mockk_android
     androidTestImplementation Testing.test_runner
+    androidTestImplementation Testing.compose_ui_test_junit4
 
 }
