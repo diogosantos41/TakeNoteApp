@@ -97,7 +97,7 @@ fun AddEditNoteScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back Arrow",
+                            contentDescription = stringResource(id = R.string.add_edit_note_content_description_back),
                             tint = White
                         )
                     }
@@ -115,13 +115,13 @@ fun AddEditNoteScreen(
                 if (state.isEditingNote) {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = "Edit note",
+                        contentDescription = stringResource(id = R.string.add_edit_note_content_description_edit),
                         tint = ThemeManager.colors.iconColor
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Default.Done,
-                        contentDescription = "Save note",
+                        contentDescription = stringResource(id = R.string.add_edit_note_content_description_save),
                         tint = ThemeManager.colors.iconColor
                     )
                 }
@@ -141,7 +141,7 @@ fun AddEditNoteScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete note",
+                            contentDescription = stringResource(id = R.string.add_edit_note_content_description_delete),
                             tint = ThemeManager.colors.iconColor
                         )
                     }

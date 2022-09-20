@@ -3,6 +3,7 @@ package com.dscoding.takenoteapp.di
 import android.app.Application
 import androidx.room.Room
 import com.dscoding.takenoteapp.data.data_source.NoteDatabase
+import com.dscoding.takenoteapp.data.data_store.FakeSettingsDataStore
 import com.dscoding.takenoteapp.data.repository.NoteRepositoryImpl
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.repository.NoteRepository
@@ -33,6 +34,6 @@ internal object TestDataModule {
     @Provides
     @Singleton
     fun provideSettingsDataStore(): SettingsDataStore {
-        return com.dscoding.takenoteapp.data.data_store.FakeSettingsDataStore()
+        return FakeSettingsDataStore()
     }
 }

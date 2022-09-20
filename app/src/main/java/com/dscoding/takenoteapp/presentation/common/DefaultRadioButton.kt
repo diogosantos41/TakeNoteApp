@@ -11,8 +11,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.utils.TestTags.ORDER_RADIO_BUTTON
 
 @Composable
 fun DefaultRadioButton(
@@ -26,13 +28,15 @@ fun DefaultRadioButton(
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier
+                .size(20.dp)
+                .testTag(ORDER_RADIO_BUTTON + text),
             selected = selected,
             onClick = onSelect,
             colors = RadioButtonDefaults.colors(
                 selectedColor = ThemeManager.colors.mainColor,
                 unselectedColor = ThemeManager.colors.iconColor
-            )
+            ),
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = text, style = MaterialTheme.typography.body1)

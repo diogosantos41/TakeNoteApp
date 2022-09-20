@@ -43,6 +43,11 @@
     <string name="error_add_note_empty_content">The content of the note can\'t be empty</string>
     <string name="error_add_note_invalid_note">The note you\'re trying to edit was deleted</string>
 
+    <string name="add_edit_note_content_description_delete">Delete note</string>
+    <string name="add_edit_note_content_description_save">Save note</string>
+    <string name="add_edit_note_content_description_edit">Edit note</string>
+    <string name="add_edit_note_content_description_back">Back Arrow</string>
+
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
     <string name="settings_header_user_interface">User interface</string>
