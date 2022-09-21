@@ -13,16 +13,17 @@ class AddNoteUseCaseTest {
 
     private lateinit var fakeNoteRepository: FakeNoteRepository
     private lateinit var addNote: AddNoteUseCase
+    private lateinit var noteWithoutTitle: Note
+    private lateinit var noteWithoutContent: Note
+    private lateinit var noteWithTitleAndContent: Note
+
 
     @Before
     fun setUp() {
         fakeNoteRepository = FakeNoteRepository()
         addNote = AddNoteUseCase(fakeNoteRepository)
-    }
 
-    @Test
-    fun `Add note without title, note not added and error caught`() = runBlocking {
-        val note = Note(
+        noteWithoutTitle = Note(
             title = "",
             content = "content",
             createdTime = 1,
@@ -30,7 +31,26 @@ class AddNoteUseCaseTest {
             color = 1
         )
 
-        val addNoteResult = addNote(note)
+        noteWithoutContent = Note(
+            title = "title",
+            content = "",
+            createdTime = 1,
+            editedTime = 1,
+            color = 1
+        )
+
+        noteWithTitleAndContent = Note(
+            title = "title",
+            content = "content",
+            createdTime = 1,
+            editedTime = 1,
+            color = 1
+        )
+    }
+
+    @Test
+    fun `Add note without title, note not added and error caught`() = runBlocking {
+        val addNoteResult = addNote(noteWithoutTitle)
         val notes = fakeNoteRepository.getNotes().first()
 
         assertThat(notes.isEmpty()).isTrue()
@@ -39,15 +59,7 @@ class AddNoteUseCaseTest {
 
     @Test
     fun `Add note without content, note not added and error caught`() = runBlocking {
-        val note = Note(
-            title = "title",
-            content = "",
-            createdTime = 1,
-            editedTime = 1,
-            color = 1
-        )
-
-        val addNoteResult = addNote(note)
+        val addNoteResult = addNote(noteWithoutContent)
         val notes = fakeNoteRepository.getNotes().first()
 
         assertThat(notes.isEmpty()).isTrue()
@@ -56,17 +68,9 @@ class AddNoteUseCaseTest {
 
     @Test
     fun `Add note, note added`() = runBlocking {
-        val note = Note(
-            title = "title",
-            content = "content",
-            createdTime = 1,
-            editedTime = 1,
-            color = 1
-        )
-
-        addNote(note)
+        addNote(noteWithTitleAndContent)
         val notes = fakeNoteRepository.getNotes().first()
 
-        assertThat(note).isEqualTo(notes[0])
+        assertThat(noteWithTitleAndContent).isEqualTo(notes[0])
     }
 }

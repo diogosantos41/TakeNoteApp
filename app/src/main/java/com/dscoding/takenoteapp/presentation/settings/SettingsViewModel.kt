@@ -120,8 +120,8 @@ class SettingsViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    sealed class UiEvent {
-        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent()
+    sealed interface UiEvent {
+        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent
     }
 }
 

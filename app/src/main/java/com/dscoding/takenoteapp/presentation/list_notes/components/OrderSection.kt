@@ -9,6 +9,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
+import com.dscoding.takenoteapp.utils.TestTags
 
 @Composable
 fun OrderSection(
@@ -25,7 +26,8 @@ fun OrderSection(
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_title),
                 selected = noteOrder is NoteOrder.Title,
-                onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType)) }
+                onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType))},
+                testTag = TestTags.ORDER_TITLE_RADIO_BUTTON
             )
             Spacer(modifier = Modifier.width(25.dp))
             DefaultRadioButton(
@@ -48,7 +50,8 @@ fun OrderSection(
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_ascending),
                 selected = noteOrder.orderType is OrderType.Ascending,
-                onSelect = { onOrderChange(noteOrder.copy(OrderType.Ascending)) }
+                onSelect = { onOrderChange(noteOrder.copy(OrderType.Ascending)) },
+                testTag = TestTags.ORDER_ASCENDING_RADIO_BUTTON
             )
             Spacer(modifier = Modifier.width(25.dp))
             DefaultRadioButton(

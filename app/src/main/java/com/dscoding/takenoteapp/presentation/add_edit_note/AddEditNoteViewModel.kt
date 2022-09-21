@@ -212,9 +212,9 @@ class AddEditNoteViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    sealed class UiEvent {
-        data class ShowSnackbar(val message: UiText) : UiEvent()
-        object SaveNote : UiEvent()
-        object DeleteNote : UiEvent()
+    sealed interface UiEvent {
+        data class ShowSnackbar(val message: UiText) : UiEvent
+        object SaveNote : UiEvent
+        object DeleteNote : UiEvent
     }
 }

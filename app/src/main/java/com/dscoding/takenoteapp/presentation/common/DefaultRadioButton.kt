@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
-import com.dscoding.takenoteapp.utils.TestTags.ORDER_RADIO_BUTTON
 
 @Composable
 fun DefaultRadioButton(
     text: String,
     selected: Boolean,
     onSelect: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    testTag: String = "",
 ) {
     Row(
         modifier = modifier,
@@ -29,8 +29,8 @@ fun DefaultRadioButton(
     ) {
         RadioButton(
             modifier = Modifier
-                .size(20.dp)
-                .testTag(ORDER_RADIO_BUTTON + text),
+                .testTag(testTag)
+                .size(20.dp),
             selected = selected,
             onClick = onSelect,
             colors = RadioButtonDefaults.colors(

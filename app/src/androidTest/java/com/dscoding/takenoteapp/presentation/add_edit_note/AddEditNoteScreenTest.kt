@@ -3,25 +3,28 @@ package com.dscoding.takenoteapp.presentation.add_edit_note
 import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.test.core.app.ApplicationProvider
 import com.dscoding.takenoteapp.MainActivity
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.LightPink
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
+import com.dscoding.takenoteapp.utils.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+
 
 @HiltAndroidTest
 @UninstallModules(DataModule::class, UseCaseModule::class)
@@ -57,24 +60,39 @@ class AddEditNoteScreenTest {
         }
     }
 
-
     @Test
-    fun clickNoteColor_isBackgroundColorCorrect() {
-
+    fun enteredNoteTitle_hasTitleTextFieldCorrectText() {
+        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
+            .performTextInput("some title text")
+        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
+            .assertTextEquals("some title text")
     }
 
     @Test
-    fun enteredNoteTitle_isTitleNotEmpty() {
-
+    fun enteredNoteContent_hasContentTextFieldCorrectText() {
+        composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
+            .performTextInput("some content text")
+        composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
+            .assertTextEquals("some content text")
     }
 
     @Test
-    fun enteredNoteContent_isContentNotEmpty() {
-
+    fun clickAddNoteWithoutTitle_isSnackbarDisplayingWithCorrectText() {
+        composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
+            .performTextInput("some content text")
+        composeRule.onNodeWithContentDescription(context.getString(R.string.add_edit_note_content_description_save))
+            .performClick()
+        composeRule.onNodeWithText(context.getString(R.string.error_add_note_empty_title))
+            .assertIsDisplayed()
     }
 
     @Test
-    fun clickAddNoteWithoutTitleAndContent_isErrorSnackbarDisplaying() {
-
+    fun clickAddNoteWithoutContent_isSnackbarDisplayingWithCorrectText() {
+        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
+            .performTextInput("some title text")
+        composeRule.onNodeWithContentDescription(context.getString(R.string.add_edit_note_content_description_save))
+            .performClick()
+        composeRule.onNodeWithText(context.getString(R.string.error_add_note_empty_content))
+            .assertIsDisplayed()
     }
 }

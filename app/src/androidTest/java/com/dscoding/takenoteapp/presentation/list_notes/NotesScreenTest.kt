@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -59,31 +62,28 @@ class NotesScreenTest {
 
     @Test
     fun openOrderSection_isOrderSectionVisible() {
-        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertDoesNotExist()
-        composeRule.onNodeWithContentDescription(
-            context.getString(R.string.notes_content_description_sort)
-        )
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION)
+            .assertDoesNotExist()
+        composeRule.onNodeWithContentDescription(context.getString(R.string.notes_content_description_sort))
             .performClick()
-        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION)
+            .assertIsDisplayed()
     }
 
     @Test
     fun selectOrderSectionRadioButtonThenCloseOrderSection_isOrderSectionGone() {
-        composeRule.onNodeWithTag(
-            TestTags.ORDER_SECTION
-        ).assertDoesNotExist()
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION)
+            .assertDoesNotExist()
         composeRule.onNodeWithContentDescription(
-            context.getString(R.string.notes_content_description_sort)
-        )
+            context.getString(R.string.notes_content_description_sort))
             .performClick()
-        composeRule.onNodeWithTag(
-            TestTags.ORDER_RADIO_BUTTON + context.getString(R.string.notes_order_section_title)
-        ).performClick()
-        composeRule.onNodeWithTag(
-            TestTags.ORDER_RADIO_BUTTON + context.getString(R.string.notes_order_section_ascending)
-        ).performClick()
+        composeRule.onNodeWithTag(TestTags.ORDER_TITLE_RADIO_BUTTON)
+            .performClick()
+        composeRule.onNodeWithTag(TestTags.ORDER_ASCENDING_RADIO_BUTTON)
+            .performClick()
         composeRule.onNodeWithContentDescription(context.getString(R.string.notes_content_description_sort))
             .performClick()
-        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertDoesNotExist()
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION)
+            .assertDoesNotExist()
     }
 }

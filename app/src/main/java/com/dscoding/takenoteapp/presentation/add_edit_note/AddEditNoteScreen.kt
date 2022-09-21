@@ -37,6 +37,7 @@ import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_COLOR
+import com.dscoding.takenoteapp.utils.TestTags
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -226,7 +227,8 @@ fun AddEditNoteScreen(
                     },
                     isHintVisible = titleState.isHintVisible,
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.h5
+                    textStyle = MaterialTheme.typography.h5,
+                    testTag = TestTags.TITLE_TEXT_FIELD
                 )
                 Spacer(modifier = Modifier.height(generalMargin))
                 TransparentHintTextField(
@@ -241,7 +243,8 @@ fun AddEditNoteScreen(
                     isHintVisible = contentState.isHintVisible,
                     singleLine = false,
                     textStyle = MaterialTheme.typography.body1,
-                    modifier = Modifier.fillMaxHeight()
+                    modifier = Modifier.fillMaxHeight(),
+                    testTag = TestTags.CONTENT_TEXT_FIELD
                 )
                 if (state.showDeleteConfirmationDialog) {
                     ConfirmationDialog(message = stringResource(id = R.string.notes_delete_confirmation_message),

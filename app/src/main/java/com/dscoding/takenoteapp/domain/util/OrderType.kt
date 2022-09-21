@@ -1,6 +1,6 @@
 package com.dscoding.takenoteapp.domain.util
 
-sealed class OrderType {
-    object Ascending: OrderType()
-    object Descending: OrderType()
+sealed interface OrderType {
+    object Ascending: OrderType
+    object Descending: OrderType
 }
