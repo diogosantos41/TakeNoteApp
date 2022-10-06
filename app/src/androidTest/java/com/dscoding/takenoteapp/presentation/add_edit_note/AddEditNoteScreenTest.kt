@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.test.core.app.ApplicationProvider
-import com.dscoding.takenoteapp.MainActivity
+import com.dscoding.takenoteapp.presentation.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
@@ -63,23 +63,23 @@ class AddEditNoteScreenTest {
     @Test
     fun enteredNoteTitle_hasTitleTextFieldCorrectText() {
         composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
-            .performTextInput("some title text")
+            .performTextInput("note-test-title")
         composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
-            .assertTextEquals("some title text")
+            .assertTextEquals("note-test-title")
     }
 
     @Test
     fun enteredNoteContent_hasContentTextFieldCorrectText() {
         composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
-            .performTextInput("some content text")
+            .performTextInput("note-test-content")
         composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
-            .assertTextEquals("some content text")
+            .assertTextEquals("note-test-content")
     }
 
     @Test
     fun clickAddNoteWithoutTitle_isSnackbarDisplayingWithCorrectText() {
         composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD)
-            .performTextInput("some content text")
+            .performTextInput("note-test-content")
         composeRule.onNodeWithContentDescription(context.getString(R.string.add_edit_note_content_description_save))
             .performClick()
         composeRule.onNodeWithText(context.getString(R.string.error_add_note_empty_title))

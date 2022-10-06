@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -21,6 +22,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.CustomTextField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
+import com.dscoding.takenoteapp.utils.TestTags
 
 @Composable
 fun SearchAppBar(
@@ -41,7 +43,8 @@ fun SearchAppBar(
         CustomTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(focusRequester),
+                .focusRequester(focusRequester)
+                .testTag(TestTags.SEARCH_QUERY_TEXT_FIELD),
             value = text,
             onValueChange = { onTextChange(it) },
             placeholder = {
@@ -64,7 +67,7 @@ fun SearchAppBar(
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back Icon",
+                            contentDescription = stringResource(id = R.string.notes_search_content_description_back),
                             tint = White,
                         )
                     }
@@ -76,7 +79,7 @@ fun SearchAppBar(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "Close Icon",
+                        contentDescription = stringResource(id = R.string.notes_search_content_description_close),
                         tint = White,
                     )
                 }

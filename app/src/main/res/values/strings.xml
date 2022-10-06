@@ -12,7 +12,7 @@
     <string name="error_unknown">Unknown error</string>
 
     <!-- Notes Screen -->
-    <string name="notes_greeting_title_with_name">Hey there!</string>
+    <string name="notes_greeting_title">Hey there!</string>
     <string name="notes_greeting_message">It\'s great to see you taking notes!</string>
     <string name="notes_list_title">Notes</string>
     <string name="notes_empty_list_message">You have no notes added. Press \'+\' to add a note!</string>
@@ -33,6 +33,10 @@
     <string name="notes_search_field_hint">Search here…</string>
     <string name="notes_search_empty_message">No matching notes</string>
 
+    <string name="notes_search_content_description_search_text">Search Query</string>
+    <string name="notes_search_content_description_back">Back</string>
+    <string name="notes_search_content_description_close">Clean</string>
+
     <!-- Add/Edit Note Screen -->
     <string name="add_edit_note_add_title">Add Note</string>
     <string name="add_edit_note_edit_title">Edit Note</string>
@@ -46,7 +50,7 @@
     <string name="add_edit_note_content_description_delete">Delete note</string>
     <string name="add_edit_note_content_description_save">Save note</string>
     <string name="add_edit_note_content_description_edit">Edit note</string>
-    <string name="add_edit_note_content_description_back">Back Arrow</string>
+    <string name="add_edit_note_content_description_back">Back</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
@@ -68,6 +72,8 @@
     <string name="settings_share_app_intent_message">Check out \'Take Note! App\': %s</string>
     <string name="settings_twenty_four_hour_clock">24-hour clock</string>
     <string name="settings_app_version_title">Version</string>
+
+    <string name="settings_content_description_back">Back</string>
 
     <!-- Widget -->
     <string name="note_widget_description">Single Note Widget</string>

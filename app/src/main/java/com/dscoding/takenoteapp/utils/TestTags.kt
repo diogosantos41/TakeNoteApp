@@ -1,10 +1,16 @@
 package com.dscoding.takenoteapp.utils
 
 object TestTags {
+
     // Notes Screen
+    const val NOTE_ITEM = "NOTE_ITEM"
     const val ORDER_SECTION = "ORDER_SECTION"
     const val ORDER_TITLE_RADIO_BUTTON = "ORDER_TITLE_RADIO_BUTTON"
     const val ORDER_ASCENDING_RADIO_BUTTON = "ORDER_ASCENDING_RADIO_BUTTON"
+    const val ORDER_DESCENDING_RADIO_BUTTON = "ORDER_DESCENDING_RADIO_BUTTON"
+
+    // Search Screen
+    const val SEARCH_QUERY_TEXT_FIELD = "SEARCH_QUERY_TEXT_FIELD"
 
     // Add Edit Note Screen
     const val TITLE_TEXT_FIELD = "TITLE_TEXT_FIELD"

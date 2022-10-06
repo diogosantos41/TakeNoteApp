@@ -19,7 +19,7 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import com.dscoding.takenoteapp.MainActivity
+import com.dscoding.takenoteapp.presentation.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.widgets.components.GlanceSpacer
 import com.dscoding.takenoteapp.presentation.widgets.components.GlanceVerticalDivider

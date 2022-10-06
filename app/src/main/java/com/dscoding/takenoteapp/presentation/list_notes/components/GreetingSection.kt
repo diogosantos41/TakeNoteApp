@@ -31,7 +31,7 @@ fun GreetingSection() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(id = R.string.notes_greeting_title_with_name),
+                text = stringResource(id = R.string.notes_greeting_title),
                 style = MaterialTheme.typography.h6,
                 color = ThemeManager.colors.textColor
             )

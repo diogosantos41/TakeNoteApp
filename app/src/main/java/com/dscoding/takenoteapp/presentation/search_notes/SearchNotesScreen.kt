@@ -42,8 +42,8 @@ fun SearchNotesScreen(
     val focusRequester = remember { FocusRequester() }
     val generalMargin = dimensionResource(R.dimen.margin)
 
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+    LaunchedEffect(key1 = true) {
+       focusRequester.requestFocus()
     }
 
     Scaffold(

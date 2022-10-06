@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp
+package com.dscoding.takenoteapp.presentation
 
 import android.os.Bundle
 import android.view.WindowManager

@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp
+package com.dscoding.takenoteapp.presentation
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing

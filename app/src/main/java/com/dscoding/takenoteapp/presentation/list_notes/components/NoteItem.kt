@@ -17,6 +17,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -25,6 +26,7 @@ import androidx.core.graphics.ColorUtils
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
+import com.dscoding.takenoteapp.utils.TestTags.NOTE_ITEM
 
 
 @Composable
@@ -38,12 +40,14 @@ fun NoteItem(
     onDeleteClick: () -> Unit = {}
 ) {
     Box(
-        modifier = if (isLastItem) modifier.padding(
-            0.dp,
-            0.dp,
-            0.dp,
-            dimensionResource(id = R.dimen.notes_margin_bottom_list_last_item)
-        ) else modifier
+        modifier = if (isLastItem) modifier
+            .padding(
+                0.dp,
+                0.dp,
+                0.dp,
+                dimensionResource(id = R.dimen.notes_margin_bottom_list_last_item)
+            )
+            .testTag(NOTE_ITEM) else modifier.testTag(NOTE_ITEM)
     ) {
         Canvas(modifier = Modifier.matchParentSize()) {
             val clipPath = Path().apply {

@@ -69,8 +69,8 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackToDashboard() }) {
                         Icon(
-                            Icons.Default.ArrowBack,
-                            "Back Arrow",
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = stringResource(id = R.string.settings_content_description_back),
                             tint = White
                         )
                     }

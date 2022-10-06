@@ -26,7 +26,7 @@ fun OrderSection(
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_title),
                 selected = noteOrder is NoteOrder.Title,
-                onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType))},
+                onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType)) },
                 testTag = TestTags.ORDER_TITLE_RADIO_BUTTON
             )
             Spacer(modifier = Modifier.width(25.dp))
@@ -57,7 +57,8 @@ fun OrderSection(
             DefaultRadioButton(
                 text = stringResource(id = R.string.notes_order_section_descending),
                 selected = noteOrder.orderType is OrderType.Descending,
-                onSelect = { onOrderChange(noteOrder.copy(OrderType.Descending)) }
+                onSelect = { onOrderChange(noteOrder.copy(OrderType.Descending)) },
+                testTag = TestTags.ORDER_DESCENDING_RADIO_BUTTON
             )
         }
     }

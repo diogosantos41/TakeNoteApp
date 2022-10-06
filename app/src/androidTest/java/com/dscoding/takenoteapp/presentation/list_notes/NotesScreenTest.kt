@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.test.core.app.ApplicationProvider
-import com.dscoding.takenoteapp.MainActivity
+import com.dscoding.takenoteapp.presentation.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
