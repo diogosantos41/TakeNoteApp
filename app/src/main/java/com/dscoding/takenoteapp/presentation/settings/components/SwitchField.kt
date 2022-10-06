@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
@@ -18,6 +19,8 @@ fun SwitchField(
     value: String,
     active: Boolean,
     onSelect: (Boolean) -> Unit,
+    switchTestTag: String = "",
+    valueTestTag: String = ""
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -35,7 +38,8 @@ fun SwitchField(
             Text(
                 text = value,
                 style = MaterialTheme.typography.body2,
-                color = Color.Gray
+                color = Color.Gray,
+                modifier = Modifier.testTag(valueTestTag)
             )
         }
         Spacer(modifier = Modifier.width(8.dp))
@@ -47,7 +51,8 @@ fun SwitchField(
                 uncheckedThumbColor = Color.Gray,
                 checkedTrackColor = Color.Gray,
                 uncheckedTrackColor = Color.LightGray,
-            )
+            ),
+            modifier = Modifier.testTag(switchTestTag),
         )
     }
 }

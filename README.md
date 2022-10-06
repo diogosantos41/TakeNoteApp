@@ -7,7 +7,7 @@ Take Note! is an intuitive and lightweight notepad app that meets all your note-
 ## Features 
 
 - Search notes using text.
-- Select a diferent color for each note.
+- Select a different color for each note.
 - Simple navigation
 - Mobile application for Android
 

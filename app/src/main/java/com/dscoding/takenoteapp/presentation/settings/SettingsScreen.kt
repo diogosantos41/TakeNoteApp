@@ -11,7 +11,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,6 +23,7 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
+import com.dscoding.takenoteapp.utils.TestTags
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
 import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
 import com.dscoding.takenoteapp.utils.extensions.openPrivacyPolicyPage
@@ -109,7 +109,10 @@ fun SettingsScreen(
                         showGreetingState.isActive,
                         onSelect = {
                             viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
-                        })
+                        },
+                        switchTestTag = TestTags.SHOW_GREETING_SWITCH,
+                        valueTestTag = TestTags.SHOW_GREETING_SWITCH_VALUE
+                    )
                     Spacer(modifier = Modifier.height(betweenFieldsMargin))
                     SwitchField(
                         stringResource(id = R.string.settings_twenty_four_hour_clock),
@@ -117,7 +120,10 @@ fun SettingsScreen(
                         twentyFourHourClockState.isActive,
                         onSelect = {
                             viewModel.onEvent(SettingsEvent.ChangeTwentyFourHourClockState)
-                        })
+                        },
+                        switchTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH,
+                        valueTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH_VALUE
+                    )
                 }
                 Divider()
                 Column(settingsColumnModifier) {

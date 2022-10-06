@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
 import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.utils.TakeNoteTheme
+import com.dscoding.takenoteapp.utils.TestTags
 
 @Composable
 fun OptionsDialog(
@@ -47,7 +49,9 @@ fun OptionsDialog(
                     DefaultRadioButton(
                         text = option,
                         selected = option == selected,
-                        onSelect = { onOptionSelected(index) })
+                        onSelect = { onOptionSelected(index) },
+                        testTag = if (option == TakeNoteTheme.DARK_YELLOW.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                    )
                     if (index != options.size - 1) {
                         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
                     }
