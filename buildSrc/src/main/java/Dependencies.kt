@@ -14,7 +14,6 @@ object Versions {
     const val compose_viewmodel_lifecycle = "2.5.0-rc02"
     const val lifecycle_runtime_ktx = "2.5.0"
     const val splash_screen = "1.0.0"
-    const val glance_appwidget = "1.0.0-alpha03"
     const val navigation_animation = "0.24.13-rc"
     const val coroutines = "1.6.4"
     const val room = "2.4.2"
@@ -64,7 +63,6 @@ object AndroidX {
     const val lifecycle_runtime_ktx =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime_ktx}"
     const val splash_screen = "androidx.core:core-splashscreen:${Versions.splash_screen}"
-    const val glance_appwidget = "androidx.glance:glance-appwidget:${Versions.glance_appwidget}"
 }
 
 object Accompanist {

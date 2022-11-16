@@ -74,9 +74,6 @@ dependencies {
     implementation AndroidX.compose_material3
     implementation Accompanist.navigation_animation
 
-    // Widgets
-    implementation AndroidX.glance_appwidget
-
     // Coroutines
     implementation Coroutines.coroutines_core
     implementation Coroutines.coroutines_android

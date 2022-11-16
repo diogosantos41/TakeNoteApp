@@ -19,35 +19,8 @@
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity
-            android:name=".presentation.widgets.note_selection.NoteWidgetSelectionActivity"
-            android:autoRemoveFromRecents="true"
-            android:exported="false"
-            android:taskAffinity="widget.configuration.affinity">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-
-        <receiver
-            android:name=".presentation.widgets.app_widget.NoteWidgetReceiver"
-            android:enabled="true"
-            android:exported="false">
-
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_provider" />
-        </receiver>
     </application>
-
 </manifest>
