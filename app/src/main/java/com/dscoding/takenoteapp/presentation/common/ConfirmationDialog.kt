@@ -1,7 +1,7 @@
 package com.dscoding.takenoteapp.presentation.common
 
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -21,7 +21,7 @@ fun ConfirmationDialog(
             {
                 Text(
                     text = stringResource(id = R.string.generic_yes),
-                    color = MaterialTheme.colors.primary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         },
@@ -30,15 +30,16 @@ fun ConfirmationDialog(
             {
                 Text(
                     text = stringResource(id = R.string.generic_cancel),
-                    color = MaterialTheme.colors.primary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         },
         title = {
             Text(
                 text = message,
-                color = MaterialTheme.colors.onPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
-        }
+        },
+        backgroundColor = MaterialTheme.colorScheme.surface
     )
 }

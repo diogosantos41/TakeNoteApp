@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -24,52 +24,57 @@ fun OptionsDialog(
     title: String,
     options: List<String>,
     selected: String,
+    visible: Boolean = true,
     onOptionSelected: (Int) -> Unit,
-    dismissDialog: () -> Unit
+    dismissDialog: () -> Unit,
+
 ) {
     val padding = dimensionResource(R.dimen.settings_dialog_margin_padding)
 
-    AlertDialog(
-        onDismissRequest = {
-            dismissDialog()
-        },
-        title = {
-            Column {
-                Text(text = title, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        },
-        buttons = {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(padding, padding, padding, 0.dp)
-            ) {
-                itemsIndexed(options) { index, option ->
-                    DefaultRadioButton(
-                        text = option,
-                        selected = option == selected,
-                        onSelect = { onOptionSelected(index) },
-                        testTag = if (option == Theme.DarkYellow.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
-                    )
-                    if (index != options.size - 1) {
-                        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
+    if (visible) {
+        AlertDialog(
+            onDismissRequest = {
+                dismissDialog()
+            },
+            title = {
+                Column {
+                    Text(text = title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+            },
+            buttons = {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(padding, padding, padding, 0.dp)
+                ) {
+                    itemsIndexed(options) { index, option ->
+                        DefaultRadioButton(
+                            text = option,
+                            selected = option == selected,
+                            onSelect = { onOptionSelected(index) },
+                            testTag = if (option == Theme.DarkYellow.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                        )
+                        if (index != options.size - 1) {
+                            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
+                        }
                     }
                 }
-            }
-            Row(
-                modifier = Modifier.padding(all = padding)
-            ) {
-                TextButton(onClick = dismissDialog)
-                {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.generic_cancel),
-                        color = MaterialTheme.colors.primary,
-                        textAlign = TextAlign.End,
-                    )
+                Row(
+                    modifier = Modifier.padding(all = padding)
+                ) {
+                    TextButton(onClick = dismissDialog)
+                    {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = stringResource(id = R.string.generic_cancel),
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.End,
+                        )
+                    }
                 }
-            }
-        }
-    )
+            },
+            backgroundColor = MaterialTheme.colorScheme.surface
+        )
+    }
 }

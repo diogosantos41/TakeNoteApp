@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContent {
-            val preferencesState = settingsDataStore.getPreferences().collectAsState(initial = PreferencesDto())
+            val preferencesState =
+                settingsDataStore.getPreferences().collectAsState(initial = PreferencesDto())
             TakeNoteAppTheme(theme = com.dscoding.takenoteapp.utils.getTheme(preferencesState.value.theme)) {
                 Surface {
                     // On some devices (ex: Poko X3) the screen became all white after system theme change.

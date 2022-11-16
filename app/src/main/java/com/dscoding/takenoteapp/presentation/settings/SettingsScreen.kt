@@ -1,11 +1,13 @@
 package com.dscoding.takenoteapp.presentation.settings
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -68,89 +70,93 @@ fun SettingsScreen(
             )
         },
         content = { padding ->
-            val settingsColumnModifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    generalMargin,
-                    generalMargin,
-                    generalMargin,
-                    generalMargin
-                )
-            Column(
+            Box(
                 modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(generalMargin, 0.dp)
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.background)
             ) {
-                Column(settingsColumnModifier) {
-
-                    Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(text = stringResource(id = R.string.settings_header_user_interface))
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        stringResource(R.string.settings_theme),
-                        state.selectedTheme.asString(),
-                        onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField(
-                        stringResource(id = R.string.settings_show_greeting),
-                        showGreetingState.value.asString(),
-                        showGreetingState.isActive,
-                        onSelect = {
-                            viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
-                        },
-                        switchTestTag = TestTags.SHOW_GREETING_SWITCH,
-                        valueTestTag = TestTags.SHOW_GREETING_SWITCH_VALUE
+                val settingsColumnModifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        generalMargin,
+                        generalMargin,
+                        generalMargin,
+                        generalMargin
                     )
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SwitchField(
-                        stringResource(id = R.string.settings_twenty_four_hour_clock),
-                        twentyFourHourClockState.value.asString(),
-                        twentyFourHourClockState.isActive,
-                        onSelect = {
-                            viewModel.onEvent(SettingsEvent.ChangeTwentyFourHourClockState)
-                        },
-                        switchTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH,
-                        valueTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH_VALUE
-                    )
-                }
-                Divider()
-                Column(settingsColumnModifier) {
-                    Spacer(modifier = Modifier.height(headerTopMargin))
-                    SettingsHeader(stringResource(id = R.string.settings_header_about))
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        stringResource(id = R.string.settings_rate_app_title),
-                        stringResource(id = R.string.settings_rate_app_message),
-                        onClick = { context.openGooglePlayAppPage() })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        stringResource(id = R.string.settings_share_app_title),
-                        stringResource(id = R.string.settings_share_app_message),
-                        onClick = { context.launchShareAppIntent() })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        stringResource(id = R.string.settings_privacy_policy_title),
-                        stringResource(id = R.string.settings_privacy_policy_message),
-                        onClick = { context.openPrivacyPolicyPage() })
-                    Spacer(modifier = Modifier.height(betweenFieldsMargin))
-                    SettingsField(
-                        stringResource(id = R.string.settings_app_version_title),
-                        BuildConfig.VERSION_NAME,
-                        onClick = { })
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(generalMargin, 0.dp)
+                ) {
+                    Column(settingsColumnModifier) {
+                        Spacer(modifier = Modifier.height(headerTopMargin))
+                        SettingsHeader(text = stringResource(id = R.string.settings_header_user_interface))
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(R.string.settings_theme),
+                            state.selectedTheme.asString(),
+                            onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) })
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SwitchField(
+                            stringResource(id = R.string.settings_show_greeting),
+                            showGreetingState.value.asString(),
+                            showGreetingState.isActive,
+                            onSelect = {
+                                viewModel.onEvent(SettingsEvent.ChangeShowGreetingState)
+                            },
+                            switchTestTag = TestTags.SHOW_GREETING_SWITCH,
+                            valueTestTag = TestTags.SHOW_GREETING_SWITCH_VALUE
+                        )
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SwitchField(
+                            stringResource(id = R.string.settings_twenty_four_hour_clock),
+                            twentyFourHourClockState.value.asString(),
+                            twentyFourHourClockState.isActive,
+                            onSelect = {
+                                viewModel.onEvent(SettingsEvent.ChangeTwentyFourHourClockState)
+                            },
+                            switchTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH,
+                            valueTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH_VALUE
+                        )
+                    }
+                    Divider()
+                    Column(settingsColumnModifier) {
+                        Spacer(modifier = Modifier.height(headerTopMargin))
+                        SettingsHeader(stringResource(id = R.string.settings_header_about))
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(id = R.string.settings_rate_app_title),
+                            stringResource(id = R.string.settings_rate_app_message),
+                            onClick = { context.openGooglePlayAppPage() })
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(id = R.string.settings_share_app_title),
+                            stringResource(id = R.string.settings_share_app_message),
+                            onClick = { context.launchShareAppIntent() })
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(id = R.string.settings_privacy_policy_title),
+                            stringResource(id = R.string.settings_privacy_policy_message),
+                            onClick = { context.openPrivacyPolicyPage() })
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(id = R.string.settings_app_version_title),
+                            BuildConfig.VERSION_NAME,
+                            onClick = { })
+                    }
                 }
             }
-            if (state.showThemeOptionsDialog) {
-                OptionsDialog(
-                    title = stringResource(id = R.string.settings_theme_dialog_title),
-                    options = geThemesTextList(),
-                    selected = state.selectedTheme.asString(),
-                    onOptionSelected = {
-                        viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
-                    }
-                )
-                {
-                    viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false))
+            OptionsDialog(
+                title = stringResource(id = R.string.settings_theme_dialog_title),
+                options = geThemesTextList(),
+                selected = state.selectedTheme.asString(),
+                visible = state.showThemeOptionsDialog,
+                onOptionSelected = {
+                    viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
                 }
+            )
+            {
+                viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false))
             }
         })
 }

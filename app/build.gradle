@@ -71,6 +71,7 @@ dependencies {
     implementation AndroidX.compose_viewmodel_lifecycle
     implementation AndroidX.compose_navigation
     implementation AndroidX.compose_material_icons
+    implementation AndroidX.compose_material3
     implementation Accompanist.navigation_animation
 
     // Widgets

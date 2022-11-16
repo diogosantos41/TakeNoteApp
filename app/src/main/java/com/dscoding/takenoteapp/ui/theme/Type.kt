@@ -1,6 +1,6 @@
 package com.dscoding.takenoteapp.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -13,7 +13,5 @@ val customFontFamily = FontFamily(
     Font(R.font.montserrat_medium, FontWeight.Medium)
 )
 
-val Typography = Typography(
-    defaultFontFamily = customFontFamily
-)
+val Typography = Typography()
 

@@ -5,10 +5,11 @@ object Versions {
     const val dagger_hilt = "2.43.2"
     const val dagger_hilt_compiler = "2.43.2"
     const val hilt_compiler = "1.0.0"
-    const val core_ktx = "1.7.0"
+    const val core_ktx = "1.9.0"
     const val compose = "1.2.0-rc02"
     const val compose_activity = "1.5.0"
     const val compose_navigation = "2.5.0"
+    const val compose_material3 = "1.1.0-alpha02"
     const val compose_hilt_navigation = "1.0.0"
     const val compose_viewmodel_lifecycle = "2.5.0-rc02"
     const val lifecycle_runtime_ktx = "2.5.0"
@@ -58,6 +59,8 @@ object AndroidX {
         "androidx.navigation:navigation-compose:${Versions.compose_navigation}"
     const val compose_material_icons =
         "androidx.compose.material:material-icons-extended:${Versions.compose}"
+    const val compose_material3 =
+        "androidx.compose.material3:material3:${Versions.compose_material3}"
     const val lifecycle_runtime_ktx =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime_ktx}"
     const val splash_screen = "androidx.core:core-splashscreen:${Versions.splash_screen}"

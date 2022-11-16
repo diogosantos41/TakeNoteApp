@@ -1,7 +1,7 @@
 package com.dscoding.takenoteapp.presentation.settings.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
@@ -31,12 +31,12 @@ fun SwitchField(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.onPrimary
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(
                 text = value,
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
                 modifier = Modifier.testTag(valueTestTag)
             )
@@ -46,7 +46,7 @@ fun SwitchField(
             checked = active,
             onCheckedChange = onSelect,
             colors = SwitchDefaults.colors(
-                checkedThumbColor = MaterialTheme.colors.primary,
+                checkedThumbColor = MaterialTheme.colorScheme.primary,
                 uncheckedThumbColor = Color.Gray,
                 checkedTrackColor = Color.Gray,
                 uncheckedTrackColor = Color.LightGray,

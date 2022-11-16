@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
@@ -109,7 +110,7 @@ fun AddEditNoteScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                backgroundColor = MaterialTheme.colors.primary,
+                backgroundColor = MaterialTheme.colorScheme.primary,
                 onClick = {
                     viewModel.onEvent(AddEditNoteEvent.SaveNote)
                 }) {
@@ -117,13 +118,13 @@ fun AddEditNoteScreen(
                     Icon(
                         imageVector = Icons.Default.Edit,
                         contentDescription = stringResource(id = R.string.add_edit_note_content_description_edit),
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Default.Done,
                         contentDescription = stringResource(id = R.string.add_edit_note_content_description_save),
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
@@ -131,7 +132,7 @@ fun AddEditNoteScreen(
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
-                backgroundColor = MaterialTheme.colors.primary,
+                backgroundColor = MaterialTheme.colorScheme.primary,
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -143,7 +144,7 @@ fun AddEditNoteScreen(
                         Icon(
                             imageVector = Icons.Default.Delete,
                             contentDescription = stringResource(id = R.string.add_edit_note_content_description_delete),
-                            tint = MaterialTheme.colors.onPrimary
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }
@@ -171,7 +172,7 @@ fun AddEditNoteScreen(
                             id = R.string.add_edit_note_edited_on,
                             state.lastTimeEdited
                         ),
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.bodyLarge,
                         color = DarkerGrey,
                         fontWeight = FontWeight.Bold,
                     )
@@ -227,7 +228,7 @@ fun AddEditNoteScreen(
                     },
                     isHintVisible = titleState.isHintVisible,
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.h5,
+                    textStyle = MaterialTheme.typography.headlineSmall,
                     testTag = TestTags.TITLE_TEXT_FIELD
                 )
                 Spacer(modifier = Modifier.height(generalMargin))
@@ -242,7 +243,7 @@ fun AddEditNoteScreen(
                     },
                     isHintVisible = contentState.isHintVisible,
                     singleLine = false,
-                    textStyle = MaterialTheme.typography.body1,
+                    textStyle = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.fillMaxHeight(),
                     testTag = TestTags.CONTENT_TEXT_FIELD
                 )
