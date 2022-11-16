@@ -9,7 +9,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.common.TestTags
 
 @Composable
 fun OrderSection(

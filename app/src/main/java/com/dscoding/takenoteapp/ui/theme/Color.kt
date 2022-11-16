@@ -1,9 +1,5 @@
 package com.dscoding.takenoteapp.ui.theme
 
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
 val Coral = Color(0xFFFF7F50)
@@ -21,46 +17,6 @@ val LightRed = Color(0xFFFFC6C6)
 val LightBlue = Color(0xFFC6D9FF)
 val LightGreen = Color(0xFFCDFFC6)
 val LightYellow = Color(0xFFFFF4C6)
-
-@Stable
-class CustomColors(
-    backgroundColor: Color,
-    containerBackgroundColor: Color,
-    iconColor: Color,
-    toolbarColor: Color,
-    textColor: Color,
-    mainColor: Color
-) {
-    private var backgroundColor by mutableStateOf(backgroundColor)
-    private var containerBackgroundColor by mutableStateOf(containerBackgroundColor)
-    var iconColor by mutableStateOf(iconColor)
-        private set
-    var toolbarColor by mutableStateOf(toolbarColor)
-        private set
-    var textColor by mutableStateOf(textColor)
-        private set
-    var mainColor by mutableStateOf(mainColor)
-        private set
-
-    fun update(colors: CustomColors) {
-        this.backgroundColor = colors.backgroundColor
-        this.containerBackgroundColor = colors.containerBackgroundColor
-        this.iconColor = colors.iconColor
-        this.toolbarColor = colors.toolbarColor
-        this.textColor = colors.textColor
-        this.mainColor = colors.mainColor
-
-    }
-
-    fun copy() = CustomColors(
-        backgroundColor,
-        containerBackgroundColor,
-        iconColor,
-        toolbarColor,
-        textColor,
-        mainColor
-    )
-}
 
 
 

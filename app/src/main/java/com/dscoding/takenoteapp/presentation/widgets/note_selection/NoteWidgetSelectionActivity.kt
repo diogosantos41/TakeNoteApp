@@ -8,6 +8,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalFoundationApi
 @AndroidEntryPoint
 class NoteWidgetSelectionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

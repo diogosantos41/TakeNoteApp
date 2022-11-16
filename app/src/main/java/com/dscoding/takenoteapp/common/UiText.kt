@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.utils
+package com.dscoding.takenoteapp.common
 
 import android.content.Context
 import androidx.annotation.StringRes

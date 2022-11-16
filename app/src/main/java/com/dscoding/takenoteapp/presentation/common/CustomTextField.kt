@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -12,7 +13,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
 
 @Composable
@@ -32,8 +32,8 @@ fun CustomTextField(
     maxLines: Int = Int.MAX_VALUE,
 ) {
     val customTextSelectionColors = TextSelectionColors(
-        handleColor = ThemeManager.colors.mainColor,
-        backgroundColor = ThemeManager.colors.mainColor.copy(alpha = 0.4f),
+        handleColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.4f),
     )
 
     CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {

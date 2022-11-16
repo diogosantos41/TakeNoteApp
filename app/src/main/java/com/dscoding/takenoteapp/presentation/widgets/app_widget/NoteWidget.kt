@@ -1,5 +1,6 @@
 package com.dscoding.takenoteapp.presentation.widgets.app_widget
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -12,9 +13,10 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.state.PreferencesGlanceStateDefinition
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_COLOR
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_COLOR
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
 
+@ExperimentalFoundationApi
 class NoteWidget : GlanceAppWidget() {
 
     override val stateDefinition: GlanceStateDefinition<*> = PreferencesGlanceStateDefinition
@@ -45,6 +47,7 @@ class NoteWidget : GlanceAppWidget() {
     }
 }
 
+@ExperimentalFoundationApi
 class NoteWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = NoteWidget()
 }

@@ -29,15 +29,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_COLOR
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
+import com.dscoding.takenoteapp.ui.theme.DarkGrey
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_COLOR
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -103,13 +103,13 @@ fun AddEditNoteScreen(
                         )
                     }
                 },
-                backgroundColor = ThemeManager.colors.toolbarColor,
+                backgroundColor = DarkGrey,
                 elevation = 0.dp
             )
         },
         floatingActionButton = {
             FloatingActionButton(
-                backgroundColor = ThemeManager.colors.mainColor,
+                backgroundColor = MaterialTheme.colors.primary,
                 onClick = {
                     viewModel.onEvent(AddEditNoteEvent.SaveNote)
                 }) {
@@ -117,13 +117,13 @@ fun AddEditNoteScreen(
                     Icon(
                         imageVector = Icons.Default.Edit,
                         contentDescription = stringResource(id = R.string.add_edit_note_content_description_edit),
-                        tint = ThemeManager.colors.iconColor
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Default.Done,
                         contentDescription = stringResource(id = R.string.add_edit_note_content_description_save),
-                        tint = ThemeManager.colors.iconColor
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
             }
@@ -131,7 +131,7 @@ fun AddEditNoteScreen(
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
-                backgroundColor = ThemeManager.colors.mainColor,
+                backgroundColor = MaterialTheme.colors.primary,
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -143,7 +143,7 @@ fun AddEditNoteScreen(
                         Icon(
                             imageVector = Icons.Default.Delete,
                             contentDescription = stringResource(id = R.string.add_edit_note_content_description_delete),
-                            tint = ThemeManager.colors.iconColor
+                            tint = MaterialTheme.colors.onPrimary
                         )
                     }
                 }

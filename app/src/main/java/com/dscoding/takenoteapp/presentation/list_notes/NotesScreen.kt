@@ -26,13 +26,12 @@ import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
-import com.dscoding.takenoteapp.utils.Constants.NOTE_COLOR_ARG
-import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
-import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_COLOR_ARG
-import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.common.Constants.NOTE_COLOR_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
+import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_COLOR_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_ID_ARG
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.utils.extensions.findActivity
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 import kotlinx.coroutines.flow.collectLatest
@@ -63,33 +62,26 @@ fun NotesScreen(
             )
             intent.replaceExtras(Intent())
         }
-        viewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is NotesViewModel.UiEvent.UpdateTheme -> {
-                    ThemeManager.takeNoteTheme = event.theme
-                }
-            }
-        }
     }
 
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                backgroundColor = ThemeManager.colors.mainColor,
+                backgroundColor = MaterialTheme.colors.primary,
                 onClick = {
                     navController.safeNavigate(Screen.AddEditNoteScreen.route)
                 }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(id = R.string.notes_content_description_add),
-                    tint = ThemeManager.colors.iconColor
+                    tint = MaterialTheme.colors.onPrimary
                 )
             }
         },
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
-                backgroundColor = ThemeManager.colors.mainColor,
+                backgroundColor = MaterialTheme.colors.primary,
                 cutoutShape = MaterialTheme.shapes.small.copy(
                     CornerSize(percent = 50)
                 )
@@ -100,7 +92,7 @@ fun NotesScreen(
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = stringResource(id = R.string.notes_content_description_search),
-                        tint = ThemeManager.colors.iconColor
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
                 IconButton(
@@ -111,7 +103,7 @@ fun NotesScreen(
                     Icon(
                         imageVector = if (state.isGridListSelected) Icons.Default.List else Icons.Default.GridView,
                         contentDescription = stringResource(id = R.string.notes_content_description_toggle_grid_list_view),
-                        tint = ThemeManager.colors.iconColor
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
                 IconButton(
@@ -120,7 +112,7 @@ fun NotesScreen(
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = stringResource(id = R.string.notes_content_description_settings),
-                        tint = ThemeManager.colors.iconColor
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
             }
@@ -151,7 +143,7 @@ fun NotesScreen(
                     Text(
                         text = stringResource(id = R.string.notes_list_title),
                         style = MaterialTheme.typography.h5,
-                        color = ThemeManager.colors.textColor
+                        color = MaterialTheme.colors.onPrimary
                     )
                     IconButton(
                         onClick = {
@@ -161,7 +153,7 @@ fun NotesScreen(
                         Icon(
                             imageVector = Icons.Default.Sort,
                             contentDescription = stringResource(id = R.string.notes_content_description_sort),
-                            tint = ThemeManager.colors.iconColor
+                            tint = MaterialTheme.colors.onPrimary
                         )
                     }
                 }

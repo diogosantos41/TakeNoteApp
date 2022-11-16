@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
+
 package com.dscoding.takenoteapp.presentation.add_edit_note
 
 import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -17,7 +20,7 @@ import com.dscoding.takenoteapp.di.UseCaseModule
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.LightPink
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.common.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -38,7 +41,6 @@ class AddEditNoteScreenTest {
     @get:Rule(order = 1)
     val composeRule = createAndroidComposeRule<MainActivity>()
 
-    @ExperimentalAnimationApi
     @Before
     fun setUp() {
         hiltRule.inject()

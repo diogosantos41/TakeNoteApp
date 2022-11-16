@@ -1,6 +1,6 @@
 package com.dscoding.takenoteapp.presentation.add_edit_note
 
-import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.common.UiText
 
 data class AddEditNoteState(
     val pageTitle: UiText.StringResource,

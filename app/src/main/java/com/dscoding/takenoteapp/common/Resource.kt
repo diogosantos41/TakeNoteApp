@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.utils
+package com.dscoding.takenoteapp.common
 
 
 sealed class Resource<T>(val data: T? = null, val failure: Failure? = null) {

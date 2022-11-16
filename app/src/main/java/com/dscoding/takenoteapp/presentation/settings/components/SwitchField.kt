@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 @Composable
 fun SwitchField(
@@ -33,7 +32,7 @@ fun SwitchField(
             Text(
                 text = title,
                 style = MaterialTheme.typography.body1,
-                color = ThemeManager.colors.textColor
+                color = MaterialTheme.colors.onPrimary
             )
             Text(
                 text = value,
@@ -47,7 +46,7 @@ fun SwitchField(
             checked = active,
             onCheckedChange = onSelect,
             colors = SwitchDefaults.colors(
-                checkedThumbColor = ThemeManager.colors.mainColor,
+                checkedThumbColor = MaterialTheme.colors.primary,
                 uncheckedThumbColor = Color.Gray,
                 checkedTrackColor = Color.Gray,
                 uncheckedTrackColor = Color.LightGray,

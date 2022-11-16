@@ -12,16 +12,16 @@ import com.dscoding.takenoteapp.presentation.list_notes.NotesScreen
 import com.dscoding.takenoteapp.presentation.search_notes.SearchNotesScreen
 import com.dscoding.takenoteapp.presentation.settings.SettingsScreen
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.utils.Constants
-import com.dscoding.takenoteapp.utils.Constants.NAVIGATION_ANIMATION_DURATION
-import com.dscoding.takenoteapp.utils.Constants.NAVIGATION_SLIDE_HORIZONTAL_ANIMATION_TARGET_OFFSET
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_COLOR
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
+import com.dscoding.takenoteapp.common.Constants
+import com.dscoding.takenoteapp.common.Constants.NAVIGATION_ANIMATION_DURATION
+import com.dscoding.takenoteapp.common.Constants.NAVIGATION_SLIDE_HORIZONTAL_ANIMATION_TARGET_OFFSET
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_COLOR
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
-@OptIn(ExperimentalFoundationApi::class)
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun Navigation() {

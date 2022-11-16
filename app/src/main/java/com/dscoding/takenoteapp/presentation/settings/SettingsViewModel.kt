@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
-import com.dscoding.takenoteapp.utils.TakeNoteTheme
-import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.utils.Theme
+import com.dscoding.takenoteapp.common.UiText
 import com.dscoding.takenoteapp.utils.extensions.logSwapTheme
 import com.dscoding.takenoteapp.utils.getTheme
 import com.dscoding.takenoteapp.utils.getThemeText
@@ -36,9 +36,6 @@ class SettingsViewModel @Inject constructor(
 
     private val _state = mutableStateOf(SettingsState())
     val state: State<SettingsState> = _state
-
-    private val _eventFlow = MutableSharedFlow<UiEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
 
     private var getPreferencesJob: Job? = null
 
@@ -83,7 +80,6 @@ class SettingsViewModel @Inject constructor(
                         .setTheme(
                             event.option
                         )
-                    _eventFlow.emit(UiEvent.UpdateTheme(getTheme(event.option)))
                 }
             }
         }
@@ -118,10 +114,6 @@ class SettingsViewModel @Inject constructor(
                 )
             }
             .launchIn(viewModelScope)
-    }
-
-    sealed interface UiEvent {
-        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent
     }
 }
 

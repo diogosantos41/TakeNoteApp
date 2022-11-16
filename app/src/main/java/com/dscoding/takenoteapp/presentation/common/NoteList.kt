@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
-import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
 import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 
 @OptIn(ExperimentalFoundationApi::class)

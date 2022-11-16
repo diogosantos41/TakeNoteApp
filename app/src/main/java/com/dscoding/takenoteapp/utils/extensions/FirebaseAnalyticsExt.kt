@@ -1,13 +1,13 @@
 package com.dscoding.takenoteapp.utils.extensions
 
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_ADD_NOTE
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_ADD_NOTE_COLOR
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_DELETE_NOTE
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_EDIT_NOTE
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_PRIVACY_POLICY
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_RATE_APP
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME
-import com.dscoding.takenoteapp.utils.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_ADD_NOTE
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_ADD_NOTE_COLOR
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_DELETE_NOTE
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_EDIT_NOTE
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_PRIVACY_POLICY
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_RATE_APP
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
 

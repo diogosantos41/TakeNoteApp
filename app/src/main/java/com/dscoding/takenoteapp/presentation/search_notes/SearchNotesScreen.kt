@@ -2,11 +2,7 @@ package com.dscoding.takenoteapp.presentation.search_notes
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -21,11 +17,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.NoteList
-import com.dscoding.takenoteapp.presentation.list_notes.components.EmptyListAlert
-import com.dscoding.takenoteapp.presentation.list_notes.components.NoteItem
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.utils.Constants
+import com.dscoding.takenoteapp.common.Constants
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 
@@ -43,7 +37,7 @@ fun SearchNotesScreen(
     val generalMargin = dimensionResource(R.dimen.margin)
 
     LaunchedEffect(key1 = true) {
-       focusRequester.requestFocus()
+        focusRequester.requestFocus()
     }
 
     Scaffold(

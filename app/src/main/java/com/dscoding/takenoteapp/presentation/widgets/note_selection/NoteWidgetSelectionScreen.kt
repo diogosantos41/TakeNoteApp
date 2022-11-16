@@ -1,7 +1,6 @@
 package com.dscoding.takenoteapp.presentation.widgets.note_selection
 
 import android.app.Activity.RESULT_OK
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -27,12 +26,13 @@ import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Compa
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_CONTENT_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_ID_KEY
 import com.dscoding.takenoteapp.presentation.widgets.app_widget.NoteWidget.Companion.NOTE_TITLE_KEY
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.utils.extensions.findActivity
 import com.dscoding.takenoteapp.utils.extensions.getGlanceId
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @Composable
 fun NoteWidgetSelectionScreen(
     viewModel: NoteWidgetSelectionViewModel = hiltViewModel()

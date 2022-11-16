@@ -2,7 +2,7 @@ package com.dscoding.takenoteapp.data.data_store
 
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
-import com.dscoding.takenoteapp.utils.TakeNoteTheme
+import com.dscoding.takenoteapp.utils.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -10,7 +10,7 @@ class FakeSettingsDataStore : SettingsDataStore {
 
     private var preferences = PreferencesDto(
         showGreeting = true,
-        theme = TakeNoteTheme.SYSTEM_DEFAULT.id,
+        theme = Theme.SystemDefault.id,
         twentyFourHourClock = true
     )
 

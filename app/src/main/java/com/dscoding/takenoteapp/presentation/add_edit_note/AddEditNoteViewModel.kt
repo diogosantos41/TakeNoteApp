@@ -10,12 +10,12 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
-import com.dscoding.takenoteapp.utils.Constants.NOTE_ID_ARG
-import com.dscoding.takenoteapp.utils.Constants.NOTE_INVALID_ID
+import com.dscoding.takenoteapp.common.Constants.NOTE_ID_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.utils.DateUtils
-import com.dscoding.takenoteapp.utils.Failure
-import com.dscoding.takenoteapp.utils.Resource
-import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.common.Failure
+import com.dscoding.takenoteapp.common.Resource
+import com.dscoding.takenoteapp.common.UiText
 import com.dscoding.takenoteapp.utils.extensions.logAddNote
 import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
 import com.dscoding.takenoteapp.utils.extensions.logEditNote

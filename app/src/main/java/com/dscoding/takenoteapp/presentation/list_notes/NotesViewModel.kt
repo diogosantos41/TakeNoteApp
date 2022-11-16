@@ -9,16 +9,11 @@ import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
-import com.dscoding.takenoteapp.utils.TakeNoteTheme
 import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
-import com.dscoding.takenoteapp.utils.getTheme
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -34,9 +29,6 @@ class NotesViewModel @Inject constructor(
     val state: State<NotesState> = _state
 
     private lateinit var noteToDelete: Note
-
-    private val _eventFlow = MutableSharedFlow<UiEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
 
     private var getPreferencesJob: Job? = null
 
@@ -98,10 +90,6 @@ class NotesViewModel @Inject constructor(
                 _state.value = state.value.copy(
                     isGreetingSectionVisible = preferences.showGreeting
                 )
-                delay(50) // In some situations, the system theme was overriding the select theme, this delay seem to have solved the problem.
-                _eventFlow.emit(
-                    UiEvent.UpdateTheme(getTheme(preferences.theme))
-                )
             }
             .launchIn(viewModelScope)
     }
@@ -116,9 +104,5 @@ class NotesViewModel @Inject constructor(
                 )
             }
             .launchIn(viewModelScope)
-    }
-
-    sealed interface UiEvent {
-        data class UpdateTheme(val theme: TakeNoteTheme) : UiEvent
     }
 }

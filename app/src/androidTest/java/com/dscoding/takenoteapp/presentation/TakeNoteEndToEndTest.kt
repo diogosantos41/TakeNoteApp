@@ -12,7 +12,7 @@ import com.dscoding.takenoteapp.delay
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.common.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -68,7 +68,8 @@ class TakeNoteEndToEndTest {
         // Change text and save the note - Navigate to Notes Screen
         composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD).assertTextEquals(noteTestTitle)
         composeRule.onNodeWithTag(TestTags.CONTENT_TEXT_FIELD).assertTextEquals(noteTestContent)
-        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD).performTextReplacement(noteTestTitleEdited)
+        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
+            .performTextReplacement(noteTestTitleEdited)
         composeRule.onNodeWithContentDescription(context.getString(R.string.add_edit_note_content_description_edit))
             .performClick()
 
@@ -172,7 +173,8 @@ class TakeNoteEndToEndTest {
         composeRule.onNodeWithTag(TestTags.SEARCH_QUERY_TEXT_FIELD).performTextInput(text3)
         composeRule.delay(300)
         composeRule.onAllNodesWithTag(TestTags.NOTE_ITEM).assertCountEquals(1)
-        composeRule.onNodeWithTag(TestTags.SEARCH_QUERY_TEXT_FIELD).performTextInput("0 notes will appear after this search")
+        composeRule.onNodeWithTag(TestTags.SEARCH_QUERY_TEXT_FIELD)
+            .performTextInput("0 notes will appear after this search")
         composeRule.onNodeWithText(context.getString(R.string.notes_search_empty_message))
         composeRule.onNodeWithContentDescription(context.getString(R.string.notes_search_content_description_close))
             .performClick()

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -14,10 +15,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
-import com.dscoding.takenoteapp.utils.TakeNoteTheme
-import com.dscoding.takenoteapp.utils.TestTags
+import com.dscoding.takenoteapp.utils.Theme
 
 @Composable
 fun OptionsDialog(
@@ -50,7 +50,7 @@ fun OptionsDialog(
                         text = option,
                         selected = option == selected,
                         onSelect = { onOptionSelected(index) },
-                        testTag = if (option == TakeNoteTheme.DARK_YELLOW.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                        testTag = if (option == Theme.DarkYellow.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
                     )
                     if (index != options.size - 1) {
                         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
@@ -65,7 +65,7 @@ fun OptionsDialog(
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(id = R.string.generic_cancel),
-                        color = ThemeManager.colors.mainColor,
+                        color = MaterialTheme.colors.primary,
                         textAlign = TextAlign.End,
                     )
                 }

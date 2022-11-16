@@ -1,6 +1,8 @@
 package com.dscoding.takenoteapp.presentation.widgets.app_widget
 
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
@@ -25,10 +27,12 @@ import com.dscoding.takenoteapp.presentation.widgets.components.GlanceSpacer
 import com.dscoding.takenoteapp.presentation.widgets.components.GlanceVerticalDivider
 import com.dscoding.takenoteapp.presentation.widgets.note_selection.NoteWidgetSelectionActivity
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
-import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_COLOR_ARG
-import com.dscoding.takenoteapp.utils.Constants.NOTE_WIDGET_ID_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_COLOR_ARG
+import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_ID_ARG
 
 
+@ExperimentalFoundationApi
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NoteWidgetScreen(noteWidgetState: State<NoteWidgetState>) {
     Box(

@@ -7,7 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -17,19 +16,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.BuildConfig
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.settings.components.OptionsDialog
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
+import com.dscoding.takenoteapp.ui.theme.DarkGrey
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.TestTags
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
 import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
 import com.dscoding.takenoteapp.utils.extensions.openPrivacyPolicyPage
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import com.dscoding.takenoteapp.utils.geThemesTextList
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SettingsScreen(
@@ -46,16 +44,6 @@ fun SettingsScreen(
     val generalMargin = dimensionResource(R.dimen.margin)
     val headerTopMargin = dimensionResource(R.dimen.settings_margin_header_top)
     val betweenFieldsMargin = dimensionResource(R.dimen.margin)
-
-    LaunchedEffect(key1 = true) {
-        viewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is SettingsViewModel.UiEvent.UpdateTheme -> {
-                    ThemeManager.takeNoteTheme = event.theme
-                }
-            }
-        }
-    }
 
     Scaffold(
         topBar = {
@@ -75,7 +63,7 @@ fun SettingsScreen(
                         )
                     }
                 },
-                backgroundColor = ThemeManager.colors.toolbarColor,
+                backgroundColor = DarkGrey,
                 elevation = 0.dp
             )
         },

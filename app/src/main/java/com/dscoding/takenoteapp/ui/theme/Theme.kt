@@ -5,95 +5,59 @@ import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
-import androidx.compose.runtime.*
-import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.utils.TakeNoteTheme
-import com.dscoding.takenoteapp.utils.UiText
+import androidx.compose.runtime.Composable
+import com.dscoding.takenoteapp.utils.Theme
 
-private val LightColors = CustomColors(
-    backgroundColor = White,
-    containerBackgroundColor = DirtWhite,
-    iconColor = DarkerGrey,
-    toolbarColor = DarkGrey,
-    textColor = DarkGrey,
-    mainColor = Coral
+private val LightColors = lightColors(
+    primary = Coral,
+    secondary = White,
+    background = White,
+    surface = DirtWhite,
+    onSurface = DarkGrey,
+    onPrimary = DarkGrey
 )
 
-private val DarkColors = CustomColors(
-    backgroundColor = DarkerGrey,
-    containerBackgroundColor = DarkGrey,
-    iconColor = White,
-    toolbarColor = DarkGrey,
-    textColor = White,
-    mainColor = Coral
+private val DarkColors = darkColors(
+    primary = Coral,
+    secondary = DarkerGrey,
+    background = DarkerGrey,
+    surface = DarkGrey,
+    onSurface = White,
+    onPrimary = White
 )
 
-private val DarkYellowColors = CustomColors(
-    backgroundColor = BlackBlue,
-    containerBackgroundColor = DarkGrey,
-    iconColor = White,
-    toolbarColor = DarkGrey,
-    textColor = White,
-    mainColor = Yellow
+private val DarkYellowColors = darkColors(
+    primary = Yellow,
+    secondary = BlackBlue,
+    background = BlackBlue,
+    surface = DarkGrey,
+    onSurface = White,
+    onPrimary = White
 )
-
-private val LocalColorsProvider = staticCompositionLocalOf {
-    LightColors
-}
 
 @Composable
-private fun LocalProvider(
-    colors: CustomColors,
-    content: @Composable () -> Unit
-) {
-    val colorPalette = remember {
-        colors.copy()
+fun getThemeColors(theme: Theme): Colors {
+    return when (theme) {
+        Theme.SystemDefault -> if (isSystemInDarkTheme()) DarkColors else LightColors
+        Theme.Light -> LightColors
+        Theme.Dark -> DarkColors
+        Theme.DarkYellow -> DarkYellowColors
+        Theme.Dynamic -> DarkYellowColors // TODO dynamic colors
     }
-
-    colorPalette.update(colors)
-    CompositionLocalProvider(LocalColorsProvider provides colorPalette, content = content)
-}
-
-
-
-private val TakeNoteTheme.colors: Pair<Colors, CustomColors>
-    get() = when (this) {
-        TakeNoteTheme.DARK -> darkColors() to DarkColors
-        TakeNoteTheme.LIGHT -> lightColors() to LightColors
-        TakeNoteTheme.DARK_YELLOW -> darkColors() to DarkYellowColors
-        else -> lightColors() to LightColors
-    }
-
-object ThemeManager {
-    val colors: CustomColors
-        @Composable
-        get() = LocalColorsProvider.current
-
-    var takeNoteTheme by mutableStateOf(TakeNoteTheme.LIGHT)
 }
 
 @Composable
 fun TakeNoteAppTheme(
-    takeNoteTheme: TakeNoteTheme = ThemeManager.takeNoteTheme,
+    theme: Theme = Theme.SystemDefault,
     content: @Composable () -> Unit
 ) {
-    val (colorPalette, colors) = if (takeNoteTheme == TakeNoteTheme.SYSTEM_DEFAULT) {
-        if (isSystemInDarkTheme()) {
-            darkColors() to DarkColors
-        } else {
-            lightColors() to LightColors
-        }
-    } else {
-        takeNoteTheme.colors
-    }
 
+    val colors = getThemeColors(theme = theme)
 
-    LocalProvider(colors = colors) {
-        MaterialTheme(
-            colors = colorPalette,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
 }

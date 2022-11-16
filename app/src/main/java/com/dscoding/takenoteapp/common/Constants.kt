@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.utils
+package com.dscoding.takenoteapp.common
 
 object Constants {
 
@@ -13,7 +13,7 @@ object Constants {
 
     // Data names
     const val DATABASE_NAME = "note_db"
-    const val DATASTORE_NAME = "settings_ds"
+    const val DATASTORE_NAME = "settings_dss"
 
     // Animation
     const val NAVIGATION_ANIMATION_DURATION = 250

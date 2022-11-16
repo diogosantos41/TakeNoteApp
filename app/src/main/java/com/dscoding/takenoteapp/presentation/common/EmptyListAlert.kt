@@ -1,4 +1,4 @@
-package com.dscoding.takenoteapp.presentation.list_notes.components
+package com.dscoding.takenoteapp.presentation.common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.ui.theme.ThemeManager
 
 
 @Composable
@@ -33,13 +32,13 @@ fun EmptyListAlert(emptyMessage: String) {
                 modifier = Modifier.size(dimensionResource(id = R.dimen.empty_message_icon_size)),
                 imageVector = Icons.Default.Info,
                 contentDescription = "Info",
-                tint = ThemeManager.colors.iconColor
+                tint = MaterialTheme.colors.onPrimary
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin)))
             Text(
                 text = emptyMessage,
                 style = MaterialTheme.typography.body1,
-                color = ThemeManager.colors.textColor,
+                color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
 

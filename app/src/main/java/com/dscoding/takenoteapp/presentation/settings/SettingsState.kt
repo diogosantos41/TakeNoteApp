@@ -1,7 +1,7 @@
 package com.dscoding.takenoteapp.presentation.settings
 
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.utils.UiText
+import com.dscoding.takenoteapp.common.UiText
 
 data class SettingsState(
     val showThemeOptionsDialog: Boolean = false,

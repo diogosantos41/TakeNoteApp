@@ -24,10 +24,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.TestTags.NOTE_ITEM
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
-import com.dscoding.takenoteapp.utils.TestTags.NOTE_ITEM
-
 
 @Composable
 fun NoteItem(
