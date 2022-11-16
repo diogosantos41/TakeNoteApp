@@ -136,10 +136,7 @@ fun NotesScreen(
                             0.dp
                         )
                 ) {
-                    if (state.isGreetingSectionVisible) {
-                        GreetingSection()
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
+                    GreetingSection(visible = state.isGreetingSectionVisible)
                     Spacer(modifier = Modifier.height(5.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -195,17 +192,17 @@ fun NotesScreen(
                             viewModel.onEvent(NotesEvent.ClickDeleteNote(it))
                         }
                     )
-                    if (state.showDeleteConfirmationDialog) {
-                        ConfirmationDialog(message = stringResource(id = R.string.notes_delete_confirmation_message),
-                            onConfirm = { viewModel.onEvent(NotesEvent.ConfirmDeleteNote) },
-                            onDismiss = {
-                                viewModel.onEvent(
-                                    NotesEvent.ShowConfirmDeleteNoteDialog(
-                                        false
-                                    )
+                    ConfirmationDialog(
+                        visible = state.showDeleteConfirmationDialog,
+                        message = stringResource(id = R.string.notes_delete_confirmation_message),
+                        onConfirm = { viewModel.onEvent(NotesEvent.ConfirmDeleteNote) },
+                        onDismiss = {
+                            viewModel.onEvent(
+                                NotesEvent.ShowConfirmDeleteNoteDialog(
+                                    false
                                 )
-                            })
-                    }
+                            )
+                        })
                 }
             }
         }

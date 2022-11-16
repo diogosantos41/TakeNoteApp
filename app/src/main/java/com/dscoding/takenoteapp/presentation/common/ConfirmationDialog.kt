@@ -11,41 +11,44 @@ import com.dscoding.takenoteapp.R
 
 @Composable
 fun ConfirmationDialog(
+    visible: Boolean = true,
     message: String,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(onClick = onConfirm)
-            {
+    if(visible) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
+            confirmButton = {
+                TextButton(onClick = onConfirm)
+                {
+                    Text(
+                        text = stringResource(id = R.string.generic_yes),
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismiss)
+                {
+                    Text(
+                        text = stringResource(id = R.string.generic_cancel),
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            },
+            title = {
                 Text(
-                    text = stringResource(id = R.string.generic_yes),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
+                    text = message,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge
                 )
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss)
-            {
-                Text(
-                    text = stringResource(id = R.string.generic_cancel),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-        },
-        title = {
-            Text(
-                text = message,
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.bodyLarge
-            )
-        },
-        backgroundColor = MaterialTheme.colorScheme.surface
-    )
+            },
+            backgroundColor = MaterialTheme.colorScheme.surface
+        )
+    }
 }

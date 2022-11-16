@@ -18,6 +18,7 @@ object Constants {
     // Animation
     const val NAVIGATION_ANIMATION_DURATION = 250
     const val NAVIGATION_SLIDE_HORIZONTAL_ANIMATION_TARGET_OFFSET = 1600
+    const val COLOR_SWAP_ANIMATION_DURATION = 500
 
     // Firebase log events
     const val FIREBASE_ANALYTICS_EVENT_ADD_NOTE = "ADD_NOTE"

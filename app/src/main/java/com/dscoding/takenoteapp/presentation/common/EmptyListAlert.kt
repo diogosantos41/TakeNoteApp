@@ -40,7 +40,7 @@ fun EmptyListAlert(emptyMessage: String) {
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Medium
 
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.empty_message_margin_bottom)))

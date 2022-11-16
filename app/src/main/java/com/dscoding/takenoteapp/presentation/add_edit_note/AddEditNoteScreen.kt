@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -30,7 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.Constants.COLOR_SWAP_ANIMATION_DURATION
 import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_COLOR
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.presentation.add_edit_note.components.TransparentHintTextField
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
@@ -38,7 +40,6 @@ import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkGrey
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -175,7 +176,7 @@ fun AddEditNoteScreen(
                         ),
                         style = MaterialTheme.typography.bodyLarge,
                         color = DarkerGrey,
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Medium,
                     )
                     Spacer(modifier = Modifier.height(generalMargin))
                 }
@@ -208,7 +209,7 @@ fun AddEditNoteScreen(
                                         noteBackgroundAnimatable.animateTo(
                                             targetValue = Color(colorInt),
                                             animationSpec = tween(
-                                                durationMillis = 500
+                                                durationMillis = COLOR_SWAP_ANIMATION_DURATION
                                             )
                                         )
                                     }
@@ -248,17 +249,17 @@ fun AddEditNoteScreen(
                     modifier = Modifier.fillMaxHeight(),
                     testTag = TestTags.CONTENT_TEXT_FIELD
                 )
-                if (state.showDeleteConfirmationDialog) {
-                    ConfirmationDialog(message = stringResource(id = R.string.notes_delete_confirmation_message),
-                        onConfirm = { viewModel.onEvent(AddEditNoteEvent.ConfirmDeleteNote) },
-                        onDismiss = {
-                            viewModel.onEvent(
-                                AddEditNoteEvent.ShowConfirmDeleteNoteDialog(
-                                    false
-                                )
+                ConfirmationDialog(
+                    visible = state.showDeleteConfirmationDialog,
+                    message = stringResource(id = R.string.notes_delete_confirmation_message),
+                    onConfirm = { viewModel.onEvent(AddEditNoteEvent.ConfirmDeleteNote) },
+                    onDismiss = {
+                        viewModel.onEvent(
+                            AddEditNoteEvent.ShowConfirmDeleteNoteDialog(
+                                false
                             )
-                        })
-                }
+                        )
+                    })
             }
         }
     )
