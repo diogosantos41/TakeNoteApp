@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.dscoding.takenoteapp.R
 
 @Composable
@@ -21,7 +22,9 @@ fun ConfirmationDialog(
             {
                 Text(
                     text = stringResource(id = R.string.generic_yes),
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
                 )
             }
         },
@@ -30,14 +33,17 @@ fun ConfirmationDialog(
             {
                 Text(
                     text = stringResource(id = R.string.generic_cancel),
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
                 )
             }
         },
         title = {
             Text(
                 text = message,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodyLarge
             )
         },
         backgroundColor = MaterialTheme.colorScheme.surface

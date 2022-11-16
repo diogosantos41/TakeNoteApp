@@ -5,7 +5,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -32,8 +32,8 @@ fun CustomTextField(
     maxLines: Int = Int.MAX_VALUE,
 ) {
     val customTextSelectionColors = TextSelectionColors(
-        handleColor = MaterialTheme.colors.primary,
-        backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.4f),
+        handleColor = MaterialTheme.colorScheme.primary,
+        backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
     )
 
     CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {

@@ -90,7 +90,8 @@ fun AddEditNoteScreen(
                 title = {
                     Text(
                         text = state.pageTitle.asString(),
-                        color = White
+                        color = White,
+                        style = MaterialTheme.typography.headlineSmall
                     )
                 },
                 navigationIcon = {

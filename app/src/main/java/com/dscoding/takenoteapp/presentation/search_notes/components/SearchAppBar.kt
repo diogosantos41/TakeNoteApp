@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -23,6 +24,7 @@ import com.dscoding.takenoteapp.presentation.common.CustomTextField
 import com.dscoding.takenoteapp.ui.theme.DarkGrey
 import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.common.TestTags
+import com.dscoding.takenoteapp.ui.theme.customFontFamily
 
 @Composable
 fun SearchAppBar(
@@ -51,13 +53,11 @@ fun SearchAppBar(
                 Text(
                     modifier = Modifier.alpha(ContentAlpha.medium),
                     text = stringResource(id = R.string.notes_search_field_hint),
+                    style = MaterialTheme.typography.bodyMedium,
                     color = White
                 )
             },
-            textStyle = TextStyle(
-                fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                color = White
-            ),
+            textStyle = MaterialTheme.typography.bodyLarge.copy(color = White),
             singleLine = true,
             maxLines = 1,
             leadingIcon = {

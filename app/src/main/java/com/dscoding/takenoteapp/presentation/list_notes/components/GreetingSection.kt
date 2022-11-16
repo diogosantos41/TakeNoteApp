@@ -31,7 +31,7 @@ fun GreetingSection() {
         ) {
             Text(
                 text = stringResource(id = R.string.notes_greeting_title),
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground
             )
             Text(

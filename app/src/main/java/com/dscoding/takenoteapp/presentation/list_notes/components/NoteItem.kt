@@ -4,7 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -81,15 +82,16 @@ fun NoteItem(
         ) {
             Text(
                 text = note.title,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.bodyLarge,
                 color = DarkerGrey,
+                fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = note.content,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.bodyLarge,
                 color = DarkerGrey,
                 maxLines = 10,
                 overflow = TextOverflow.Ellipsis

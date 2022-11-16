@@ -53,7 +53,8 @@ fun SettingsScreen(
                 title = {
                     Text(
                         text = stringResource(id = R.string.settings_title),
-                        color = White
+                        color = White,
+                        style = MaterialTheme.typography.headlineSmall
                     )
                 },
                 navigationIcon = {

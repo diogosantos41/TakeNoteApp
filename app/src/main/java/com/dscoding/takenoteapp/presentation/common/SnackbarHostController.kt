@@ -1,6 +1,6 @@
 package com.dscoding.takenoteapp.presentation.common
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -14,7 +14,7 @@ fun SnackbarHostController(
 ) {
     SnackbarHost(snackbarHostState) { data ->
         Snackbar(
-            actionColor = MaterialTheme.colors.primary,
+            actionColor = MaterialTheme.colorScheme.primary,
             contentColor = White,
             backgroundColor = Grey,
             snackbarData = data
