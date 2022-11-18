@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.common.Constants
 import com.dscoding.takenoteapp.presentation.common.NoteList
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.util.Screen
@@ -83,8 +82,10 @@ fun SearchNotesScreen(
                         showDeleteButton = false,
                         onNoteClicked = {
                             navController.safeNavigate(
-                                Screen.AddEditNoteScreen.route +
-                                        "?${Constants.NOTE_ID_ARG}=${it.id}&${Constants.NOTE_COLOR_ARG}=${it.color}"
+                                Screen.AddEditNoteScreen.withArgs(
+                                    noteId = "${it.id}",
+                                    noteColor = "${it.color}"
+                                )
                             )
                         }
                     )

@@ -1,6 +1,5 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
-import android.content.Intent
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -11,10 +10,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -22,11 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.common.Constants.NOTE_COLOR_ARG
-import com.dscoding.takenoteapp.common.Constants.NOTE_ID_ARG
-import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
-import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_COLOR_ARG
-import com.dscoding.takenoteapp.common.Constants.NOTE_WIDGET_ID_ARG
 import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.NoteList
@@ -34,7 +26,6 @@ import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.utils.extensions.findActivity
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 
 @ExperimentalFoundationApi
@@ -44,26 +35,9 @@ fun NotesScreen(
     navController: NavController,
     viewModel: NotesViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val generalMargin = dimensionResource(R.dimen.margin)
-
-    LaunchedEffect(key1 = true) {
-        val intent = context.findActivity().intent
-        if (intent.extras?.get(NOTE_WIDGET_ID_ARG) != null && intent.extras?.get(NOTE_WIDGET_ID_ARG) != NOTE_INVALID_ID) {
-            navController.safeNavigate(
-                Screen.AddEditNoteScreen.route +
-                        "?$NOTE_ID_ARG=${
-                            intent.extras?.get(NOTE_WIDGET_ID_ARG)
-                        }" +
-                        "&$NOTE_COLOR_ARG=${
-                            intent.extras?.get(NOTE_WIDGET_COLOR_ARG)
-                        }"
-            )
-            intent.replaceExtras(Intent())
-        }
-    }
 
     Scaffold(
         floatingActionButton = {
@@ -184,8 +158,10 @@ fun NotesScreen(
                         showDeleteButton = true,
                         onNoteClicked = {
                             navController.safeNavigate(
-                                Screen.AddEditNoteScreen.route +
-                                        "?$NOTE_ID_ARG=${it.id}&$NOTE_COLOR_ARG=${it.color}"
+                                Screen.AddEditNoteScreen.withArgs(
+                                    noteId = "${it.id}",
+                                    noteColor = "${it.color}"
+                                )
                             )
                         },
                         onDeleteClicked = {

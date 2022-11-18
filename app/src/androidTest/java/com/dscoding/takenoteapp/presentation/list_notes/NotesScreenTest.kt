@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
+
 package com.dscoding.takenoteapp.presentation.list_notes
 
 import android.content.Context

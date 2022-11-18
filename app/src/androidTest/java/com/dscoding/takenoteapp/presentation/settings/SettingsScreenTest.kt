@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
+
 package com.dscoding.takenoteapp.presentation.settings
 
 import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.NavHost

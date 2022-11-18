@@ -12,13 +12,13 @@ fun geThemesTextList(): List<String> {
         Theme.Dark.uiText.asString(),
         Theme.DarkYellow.uiText.asString()
     )
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    if (supportDynamicColors()) {
         list.add(Theme.Dynamic.uiText.asString())
     }
     return list
 }
 
-fun getTheme(id: Int): Theme {
+fun getAppTheme(id: Int): Theme {
     val map = Theme.values().associateBy(Theme::id)
     map[id].let {
         return it!!
@@ -26,5 +26,5 @@ fun getTheme(id: Int): Theme {
 }
 
 fun getThemeText(id: Int): UiText {
-    return getTheme(id).uiText
+    return getAppTheme(id).uiText
 }
