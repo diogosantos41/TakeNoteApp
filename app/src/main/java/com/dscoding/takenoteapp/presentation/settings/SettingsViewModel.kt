@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.common.UiText
+import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
 import com.dscoding.takenoteapp.utils.extensions.logSwapTheme
 import com.dscoding.takenoteapp.utils.getAppTheme
 import com.dscoding.takenoteapp.utils.getThemeText

@@ -1,20 +1,22 @@
 package com.dscoding.takenoteapp.presentation
 
-import android.R
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
@@ -58,6 +60,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        if (resources.getBoolean(R.bool.portrait_only)) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContent {
@@ -67,7 +73,7 @@ class MainActivity : ComponentActivity() {
                     // This code seems to solve the problem
                     lifecycleScope.launch {
                         delay(25)
-                        window.setBackgroundDrawableResource(R.color.transparent)
+                        window.setBackgroundDrawableResource(android.R.color.transparent)
                     }
                     Navigation()
                 }

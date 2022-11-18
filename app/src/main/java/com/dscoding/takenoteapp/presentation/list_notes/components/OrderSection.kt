@@ -6,10 +6,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.domain.util.NoteOrder
 import com.dscoding.takenoteapp.domain.util.OrderType
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
-import com.dscoding.takenoteapp.common.TestTags
 
 @Composable
 fun OrderSection(

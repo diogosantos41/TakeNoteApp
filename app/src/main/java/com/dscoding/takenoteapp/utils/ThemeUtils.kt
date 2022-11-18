@@ -1,6 +1,5 @@
 package com.dscoding.takenoteapp.utils
 
-import android.os.Build
 import androidx.compose.runtime.Composable
 import com.dscoding.takenoteapp.common.UiText
 
