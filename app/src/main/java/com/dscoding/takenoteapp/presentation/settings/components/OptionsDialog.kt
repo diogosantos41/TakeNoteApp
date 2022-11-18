@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -28,7 +28,7 @@ fun OptionsDialog(
     onOptionSelected: (Int) -> Unit,
     dismissDialog: () -> Unit,
 
-) {
+    ) {
     val padding = dimensionResource(R.dimen.settings_dialog_margin_padding)
 
     if (visible) {
@@ -38,7 +38,12 @@ fun OptionsDialog(
             },
             title = {
                 Column {
-                    Text(text = title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                    Text(
+                        text = title,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             },
@@ -70,6 +75,8 @@ fun OptionsDialog(
                             text = stringResource(id = R.string.generic_cancel),
                             color = MaterialTheme.colorScheme.primary,
                             textAlign = TextAlign.End,
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 }

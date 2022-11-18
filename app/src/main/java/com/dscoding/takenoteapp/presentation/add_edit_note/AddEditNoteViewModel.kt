@@ -145,7 +145,7 @@ class AddEditNoteViewModel @Inject constructor(
                     addNoteResult = noteUseCases.addNote(
                         Note(
                             title = noteTitle.value.text,
-                            content = noteContent.value.text,
+                            content = noteContent.value.text.trim(),
                             createdTime = if (state.value.isEditingNote) currentSelectedNote?.createdTime
                             else System.currentTimeMillis(),
                             editedTime = System.currentTimeMillis(),

@@ -22,7 +22,6 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.common.ConfirmationDialog
 import com.dscoding.takenoteapp.presentation.common.NoteList
-import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.presentation.list_notes.components.GreetingSection
 import com.dscoding.takenoteapp.presentation.list_notes.components.OrderSection
 import com.dscoding.takenoteapp.presentation.util.Screen
@@ -93,7 +92,6 @@ fun NotesScreen(
             }
         },
         scaffoldState = scaffoldState,
-        snackbarHost = { SnackbarHostController(it) },
         content = { padding ->
             Box(
                 modifier = Modifier

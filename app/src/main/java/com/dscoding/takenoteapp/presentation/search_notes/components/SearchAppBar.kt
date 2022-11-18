@@ -16,15 +16,13 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
-import com.dscoding.takenoteapp.presentation.common.CustomTextField
-import com.dscoding.takenoteapp.ui.theme.DarkGrey
-import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.common.TestTags
-import com.dscoding.takenoteapp.ui.theme.customFontFamily
+import com.dscoding.takenoteapp.presentation.common.CustomTextField
+import com.dscoding.takenoteapp.ui.theme.FixSearchGrey
+import com.dscoding.takenoteapp.ui.theme.White
 
 @Composable
 fun SearchAppBar(
@@ -40,7 +38,7 @@ fun SearchAppBar(
             .fillMaxWidth()
             .height(dimensionResource(id = R.dimen.search_notes_toolbar_height)),
         elevation = 0.dp,
-        color = DarkGrey
+        color = FixSearchGrey
     ) {
         CustomTextField(
             modifier = Modifier

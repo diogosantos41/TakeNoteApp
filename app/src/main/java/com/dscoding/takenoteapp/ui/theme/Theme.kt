@@ -12,7 +12,7 @@ private val LightColors = lightColorScheme(
     secondary = White,
     background = White,
     onBackground = DarkGrey,
-    surface = DirtWhite,
+    surface = DirtyWhite,
     onSurface = DarkGrey
 )
 
