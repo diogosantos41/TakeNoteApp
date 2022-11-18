@@ -28,6 +28,7 @@
     <string name="notes_content_description_search">Search</string>
     <string name="notes_content_description_toggle_grid_list_view">Toggle gridview/list view</string>
     <string name="notes_content_description_settings">Settings</string>
+    <string name="notes_content_description_delete">Delete</string>
 
     <!-- Search Notes Screen -->
     <string name="notes_search_field_hint">Search here…</string>
@@ -47,9 +48,9 @@
     <string name="error_add_note_empty_content">The content of the note can\'t be empty</string>
     <string name="error_add_note_invalid_note">The note you\'re trying to edit was deleted</string>
 
-    <string name="add_edit_note_content_description_delete">Delete note</string>
-    <string name="add_edit_note_content_description_save">Save note</string>
-    <string name="add_edit_note_content_description_edit">Edit note</string>
+    <string name="add_edit_note_content_description_delete">Delete</string>
+    <string name="add_edit_note_content_description_save">Save</string>
+    <string name="add_edit_note_content_description_edit">Edit</string>
     <string name="add_edit_note_content_description_back">Back</string>
 
     <!-- Settings Screen -->
@@ -76,6 +77,8 @@
 
     <string name="settings_content_description_back">Back</string>
 
-    <!-- Widget -->
-    <string name="note_widget_description">Single Note Widget</string>
+    <!-- Common Screens -->
+    <string name="empty_list_content_description_icon">Info</string>
+
+
 </resources>
