@@ -35,7 +35,12 @@ fun NoteList(
         EmptyListAlert(emptyMessage = emptyMessage)
     } else {
         LazyVerticalGrid(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioNoBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
+            ),
             columns = GridCells.Fixed(if (showGridView) 2 else 1),
             verticalArrangement = Arrangement.spacedBy(generalMargin),
             horizontalArrangement = Arrangement.spacedBy(generalMargin)
