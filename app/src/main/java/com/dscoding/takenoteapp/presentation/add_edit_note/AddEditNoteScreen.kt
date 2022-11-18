@@ -40,7 +40,6 @@ import com.dscoding.takenoteapp.presentation.common.SnackbarHostController
 import com.dscoding.takenoteapp.ui.theme.DarkGrey
 import com.dscoding.takenoteapp.ui.theme.DarkerGrey
 import com.dscoding.takenoteapp.ui.theme.White
-import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -76,10 +75,10 @@ fun AddEditNoteScreen(
                     )
                 }
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
-                    navController.popBackToDashboard()
+                    navController.popBackStack()
                 }
                 is AddEditNoteViewModel.UiEvent.DeleteNote -> {
-                    navController.popBackToDashboard()
+                    navController.popBackStack()
                 }
             }
         }
@@ -97,7 +96,7 @@ fun AddEditNoteScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.popBackToDashboard()
+                        navController.popBackStack()
                     }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

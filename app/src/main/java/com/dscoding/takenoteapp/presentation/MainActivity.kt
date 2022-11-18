@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        WindowCompat.setDecorFitsSystemWindows(window, true)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContent {
             TakeNoteAppTheme(theme = getAppTheme(getThemeId(uiThemeState))) {

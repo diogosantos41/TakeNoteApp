@@ -24,11 +24,11 @@ import com.dscoding.takenoteapp.presentation.settings.components.SettingsField
 import com.dscoding.takenoteapp.presentation.settings.components.SettingsHeader
 import com.dscoding.takenoteapp.presentation.settings.components.SwitchField
 import com.dscoding.takenoteapp.ui.theme.DarkGrey
+import com.dscoding.takenoteapp.ui.theme.DividerGrey
 import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
 import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
 import com.dscoding.takenoteapp.utils.extensions.openPrivacyPolicyPage
-import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import com.dscoding.takenoteapp.utils.geThemesTextList
 
 @Composable
@@ -58,7 +58,7 @@ fun SettingsScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackToDashboard() }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = stringResource(id = R.string.settings_content_description_back),
@@ -120,7 +120,8 @@ fun SettingsScreen(
                             valueTestTag = TestTags.TWENTY_FOUR_HOUR_SWITCH_VALUE
                         )
                     }
-                    Divider()
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = DividerGrey, modifier = Modifier.padding(horizontal = generalMargin))
                     Column(settingsColumnModifier) {
                         Spacer(modifier = Modifier.height(headerTopMargin))
                         SettingsHeader(stringResource(id = R.string.settings_header_about))

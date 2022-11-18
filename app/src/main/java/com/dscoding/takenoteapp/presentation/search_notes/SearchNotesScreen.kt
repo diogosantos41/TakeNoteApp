@@ -24,7 +24,6 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.presentation.common.NoteList
 import com.dscoding.takenoteapp.presentation.search_notes.components.SearchAppBar
 import com.dscoding.takenoteapp.presentation.util.Screen
-import com.dscoding.takenoteapp.utils.extensions.popBackToDashboard
 import com.dscoding.takenoteapp.utils.extensions.safeNavigate
 
 @ExperimentalFoundationApi
@@ -55,7 +54,7 @@ fun SearchNotesScreen(
                     viewModel.onEvent(SearchNotesEvent.CleanSearchText)
                 },
                 onBackPressed = {
-                    navController.popBackToDashboard()
+                    navController.popBackStack()
                 },
                 focusRequester = focusRequester
             )

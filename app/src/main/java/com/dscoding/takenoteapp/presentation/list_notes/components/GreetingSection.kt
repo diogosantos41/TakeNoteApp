@@ -12,6 +12,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.ui.theme.DividerGrey
 
 @Composable
 fun GreetingSection(visible: Boolean = true) {
@@ -42,7 +43,7 @@ fun GreetingSection(visible: Boolean = true) {
                     color = MaterialTheme.colorScheme.primary,
                 )
                 Spacer(modifier = Modifier.height(dimensionResource(R.dimen.notes_margin_vertical_greeting_section)))
-                Divider(color = Color.Gray)
+                Divider(color = DividerGrey)
             }
         }
         Spacer(modifier = Modifier.height(8.dp))

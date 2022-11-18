@@ -152,7 +152,7 @@ fun NotesScreen(
                     NoteList(
                         notes = state.notes,
                         emptyMessage = stringResource(id = R.string.notes_empty_list_message),
-                        showGridView = state.isGridListSelected,
+                        showGridView = state.isGridListSelected && state.notes.size > 1,
                         showDeleteButton = true,
                         onNoteClicked = {
                             navController.safeNavigate(

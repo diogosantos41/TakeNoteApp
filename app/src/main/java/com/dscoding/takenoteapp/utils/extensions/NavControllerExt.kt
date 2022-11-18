@@ -8,11 +8,3 @@ fun NavController.safeNavigate(destinationRoute: String) {
         this.navigate(destinationRoute)
     }
 }
-
-fun NavController.popBackToDashboard() {
-    this.navigate(Screen.NotesScreen.route) {
-        popUpTo(Screen.NotesScreen.route) {
-            inclusive = true
-        }
-    }
-}

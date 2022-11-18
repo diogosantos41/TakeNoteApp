@@ -1,6 +1,7 @@
 package com.dscoding.takenoteapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Gray
 
 val Coral = Color(0xFFFF7F50)
 val Yellow = Color(0xFFFCD535)
@@ -8,6 +9,7 @@ val Yellow = Color(0xFFFCD535)
 val White = Color(0xFFFFFFFF)
 val DirtyWhite = Color(0xFFFAFAFA)
 val FixSearchGrey = Color(0xFF363636)
+val DividerGrey = Gray
 val DarkGrey = Color(0xFF303030)
 val DarkerGrey = Color(0xFF151515)
 val BlackBlue = Color(0xFF0b0E11)
