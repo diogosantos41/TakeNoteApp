@@ -7,7 +7,7 @@ Take Note! is an intuitive and lightweight notepad app that meets all your note-
 ## Features 
 
 - Search notes using text.
-- Select a diferent color for each note.
+- Select a different color for each note.
 - Simple navigation
 - Mobile application for Android
 
@@ -24,4 +24,3 @@ Take Note! is an intuitive and lightweight notepad app that meets all your note-
 * [Data Store](https://developer.android.com/topic/libraries/architecture/datastore) - Data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.
 * [Firebase Analytics](https://firebase.google.com/products/analytics) - Provides unlimited reporting and automatically captures certain key events and user properties.
 * [Firebase Crashlytics](https://firebase.google.com/products/crashlytics) - A real time crash reporting tool
-

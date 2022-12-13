@@ -1,42 +1,65 @@
 package com.dscoding.takenoteapp.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import com.dscoding.takenoteapp.utils.Theme
 
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+private val LightColors = lightColorScheme(
+    primary = Coral,
+    onPrimary = DarkGrey,
+    secondary = White,
+    background = White,
+    onBackground = DarkGrey,
+    surface = DirtyWhite,
+    onSurface = DarkGrey
 )
 
-private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+private val DarkColors = darkColorScheme(
+    primary = Coral,
+    onPrimary = White,
+    secondary = DarkerGrey,
+    background = DarkerGrey,
+    onBackground = White,
+    surface = DarkGrey,
+    onSurface = White,
 
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+)
+
+private val DarkYellowColors = darkColorScheme(
+    primary = Yellow,
+    onPrimary = White,
+    secondary = BlackBlue,
+    background = BlackBlue,
+    onBackground = White,
+    surface = DarkGrey,
+    onSurface = White,
+
 )
 
 @Composable
-fun TakeNoteAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+fun getThemeColors(theme: Theme): ColorScheme {
+    val context = LocalContext.current
+    return when (theme) {
+        Theme.SystemDefault -> if (isSystemInDarkTheme()) DarkColors else LightColors
+        Theme.Light -> LightColors
+        Theme.Dark -> DarkColors
+        Theme.DarkYellow -> DarkYellowColors
+        Theme.Dynamic -> if (isSystemInDarkTheme()) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     }
+}
+
+@Composable
+fun TakeNoteAppTheme(
+    theme: Theme = Theme.SystemDefault,
+    content: @Composable () -> Unit
+) {
+
+    val colors = getThemeColors(theme = theme)
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

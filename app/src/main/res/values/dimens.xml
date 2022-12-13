@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">15dp</dimen>
+
+    <dimen name="empty_message_margin_bottom">60dp</dimen>
+    <dimen name="empty_message_icon_size">40dp</dimen>
+
+    <dimen name="notes_margin_vertical_greeting_section">25dp</dimen>
+    <dimen name="notes_margin_bottom_list_last_item">80dp</dimen>
+
+    <dimen name="search_notes_margin_between_notes">10dp</dimen>
+    <dimen name="search_notes_toolbar_height">56dp</dimen>
+
+    <dimen name="add_note_color_row_padding">8dp</dimen>
+    <dimen name="add_note_color_circle_size">50dp</dimen>
+    <dimen name="add_note_color_circle_shadow_size">15dp</dimen>
+    <dimen name="add_note_color_circle_selected_border_size">3dp</dimen>
+
+    <dimen name="settings_margin_header_top">12dp</dimen>
+    <dimen name="settings_dialog_margin_padding">20dp</dimen>
+    <dimen name="settings_dialog_margin_between_options">25dp</dimen>
+
+
+
+</resources>

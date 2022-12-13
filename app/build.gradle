@@ -1,19 +1,23 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
-    compileSdk 32
+    compileSdk AndroidSdk.compileSdk
 
     defaultConfig {
-        applicationId "com.dscoding.takenoteapp"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId App.applicationId
+        minSdk AndroidSdk.minSdk
+        targetSdk AndroidSdk.targetSdk
+        versionCode App.versionCode
+        versionName App.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.dscoding.takenoteapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -21,7 +25,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,33 +34,90 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = Versions.jvmTarget
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion Versions.kotlin_compiler_extension
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.dscoding.takenoteapp'
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    implementation AndroidX.core_ktx
+    implementation AndroidX.compose_ui
+    implementation AndroidX.compose_material
+    implementation AndroidX.compose_ui_tooling_preview
+    implementation AndroidX.compose_activity
+    debugImplementation AndroidX.compose_ui_tooling
+    implementation AndroidX.lifecycle_runtime_ktx
+    debugImplementation Testing.composes_ui_manifest
+
+    // Splash Screen (needed to support < 12 versions)
+    implementation AndroidX.splash_screen
+
+    // Preferences DataStore
+    implementation Data.datastore
+
+    // Compose dependencies
+    implementation AndroidX.compose_viewmodel_lifecycle
+    implementation AndroidX.compose_navigation
+    implementation AndroidX.compose_material_icons
+    implementation AndroidX.compose_material3
+    implementation Accompanist.navigation_animation
+
+    // Coroutines
+    implementation Coroutines.coroutines_core
+    implementation Coroutines.coroutines_android
+
+    //Dagger - Hilt
+    implementation DependencyInjection.dagger_hilt_android
+    kapt DependencyInjection.dagger_hilt_android_compiler
+    kapt AnnotationProcessing.hilt_compiler
+    implementation DependencyInjection.hilt_navigation_compose
+
+    // Room
+    implementation Data.room_ktx
+    implementation Data.room_runtime
+    kapt AnnotationProcessing.room_compiler
+
+    // Firebase
+    implementation Firebase.analytics
+    implementation Firebase.crashlytics
+
+    // Leak Canary
+    debugImplementation SquareUp.leak_canary
+
+    // Local unit tests
+    testImplementation Testing.test_core
+    testImplementation Testing.junit
+    testImplementation Testing.arch_core_testing
+    testImplementation Testing.coroutines_test
+    testImplementation Testing.google_truth
+    testImplementation Testing.mock_web_server
+    testImplementation Testing.mockk
+    debugImplementation Testing.composes_ui_manifest
+
+    // Instrumentation tests
+    androidTestImplementation Testing.hilt_android_testing
+    kaptAndroidTest Testing.hilt_android_compiler
+    androidTestImplementation Testing.junit
+    androidTestImplementation Testing.coroutines_test
+    androidTestImplementation Testing.arch_core_testing
+    androidTestImplementation Testing.google_truth
+    androidTestImplementation Testing.ext_junit
+    androidTestImplementation Testing.test_core_ktx
+    androidTestImplementation Testing.mock_web_server
+    androidTestImplementation Testing.mockk_android
+    androidTestImplementation Testing.test_runner
+    androidTestImplementation Testing.compose_ui_test_junit4
+
 }
