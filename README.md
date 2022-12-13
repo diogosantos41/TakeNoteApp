@@ -9,12 +9,17 @@ Take Note! is an intuitive and lightweight notepad app that meets all your note-
 - Search notes using text.
 - Select a different color for each note.
 - Simple navigation
+- Light & Dark Mode
+- Choose from various themes (+ M3 Dynamic colors)
 - Mobile application for Android
 
 ## Build With
 
 * [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - Modern toolkit for building native UI
+* [Compose UI Testing](https://developer.android.com/jetpack/compose/testing) - Compose provides a set of testing APIs to find elements, verify their attributes and perform user actions.
+* [Material 3 Dynamic colors](https://m3.material.io/) - The capability of variable color sources to remap system UI and in-app color experiences.
+* [Glance](https://developer.android.com/jetpack/androidx/releases/glance) - A Jetpack library to make it faster and easier to build app widgets (only developed @ branch feature/widgets)
 * [Accompanist](https://github.com/google/accompanist) - Collection of extension libraries for Jetpack Compose
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes
 * [Navigation Compose](https://developer.android.com/jetpack/compose/navigation) - Allow users to navigate across, into, and back out from the different pieces of content within your app
