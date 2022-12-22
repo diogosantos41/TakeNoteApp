@@ -13,11 +13,11 @@ import com.dscoding.takenoteapp.utils.extensions.logDeleteNote
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class NotesViewModel @Inject constructor(
@@ -54,7 +54,6 @@ class NotesViewModel @Inject constructor(
                     showDeleteConfirmationDialog = true
                 )
                 noteToDelete = event.note
-
             }
             is NotesEvent.ConfirmDeleteNote -> {
                 Firebase.analytics.logDeleteNote()

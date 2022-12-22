@@ -18,7 +18,6 @@ class GetNotesUseCase(private val repository: NoteRepository) {
                         is NoteOrder.Date -> notes.sortedBy { it.createdTime }
                         is NoteOrder.Color -> notes.sortedBy { it.color }
                     }
-
                 }
                 is OrderType.Descending -> {
                     when (noteOrder) {

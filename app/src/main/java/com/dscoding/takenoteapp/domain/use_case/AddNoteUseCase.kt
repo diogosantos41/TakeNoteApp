@@ -1,9 +1,9 @@
 package com.dscoding.takenoteapp.domain.use_case
 
-import com.dscoding.takenoteapp.domain.model.Note
-import com.dscoding.takenoteapp.domain.repository.NoteRepository
 import com.dscoding.takenoteapp.common.Failure
 import com.dscoding.takenoteapp.common.Resource
+import com.dscoding.takenoteapp.domain.model.Note
+import com.dscoding.takenoteapp.domain.repository.NoteRepository
 
 class AddNoteUseCase(private val repository: NoteRepository) {
 

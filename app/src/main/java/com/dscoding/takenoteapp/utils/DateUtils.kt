@@ -2,8 +2,7 @@ package com.dscoding.takenoteapp.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
-import java.util.*
-
+import java.util.Date
 
 object DateUtils {
 

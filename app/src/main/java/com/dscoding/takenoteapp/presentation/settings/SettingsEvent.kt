@@ -5,5 +5,4 @@ sealed interface SettingsEvent {
     object ChangeTwentyFourHourClockState : SettingsEvent
     data class ShowThemeOptionsDialog(val toShowDialog: Boolean) : SettingsEvent
     data class SelectThemeOption(val option: Int) : SettingsEvent
-
 }

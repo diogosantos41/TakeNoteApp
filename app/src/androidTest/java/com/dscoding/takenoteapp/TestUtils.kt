@@ -1,5 +1,4 @@
 @file:OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
-
 package com.dscoding.takenoteapp
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -8,8 +7,8 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.dscoding.takenoteapp.presentation.MainActivity
+import java.util.Timer
 import junit.framework.Assert
-import java.util.*
 import kotlin.concurrent.schedule
 
 fun assertNodeEqualsText(node: SemanticsNodeInteraction, text: String) {
@@ -21,8 +20,6 @@ fun assertNodeEqualsText(node: SemanticsNodeInteraction, text: String) {
         }
     }
 }
-
-
 
 object AsyncTimer {
     var expired = false

@@ -1,10 +1,21 @@
 package com.dscoding.takenoteapp.presentation.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
@@ -96,7 +107,8 @@ fun SettingsScreen(
                         SettingsField(
                             stringResource(R.string.settings_theme),
                             state.selectedTheme.asString(),
-                            onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) })
+                            onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) }
+                        )
                         Spacer(modifier = Modifier.height(betweenFieldsMargin))
                         SwitchField(
                             stringResource(id = R.string.settings_show_greeting),
@@ -129,22 +141,26 @@ fun SettingsScreen(
                         SettingsField(
                             stringResource(id = R.string.settings_rate_app_title),
                             stringResource(id = R.string.settings_rate_app_message),
-                            onClick = { context.openGooglePlayAppPage() })
+                            onClick = { context.openGooglePlayAppPage() }
+                        )
                         Spacer(modifier = Modifier.height(betweenFieldsMargin))
                         SettingsField(
                             stringResource(id = R.string.settings_share_app_title),
                             stringResource(id = R.string.settings_share_app_message),
-                            onClick = { context.launchShareAppIntent() })
+                            onClick = { context.launchShareAppIntent() }
+                        )
                         Spacer(modifier = Modifier.height(betweenFieldsMargin))
                         SettingsField(
                             stringResource(id = R.string.settings_privacy_policy_title),
                             stringResource(id = R.string.settings_privacy_policy_message),
-                            onClick = { context.openPrivacyPolicyPage() })
+                            onClick = { context.openPrivacyPolicyPage() }
+                        )
                         Spacer(modifier = Modifier.height(betweenFieldsMargin))
                         SettingsField(
                             stringResource(id = R.string.settings_app_version_title),
                             BuildConfig.VERSION_NAME,
-                            onClick = { })
+                            onClick = { }
+                        )
                     }
                 }
             }
@@ -156,10 +172,9 @@ fun SettingsScreen(
                 onOptionSelected = {
                     viewModel.onEvent(SettingsEvent.SelectThemeOption(it))
                 }
-            )
-            {
+            ) {
                 viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false))
             }
-        })
+        }
+    )
 }
-

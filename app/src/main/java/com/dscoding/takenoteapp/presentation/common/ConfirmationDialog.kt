@@ -16,12 +16,11 @@ fun ConfirmationDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    if(visible) {
+    if (visible) {
         AlertDialog(
             onDismissRequest = onDismiss,
             confirmButton = {
-                TextButton(onClick = onConfirm)
-                {
+                TextButton(onClick = onConfirm) {
                     Text(
                         text = stringResource(id = R.string.generic_yes),
                         color = MaterialTheme.colorScheme.primary,
@@ -31,8 +30,7 @@ fun ConfirmationDialog(
                 }
             },
             dismissButton = {
-                TextButton(onClick = onDismiss)
-                {
+                TextButton(onClick = onDismiss) {
                     Text(
                         text = stringResource(id = R.string.generic_cancel),
                         color = MaterialTheme.colorScheme.primary,

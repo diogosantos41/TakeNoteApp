@@ -12,5 +12,4 @@ sealed interface AddEditNoteEvent {
     object SaveNote : AddEditNoteEvent
     object ClickDeleteNote : AddEditNoteEvent
     object ConfirmDeleteNote : AddEditNoteEvent
-
 }

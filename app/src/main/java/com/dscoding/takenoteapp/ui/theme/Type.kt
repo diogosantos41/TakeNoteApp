@@ -41,5 +41,3 @@ val Typography = Typography().copy(
         letterSpacing = 0.15.sp
     )
 )
-
-

@@ -1,8 +1,12 @@
 package com.dscoding.takenoteapp.presentation
 
-import androidx.compose.animation.*
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -68,7 +72,8 @@ fun Navigation() {
                 noteColor = color
             )
         }
-        composable(route = Screen.SearchNotesScreen.route,
+        composable(
+            route = Screen.SearchNotesScreen.route,
             exitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = { NAVIGATION_SLIDE_HORIZONTAL_ANIMATION_TARGET_OFFSET },
@@ -86,12 +91,15 @@ fun Navigation() {
                         easing = FastOutSlowInEasing
                     )
                 )
-            }) {
+            }
+        ) {
             SearchNotesScreen(navController = navController)
         }
-        composable(route = Screen.SettingsScreen.route,
+        composable(
+            route = Screen.SettingsScreen.route,
             exitTransition = { fadeOut(animationSpec = tween(durationMillis = NAVIGATION_ANIMATION_DURATION)) },
-            enterTransition = { fadeIn(animationSpec = tween(durationMillis = NAVIGATION_ANIMATION_DURATION)) }) {
+            enterTransition = { fadeIn(animationSpec = tween(durationMillis = NAVIGATION_ANIMATION_DURATION)) }
+        ) {
             SettingsScreen(navController = navController)
         }
     }

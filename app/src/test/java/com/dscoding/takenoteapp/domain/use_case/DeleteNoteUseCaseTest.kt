@@ -2,11 +2,9 @@ package com.dscoding.takenoteapp.domain.use_case
 
 import com.dscoding.takenoteapp.data.repository.FakeNoteRepository
 import com.dscoding.takenoteapp.domain.model.Note
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-
 import org.junit.Before
 import org.junit.Test
 

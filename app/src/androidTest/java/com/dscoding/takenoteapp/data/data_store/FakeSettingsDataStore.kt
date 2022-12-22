@@ -14,7 +14,6 @@ class FakeSettingsDataStore : SettingsDataStore {
         twentyFourHourClock = true
     )
 
-
     override fun getPreferences(): Flow<PreferencesDto> {
         return flow { emit(preferences) }
     }

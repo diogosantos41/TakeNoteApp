@@ -1,6 +1,11 @@
 package com.dscoding.takenoteapp.presentation.settings.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
@@ -28,7 +33,7 @@ fun OptionsDialog(
     onOptionSelected: (Int) -> Unit,
     dismissDialog: () -> Unit,
 
-    ) {
+) {
     val padding = dimensionResource(R.dimen.settings_dialog_margin_padding)
 
     if (visible) {
@@ -68,8 +73,7 @@ fun OptionsDialog(
                 Row(
                     modifier = Modifier.padding(all = padding)
                 ) {
-                    TextButton(onClick = dismissDialog)
-                    {
+                    TextButton(onClick = dismissDialog) {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
                             text = stringResource(id = R.string.generic_cancel),

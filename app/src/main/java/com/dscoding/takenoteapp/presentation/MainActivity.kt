@@ -23,11 +23,15 @@ import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
 import com.dscoding.takenoteapp.utils.Theme
 import com.dscoding.takenoteapp.utils.getAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -64,7 +68,7 @@ class MainActivity : ComponentActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
             TakeNoteAppTheme(theme = getAppTheme(getThemeId(uiThemeState))) {
@@ -104,4 +108,3 @@ class MainActivity : ComponentActivity() {
         data class Success(val preferencesDto: PreferencesDto) : UiThemeState
     }
 }
-

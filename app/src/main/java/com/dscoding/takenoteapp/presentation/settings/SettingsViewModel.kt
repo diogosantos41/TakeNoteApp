@@ -13,11 +13,11 @@ import com.dscoding.takenoteapp.utils.getThemeText
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -35,7 +35,6 @@ class SettingsViewModel @Inject constructor(
     val state: State<SettingsState> = _state
 
     private var getPreferencesJob: Job? = null
-
 
     init {
         getPreferences()
@@ -113,4 +112,3 @@ class SettingsViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 }
-
