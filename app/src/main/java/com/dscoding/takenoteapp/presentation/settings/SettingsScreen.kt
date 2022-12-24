@@ -81,7 +81,7 @@ fun SettingsScreen(
                 elevation = 0.dp
             )
         },
-        content = { padding ->
+        content = { _ ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()

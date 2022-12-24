@@ -10,7 +10,7 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.Constants.NOTE_ID_ARG
 import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
 import com.dscoding.takenoteapp.common.Failure
-import com.dscoding.takenoteapp.common.Resource
+import com.dscoding.takenoteapp.common.Result
 import com.dscoding.takenoteapp.common.UiText
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
@@ -140,9 +140,8 @@ class AddEditNoteViewModel @Inject constructor(
                 } else {
                     Firebase.analytics.logAddNote(state.value.noteColor.toString())
                 }
-                var addNoteResult: Resource<Any?>
                 viewModelScope.launch {
-                    addNoteResult = noteUseCases.addNote(
+                    val addNoteResult = noteUseCases.addNote(
                         Note(
                             title = noteTitle.value.text,
                             content = noteContent.value.text.trim(),
@@ -154,10 +153,10 @@ class AddEditNoteViewModel @Inject constructor(
                         )
                     )
                     when (addNoteResult) {
-                        is Resource.Success -> {
+                        is Result.Success -> {
                             _eventFlow.emit(UiEvent.SaveNote)
                         }
-                        is Resource.Error -> {
+                        is Result.Error -> {
                             val errorMessage = when (addNoteResult.failure) {
                                 is Failure.EmptyNoteTitle -> {
                                     UiText.StringResource(R.string.error_add_note_empty_title)
