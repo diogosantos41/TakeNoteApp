@@ -9,9 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.Constants.NOTE_ID_ARG
 import com.dscoding.takenoteapp.common.Constants.NOTE_INVALID_ID
-import com.dscoding.takenoteapp.common.Failure
 import com.dscoding.takenoteapp.common.Result
-import com.dscoding.takenoteapp.common.UiText
+import com.dscoding.takenoteapp.common.StringResource
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.use_case.NoteUseCases
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
@@ -22,13 +21,13 @@ import com.dscoding.takenoteapp.utils.extensions.logEditNote
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class AddEditNoteViewModel @Inject constructor(
@@ -39,21 +38,21 @@ class AddEditNoteViewModel @Inject constructor(
 
     private val _noteTitle = mutableStateOf(
         NoteTextFieldState(
-            hint = UiText.StringResource(resId = R.string.add_edit_note_title_hint)
+            hint = StringResource(resId = R.string.add_edit_note_title_hint)
         )
     )
     val noteTitle: State<NoteTextFieldState> = _noteTitle
 
     private val _noteContent = mutableStateOf(
         NoteTextFieldState(
-            hint = UiText.StringResource(resId = R.string.add_edit_note_content_hint)
+            hint = StringResource(resId = R.string.add_edit_note_content_hint)
         )
     )
     val noteContent: State<NoteTextFieldState> = _noteContent
 
     private val _state = mutableStateOf(
         AddEditNoteState(
-            pageTitle = UiText.StringResource(R.string.add_edit_note_add_title),
+            pageTitle = StringResource(R.string.add_edit_note_add_title),
             noteColor = Note.noteColors.random().toArgb(),
             isEditingNote = false,
             lastTimeEdited = ""
@@ -84,10 +83,10 @@ class AddEditNoteViewModel @Inject constructor(
                         )
                         _noteContent.value = _noteContent.value.copy(
                             text = note.content,
-                            isHintVisible = false
+                            isHintVisible = note.content.isEmpty()
                         )
                         _state.value = state.value.copy(
-                            pageTitle = UiText.StringResource(R.string.add_edit_note_edit_title),
+                            pageTitle = StringResource(R.string.add_edit_note_edit_title),
                             noteColor = note.color,
                             isEditingNote = true,
                             lastTimeEdited = DateUtils.convertTimeMillisToStringDate(
@@ -97,7 +96,7 @@ class AddEditNoteViewModel @Inject constructor(
                         )
                     } ?: _eventFlow.emit(
                         UiEvent.ShowSnackbar(
-                            message = UiText.StringResource(R.string.error_add_note_invalid_note)
+                            message = StringResource(R.string.error_add_note_invalid_note)
                         )
                     )
                 }
@@ -115,7 +114,7 @@ class AddEditNoteViewModel @Inject constructor(
             is AddEditNoteEvent.ChangeTitleFocus -> {
                 _noteTitle.value = noteTitle.value.copy(
                     isHintVisible = !event.focusState.isFocused &&
-                        noteTitle.value.text.isBlank()
+                            noteTitle.value.text.isBlank()
                 )
             }
             is AddEditNoteEvent.EnteredContent -> {
@@ -126,7 +125,7 @@ class AddEditNoteViewModel @Inject constructor(
             is AddEditNoteEvent.ChangeContentFocus -> {
                 _noteContent.value = noteContent.value.copy(
                     isHintVisible = !event.focusState.isFocused &&
-                        noteContent.value.text.isBlank()
+                            noteContent.value.text.isBlank()
                 )
             }
             is AddEditNoteEvent.ChangeColor -> {
@@ -157,20 +156,10 @@ class AddEditNoteViewModel @Inject constructor(
                             _eventFlow.emit(UiEvent.SaveNote)
                         }
                         is Result.Error -> {
-                            val errorMessage = when (addNoteResult.failure) {
-                                is Failure.EmptyNoteTitle -> {
-                                    UiText.StringResource(R.string.error_add_note_empty_title)
-                                }
-                                is Failure.EmptyNoteContent -> {
-                                    UiText.StringResource(R.string.error_add_note_empty_content)
-                                }
-                                else -> {
-                                    UiText.StringResource(R.string.error_unknown)
-                                }
-                            }
                             _eventFlow.emit(
                                 UiEvent.ShowSnackbar(
-                                    message = errorMessage
+                                    message = addNoteResult.errorMessage
+                                        ?: StringResource(R.string.error_unknown)
                                 )
                             )
                         }
@@ -211,7 +200,7 @@ class AddEditNoteViewModel @Inject constructor(
     }
 
     sealed interface UiEvent {
-        data class ShowSnackbar(val message: UiText) : UiEvent
+        data class ShowSnackbar(val message: StringResource) : UiEvent
         object SaveNote : UiEvent
         object DeleteNote : UiEvent
     }

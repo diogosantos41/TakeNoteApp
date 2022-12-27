@@ -1,5 +1,6 @@
 package com.dscoding.takenoteapp.presentation.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -38,6 +39,11 @@ fun DefaultRadioButton(
             ),
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = text, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
+        Text(
+            modifier = Modifier.clickable(onClick = onSelect),
+            text = text,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
     }
 }

@@ -63,7 +63,7 @@ fun OptionsDialog(
                             text = option,
                             selected = option == selected,
                             onSelect = { onOptionSelected(index) },
-                            testTag = if (option == Theme.DarkYellow.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                            testTag = if (option == Theme.DarkYellow.stringResource.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
                         )
                         if (index != options.size - 1) {
                             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))

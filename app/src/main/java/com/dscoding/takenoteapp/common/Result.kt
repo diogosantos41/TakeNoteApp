@@ -1,6 +1,6 @@
 package com.dscoding.takenoteapp.common
 
-sealed class Result<out T>(val data: T? = null, val failure: Failure? = null) {
+sealed class Result<out T>(val data: T? = null, val errorMessage: StringResource? = null) {
     class Success<T>(data: T? = null) : Result<T>(data = data)
-    class Error(failure: Failure) : Result<Nothing>(failure = failure)
+    class Error(errorMessage: StringResource) : Result<Nothing>(errorMessage = errorMessage)
 }

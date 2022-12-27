@@ -91,14 +91,4 @@ class AddEditNoteScreenTest {
         composeRule.onNodeWithText(context.getString(R.string.error_add_note_empty_title))
             .assertIsDisplayed()
     }
-
-    @Test
-    fun clickAddNoteWithoutContent_isSnackbarDisplayingWithCorrectText() {
-        composeRule.onNodeWithTag(TestTags.TITLE_TEXT_FIELD)
-            .performTextInput("some title text")
-        composeRule.onNodeWithContentDescription(context.getString(R.string.add_edit_note_content_description_save))
-            .performClick()
-        composeRule.onNodeWithText(context.getString(R.string.error_add_note_empty_content))
-            .assertIsDisplayed()
-    }
 }
