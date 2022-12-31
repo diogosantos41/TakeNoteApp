@@ -26,6 +26,10 @@ class FakeSettingsDataStore : SettingsDataStore {
         preferences.theme = theme
     }
 
+    override suspend fun setFont(font: Int) {
+        preferences.font = font
+    }
+
     override suspend fun setTwentyFourHourClock(twentyFourHourClock: Boolean) {
         preferences.twentyFourHourClock = twentyFourHourClock
     }
