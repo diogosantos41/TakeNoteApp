@@ -20,14 +20,20 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
+import com.dscoding.takenoteapp.utils.getAppFont
 import com.dscoding.takenoteapp.utils.getAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -64,10 +70,13 @@ class MainActivity : ComponentActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
-            TakeNoteAppTheme(theme = getAppTheme(getThemeId(uiThemeState))) {
+            TakeNoteAppTheme(
+                theme = getAppTheme(getThemeId(uiThemeState)),
+                font = getAppFont(getFontId(uiThemeState))
+            ) {
                 Surface {
                     // On some devices (ex: Poko X3) the screen became all white after system theme change.
                     // This code seems to solve the problem
@@ -89,6 +98,14 @@ class MainActivity : ComponentActivity() {
         is UiThemeState.Success -> uiState.preferencesDto.theme
     }
 
+    @Composable
+    private fun getFontId(
+        uiState: UiThemeState,
+    ): Int = when (uiState) {
+        is UiThemeState.Loading -> Font.Montserrat.id
+        is UiThemeState.Success -> uiState.preferencesDto.font
+    }
+
     private fun getUiThemeState(): StateFlow<UiThemeState> {
         return settingsDataStore.getPreferences().map {
             UiThemeState.Success(it)
@@ -104,4 +121,3 @@ class MainActivity : ComponentActivity() {
         data class Success(val preferencesDto: PreferencesDto) : UiThemeState
     }
 }
-

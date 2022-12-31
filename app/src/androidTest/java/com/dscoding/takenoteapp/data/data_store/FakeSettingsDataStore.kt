@@ -14,7 +14,6 @@ class FakeSettingsDataStore : SettingsDataStore {
         twentyFourHourClock = true
     )
 
-
     override fun getPreferences(): Flow<PreferencesDto> {
         return flow { emit(preferences) }
     }
@@ -25,6 +24,10 @@ class FakeSettingsDataStore : SettingsDataStore {
 
     override suspend fun setTheme(theme: Int) {
         preferences.theme = theme
+    }
+
+    override suspend fun setFont(font: Int) {
+        preferences.font = font
     }
 
     override suspend fun setTwentyFourHourClock(twentyFourHourClock: Boolean) {

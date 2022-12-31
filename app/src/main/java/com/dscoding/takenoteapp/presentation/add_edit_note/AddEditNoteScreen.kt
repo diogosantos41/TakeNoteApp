@@ -2,16 +2,38 @@ package com.dscoding.takenoteapp.presentation.add_edit_note
 
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.*
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,6 +42,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -55,6 +79,8 @@ fun AddEditNoteScreen(
     val contentState = viewModel.noteContent.value
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
+    val focusRequester = remember { FocusRequester() }
+    val interactionSource = MutableInteractionSource()
 
     val noteBackgroundAnimatable = remember {
         Animatable(
@@ -64,7 +90,6 @@ fun AddEditNoteScreen(
     val scope = rememberCoroutineScope()
 
     val generalMargin = dimensionResource(R.dimen.margin)
-
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -93,28 +118,23 @@ fun AddEditNoteScreen(
                         color = White,
                         style = MaterialTheme.typography.headlineSmall
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.popBackStack()
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = stringResource(id = R.string.add_edit_note_content_description_back),
-                            tint = White
-                        )
-                    }
-                },
-                backgroundColor = DarkGrey,
-                elevation = 0.dp
+                }, navigationIcon = {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(id = R.string.add_edit_note_content_description_back),
+                        tint = White
+                    )
+                }
+            }, backgroundColor = DarkGrey, elevation = 0.dp
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                onClick = {
-                    viewModel.onEvent(AddEditNoteEvent.SaveNote)
-                }) {
+            FloatingActionButton(backgroundColor = MaterialTheme.colorScheme.primary, onClick = {
+                viewModel.onEvent(AddEditNoteEvent.SaveNote)
+            }) {
                 if (state.isEditingNote) {
                     Icon(
                         imageVector = Icons.Default.Edit,
@@ -170,8 +190,7 @@ fun AddEditNoteScreen(
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(
-                            id = R.string.add_edit_note_edited_on,
-                            state.lastTimeEdited
+                            id = R.string.add_edit_note_edited_on, state.lastTimeEdited
                         ),
                         style = MaterialTheme.typography.bodyLarge,
                         color = DarkerGrey,
@@ -245,7 +264,15 @@ fun AddEditNoteScreen(
                     isHintVisible = contentState.isHintVisible,
                     singleLine = false,
                     textStyle = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null,
+                            onClick = { focusRequester.requestFocus() }
+                        )
+                        .focusRequester(focusRequester)
+                        .fillMaxHeight()
+                        .weight(1f),
                     testTag = TestTags.CONTENT_TEXT_FIELD
                 )
                 ConfirmationDialog(
@@ -258,7 +285,8 @@ fun AddEditNoteScreen(
                                 false
                             )
                         )
-                    })
+                    }
+                )
             }
         }
     )

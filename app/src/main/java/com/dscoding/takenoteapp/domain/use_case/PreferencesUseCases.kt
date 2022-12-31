@@ -4,4 +4,3 @@ data class PreferencesUseCases(
     val getPreferences: GetPreferencesUseCase,
     val updatePreferences: UpdatePreferencesUseCase
 )
-

@@ -60,7 +60,7 @@ fun SearchNotesScreen(
             )
         },
         scaffoldState = scaffoldState,
-        content = { padding ->
+        content = { _ ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -90,5 +90,6 @@ fun SearchNotesScreen(
                     )
                 }
             }
-        })
+        }
+    )
 }

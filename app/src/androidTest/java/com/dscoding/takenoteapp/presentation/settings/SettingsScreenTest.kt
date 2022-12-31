@@ -6,20 +6,26 @@ import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeLeft
+import androidx.compose.ui.test.swipeRight
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.test.core.app.ApplicationProvider
-import com.dscoding.takenoteapp.presentation.MainActivity
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.assertNodeEqualsText
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
+import com.dscoding.takenoteapp.presentation.MainActivity
 import com.dscoding.takenoteapp.presentation.util.Screen
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
-import com.dscoding.takenoteapp.common.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -65,6 +71,16 @@ class SettingsScreenTest {
             .assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.THEME_YELLOW_RADIO_BUTTON).performClick()
         composeRule.onNodeWithText(context.getString(R.string.settings_theme_option_dark_yellow))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun selectFont_fontSelected() {
+        composeRule.onNodeWithText(context.getString(R.string.settings_font)).performClick()
+        composeRule.onNodeWithText(context.getString(R.string.settings_font_dialog_title))
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.FONT_MONOSPACE_RADIO_BUTTON).performClick()
+        composeRule.onNodeWithText(context.getString(R.string.settings_font_option_monospace))
             .assertIsDisplayed()
     }
 

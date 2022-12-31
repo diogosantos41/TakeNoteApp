@@ -1,20 +1,18 @@
 package com.dscoding.takenoteapp.domain.use_case
 
+import com.dscoding.takenoteapp.R
+import com.dscoding.takenoteapp.common.Result
+import com.dscoding.takenoteapp.common.StringResource
 import com.dscoding.takenoteapp.domain.model.Note
 import com.dscoding.takenoteapp.domain.repository.NoteRepository
-import com.dscoding.takenoteapp.common.Failure
-import com.dscoding.takenoteapp.common.Resource
 
 class AddNoteUseCase(private val repository: NoteRepository) {
 
-    suspend operator fun invoke(note: Note): Resource<Any?> {
+    suspend operator fun invoke(note: Note): Result<Nothing> {
         if (note.title.isBlank()) {
-            return Resource.Error(Failure.EmptyNoteTitle)
-        }
-        if (note.content.isBlank()) {
-            return Resource.Error(Failure.EmptyNoteContent)
+            return Result.Error(errorMessage = StringResource(R.string.error_add_note_empty_title))
         }
         repository.insertNote(note)
-        return Resource.Success(null)
+        return Result.Success()
     }
 }

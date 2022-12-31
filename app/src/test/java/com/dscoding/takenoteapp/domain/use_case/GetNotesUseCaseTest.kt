@@ -92,5 +92,4 @@ class GetNotesUseCaseTest {
             assertThat(notes[i].color).isGreaterThan(notes[i + 1].color)
         }
     }
-
 }

@@ -1,21 +1,33 @@
 @file:OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
-
 package com.dscoding.takenoteapp.presentation
 
 import android.content.Context
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeLeft
 import androidx.test.core.app.ApplicationProvider
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.assertNodeEqualsText
+import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.delay
 import com.dscoding.takenoteapp.di.DataModule
 import com.dscoding.takenoteapp.di.UseCaseModule
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
-import com.dscoding.takenoteapp.common.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -23,7 +35,6 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
-
 
 @HiltAndroidTest
 @UninstallModules(DataModule::class, UseCaseModule::class)
@@ -48,6 +59,7 @@ class TakeNoteEndToEndTest {
         }
     }
 
+    @Suppress
     @Test
     fun saveNewNote_editAfterwards() {
         val noteTestTitle = "note-test-title"
@@ -80,10 +92,11 @@ class TakeNoteEndToEndTest {
         composeRule.onNodeWithText(noteTestTitleEdited).assertIsDisplayed()
     }
 
+    @Suppress
     @Test
     fun saveNewNotes_orderByTitleDescending() {
 
-        //Add 3 Notes
+        // Add 3 Notes
         for (i in 1..3) {
             // Click on FAB - Navigate to Add Note Screen
             composeRule.onNodeWithContentDescription(context.getString(R.string.notes_content_description_add))
@@ -114,9 +127,9 @@ class TakeNoteEndToEndTest {
             .assertTextContains("2")
         composeRule.onAllNodesWithTag(TestTags.NOTE_ITEM)[2]
             .assertTextContains("1")
-
     }
 
+    @Suppress
     @Ignore("Not ready, Swipe left/right not working")
     @Test
     fun toggleSettingsShowGreeting_ToggleAgainAfterwards() {

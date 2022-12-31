@@ -7,9 +7,10 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.common.Constants.DATASTORE_NAME
+import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
 import kotlinx.coroutines.flow.map
 
@@ -19,11 +20,11 @@ class SettingsDataStoreImpl(
     private val context: Context
 ) : SettingsDataStore {
 
-
     override fun getPreferences() = context.dataStore.data.map { preferences ->
         PreferencesDto(
             showGreeting = preferences[SHOW_GREETING] ?: true,
             theme = preferences[THEME] ?: Theme.SystemDefault.id,
+            font = preferences[FONT] ?: Font.Montserrat.id,
             twentyFourHourClock = preferences[TWENTY_FOUR_HOUR_CLOCK] ?: true
         )
     }
@@ -40,6 +41,12 @@ class SettingsDataStoreImpl(
         }
     }
 
+    override suspend fun setFont(font: Int) {
+        context.dataStore.edit { preferences ->
+            preferences[FONT] = font
+        }
+    }
+
     override suspend fun setTwentyFourHourClock(twentyFourHourClock: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[TWENTY_FOUR_HOUR_CLOCK] = twentyFourHourClock
@@ -49,6 +56,7 @@ class SettingsDataStoreImpl(
     companion object {
         val SHOW_GREETING = booleanPreferencesKey("show_greeting")
         val THEME = intPreferencesKey("theme")
+        val FONT = intPreferencesKey("font")
         val TWENTY_FOUR_HOUR_CLOCK = booleanPreferencesKey("twenty_four_hour_clock")
     }
 }

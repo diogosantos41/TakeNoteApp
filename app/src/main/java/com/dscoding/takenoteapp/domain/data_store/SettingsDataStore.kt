@@ -11,5 +11,7 @@ interface SettingsDataStore {
 
     suspend fun setTheme(theme: Int)
 
+    suspend fun setFont(font: Int)
+
     suspend fun setTwentyFourHourClock(twentyFourHourClock: Boolean)
 }

@@ -7,10 +7,10 @@ class SearchNotesUseCase {
         return notes.filter {
             it.title.contains(
                 queryText, ignoreCase = true
-            )
-                    || it.content.contains(
-                queryText, ignoreCase = true
-            )
+            ) ||
+                it.content.contains(
+                    queryText, ignoreCase = true
+                )
         }
     }
 }

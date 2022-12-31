@@ -1,6 +1,11 @@
 package com.dscoding.takenoteapp.presentation.settings.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.AlertDialog
@@ -17,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
 
 @Composable
@@ -28,7 +34,7 @@ fun OptionsDialog(
     onOptionSelected: (Int) -> Unit,
     dismissDialog: () -> Unit,
 
-    ) {
+) {
     val padding = dimensionResource(R.dimen.settings_dialog_margin_padding)
 
     if (visible) {
@@ -58,7 +64,11 @@ fun OptionsDialog(
                             text = option,
                             selected = option == selected,
                             onSelect = { onOptionSelected(index) },
-                            testTag = if (option == Theme.DarkYellow.uiText.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                            testTag = when (option) {
+                                Theme.DarkYellow.stringResource.asString() -> TestTags.THEME_YELLOW_RADIO_BUTTON
+                                Font.Monospace.stringResource.asString() -> TestTags.FONT_MONOSPACE_RADIO_BUTTON
+                                else -> ""
+                            }
                         )
                         if (index != options.size - 1) {
                             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))
@@ -68,8 +78,7 @@ fun OptionsDialog(
                 Row(
                     modifier = Modifier.padding(all = padding)
                 ) {
-                    TextButton(onClick = dismissDialog)
-                    {
+                    TextButton(onClick = dismissDialog) {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
                             text = stringResource(id = R.string.generic_cancel),

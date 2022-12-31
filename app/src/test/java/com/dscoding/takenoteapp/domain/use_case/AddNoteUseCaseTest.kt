@@ -2,7 +2,6 @@ package com.dscoding.takenoteapp.domain.use_case
 
 import com.dscoding.takenoteapp.data.repository.FakeNoteRepository
 import com.dscoding.takenoteapp.domain.model.Note
-import com.dscoding.takenoteapp.common.Failure
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -14,9 +13,7 @@ class AddNoteUseCaseTest {
     private lateinit var fakeNoteRepository: FakeNoteRepository
     private lateinit var addNote: AddNoteUseCase
     private lateinit var noteWithoutTitle: Note
-    private lateinit var noteWithoutContent: Note
     private lateinit var noteWithTitleAndContent: Note
-
 
     @Before
     fun setUp() {
@@ -26,14 +23,6 @@ class AddNoteUseCaseTest {
         noteWithoutTitle = Note(
             title = "",
             content = "content",
-            createdTime = 1,
-            editedTime = 1,
-            color = 1
-        )
-
-        noteWithoutContent = Note(
-            title = "title",
-            content = "",
             createdTime = 1,
             editedTime = 1,
             color = 1
@@ -54,16 +43,7 @@ class AddNoteUseCaseTest {
         val notes = fakeNoteRepository.getNotes().first()
 
         assertThat(notes.isEmpty()).isTrue()
-        assertThat(addNoteResult.failure is Failure.EmptyNoteTitle).isTrue()
-    }
-
-    @Test
-    fun `Add note without content, note not added and error caught`() = runBlocking {
-        val addNoteResult = addNote(noteWithoutContent)
-        val notes = fakeNoteRepository.getNotes().first()
-
-        assertThat(notes.isEmpty()).isTrue()
-        assertThat(addNoteResult.failure is Failure.EmptyNoteContent).isTrue()
+        assertThat(addNoteResult.errorMessage != null).isTrue()
     }
 
     @Test

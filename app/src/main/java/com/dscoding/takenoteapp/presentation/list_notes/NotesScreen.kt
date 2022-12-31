@@ -1,13 +1,37 @@
 package com.dscoding.takenoteapp.presentation.list_notes
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.*
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,11 +64,9 @@ fun NotesScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                onClick = {
-                    navController.safeNavigate(Screen.AddEditNoteScreen.route)
-                }) {
+            FloatingActionButton(backgroundColor = MaterialTheme.colorScheme.primary, onClick = {
+                navController.safeNavigate(Screen.AddEditNoteScreen.route)
+            }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(id = R.string.notes_content_description_add),
@@ -102,10 +124,7 @@ fun NotesScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(
-                            generalMargin,
-                            0.dp,
-                            generalMargin,
-                            0.dp
+                            generalMargin, 0.dp, generalMargin, 0.dp
                         )
                 ) {
                     GreetingSection(visible = state.isGreetingSectionVisible)
@@ -152,7 +171,7 @@ fun NotesScreen(
                     NoteList(
                         notes = state.notes,
                         emptyMessage = stringResource(id = R.string.notes_empty_list_message),
-                        showGridView = state.isGridListSelected && state.notes.size > 1,
+                        showGridView = state.isGridListSelected,
                         showDeleteButton = true,
                         onNoteClicked = {
                             navController.safeNavigate(
@@ -176,13 +195,10 @@ fun NotesScreen(
                                     false
                                 )
                             )
-                        })
+                        }
+                    )
                 }
             }
         }
     )
 }
-
-
-
-
