@@ -19,4 +19,3 @@ class StringResource(
         return context.getString(resId, *args)
     }
 }
-

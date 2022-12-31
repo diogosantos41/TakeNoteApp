@@ -20,7 +20,9 @@ import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.domain.data_store.SettingsDataStore
 import com.dscoding.takenoteapp.domain.model.PreferencesDto
 import com.dscoding.takenoteapp.ui.theme.TakeNoteAppTheme
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
+import com.dscoding.takenoteapp.utils.getAppFont
 import com.dscoding.takenoteapp.utils.getAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -71,7 +73,10 @@ class MainActivity : ComponentActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
-            TakeNoteAppTheme(theme = getAppTheme(getThemeId(uiThemeState))) {
+            TakeNoteAppTheme(
+                theme = getAppTheme(getThemeId(uiThemeState)),
+                font = getAppFont(getFontId(uiThemeState))
+            ) {
                 Surface {
                     // On some devices (ex: Poko X3) the screen became all white after system theme change.
                     // This code seems to solve the problem
@@ -91,6 +96,14 @@ class MainActivity : ComponentActivity() {
     ): Int = when (uiState) {
         is UiThemeState.Loading -> Theme.SystemDefault.id
         is UiThemeState.Success -> uiState.preferencesDto.theme
+    }
+
+    @Composable
+    private fun getFontId(
+        uiState: UiThemeState,
+    ): Int = when (uiState) {
+        is UiThemeState.Loading -> Font.Montserrat.id
+        is UiThemeState.Success -> uiState.preferencesDto.font
     }
 
     private fun getUiThemeState(): StateFlow<UiThemeState> {

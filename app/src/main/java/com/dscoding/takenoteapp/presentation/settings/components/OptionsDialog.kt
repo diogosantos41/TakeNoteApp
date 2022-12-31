@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.TestTags
 import com.dscoding.takenoteapp.presentation.common.DefaultRadioButton
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
 
 @Composable
@@ -63,7 +64,11 @@ fun OptionsDialog(
                             text = option,
                             selected = option == selected,
                             onSelect = { onOptionSelected(index) },
-                            testTag = if (option == Theme.DarkYellow.stringResource.asString()) TestTags.THEME_YELLOW_RADIO_BUTTON else ""
+                            testTag = when (option) {
+                                Theme.DarkYellow.stringResource.asString() -> TestTags.THEME_YELLOW_RADIO_BUTTON
+                                Font.Monospace.stringResource.asString() -> TestTags.FONT_MONOSPACE_RADIO_BUTTON
+                                else -> ""
+                            }
                         )
                         if (index != options.size - 1) {
                             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.settings_dialog_margin_between_options)))

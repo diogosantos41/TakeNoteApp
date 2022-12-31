@@ -7,17 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.dscoding.takenoteapp.R
 import com.dscoding.takenoteapp.common.StringResource
 import com.dscoding.takenoteapp.domain.use_case.PreferencesUseCases
+import com.dscoding.takenoteapp.utils.extensions.logSwapFont
 import com.dscoding.takenoteapp.utils.extensions.logSwapTheme
+import com.dscoding.takenoteapp.utils.getAppFont
 import com.dscoding.takenoteapp.utils.getAppTheme
+import com.dscoding.takenoteapp.utils.getFontText
 import com.dscoding.takenoteapp.utils.getThemeText
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -78,6 +81,26 @@ class SettingsViewModel @Inject constructor(
                         )
                 }
             }
+            is SettingsEvent.ShowFontOptionsDialog -> {
+                _state.value = state.value.copy(
+                    showFontOptionsDialog = event.toShowDialog
+                )
+            }
+            is SettingsEvent.SelectFontOption -> {
+                if (state.value.selectedFont != getFontText(event.option)) {
+                    Firebase.analytics.logSwapFont(getAppFont(event.option).name)
+                }
+                _state.value = state.value.copy(
+                    showFontOptionsDialog = false,
+                    selectedFont = getFontText(event.option)
+                )
+                viewModelScope.launch {
+                    preferencesUseCases.updatePreferences
+                        .setFont(
+                            event.option
+                        )
+                }
+            }
         }
     }
 
@@ -107,6 +130,9 @@ class SettingsViewModel @Inject constructor(
                 )
                 _state.value = state.value.copy(
                     selectedTheme = getThemeText(preferences.theme)
+                )
+                _state.value = state.value.copy(
+                    selectedFont = getFontText(preferences.font)
                 )
             }
             .launchIn(viewModelScope)

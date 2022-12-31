@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -70,7 +69,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AddEditNoteScreen(
-    navController: NavController, noteColor: Int, viewModel: AddEditNoteViewModel = hiltViewModel()
+    navController: NavController,
+    noteColor: Int,
+    viewModel: AddEditNoteViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -108,26 +109,28 @@ fun AddEditNoteScreen(
         }
     }
 
-    Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(
-                text = state.pageTitle.asString(),
-                color = White,
-                style = MaterialTheme.typography.headlineSmall
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = state.pageTitle.asString(),
+                        color = White,
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                }, navigationIcon = {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(id = R.string.add_edit_note_content_description_back),
+                        tint = White
+                    )
+                }
+            }, backgroundColor = DarkGrey, elevation = 0.dp
             )
-        }, navigationIcon = {
-            IconButton(onClick = {
-                navController.popBackStack()
-            }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(id = R.string.add_edit_note_content_description_back),
-                    tint = White
-                )
-            }
-        }, backgroundColor = DarkGrey, elevation = 0.dp
-        )
-    },
+        },
         floatingActionButton = {
             FloatingActionButton(backgroundColor = MaterialTheme.colorScheme.primary, onClick = {
                 viewModel.onEvent(AddEditNoteEvent.SaveNote)
@@ -203,31 +206,34 @@ fun AddEditNoteScreen(
                 ) {
                     Note.noteColors.forEach { color ->
                         val colorInt = color.toArgb()
-                        Box(modifier = Modifier
-                            .size(dimensionResource(id = R.dimen.add_note_color_circle_size))
-                            .shadow(
-                                dimensionResource(id = R.dimen.add_note_color_circle_shadow_size),
-                                CircleShape
-                            )
-                            .clip(CircleShape)
-                            .background(color)
-                            .border(
-                                width = dimensionResource(id = R.dimen.add_note_color_circle_selected_border_size),
-                                color = if (state.noteColor == colorInt) {
-                                    DarkerGrey
-                                } else Color.Transparent,
-                                shape = CircleShape
-                            )
-                            .clickable {
-                                scope.launch {
-                                    noteBackgroundAnimatable.animateTo(
-                                        targetValue = Color(colorInt), animationSpec = tween(
-                                            durationMillis = COLOR_SWAP_ANIMATION_DURATION
+                        Box(
+                            modifier = Modifier
+                                .size(dimensionResource(id = R.dimen.add_note_color_circle_size))
+                                .shadow(
+                                    dimensionResource(id = R.dimen.add_note_color_circle_shadow_size),
+                                    CircleShape
+                                )
+                                .clip(CircleShape)
+                                .background(color)
+                                .border(
+                                    width = dimensionResource(id = R.dimen.add_note_color_circle_selected_border_size),
+                                    color = if (state.noteColor == colorInt) {
+                                        DarkerGrey
+                                    } else Color.Transparent,
+                                    shape = CircleShape
+                                )
+                                .clickable {
+                                    scope.launch {
+                                        noteBackgroundAnimatable.animateTo(
+                                            targetValue = Color(colorInt),
+                                            animationSpec = tween(
+                                                durationMillis = COLOR_SWAP_ANIMATION_DURATION
+                                            )
                                         )
-                                    )
+                                    }
+                                    viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
                                 }
-                                viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
-                            })
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.height(generalMargin))
@@ -259,15 +265,18 @@ fun AddEditNoteScreen(
                     singleLine = false,
                     textStyle = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier
-                        .clickable(interactionSource = interactionSource,
+                        .clickable(
+                            interactionSource = interactionSource,
                             indication = null,
-                            onClick = { focusRequester.requestFocus() })
+                            onClick = { focusRequester.requestFocus() }
+                        )
                         .focusRequester(focusRequester)
                         .fillMaxHeight()
                         .weight(1f),
                     testTag = TestTags.CONTENT_TEXT_FIELD
                 )
-                ConfirmationDialog(visible = state.showDeleteConfirmationDialog,
+                ConfirmationDialog(
+                    visible = state.showDeleteConfirmationDialog,
                     message = stringResource(id = R.string.notes_delete_confirmation_message),
                     onConfirm = { viewModel.onEvent(AddEditNoteEvent.ConfirmDeleteNote) },
                     onDismiss = {
@@ -276,7 +285,9 @@ fun AddEditNoteScreen(
                                 false
                             )
                         )
-                    })
+                    }
+                )
             }
-        })
+        }
+    )
 }

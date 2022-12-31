@@ -74,6 +74,16 @@ class SettingsScreenTest {
             .assertIsDisplayed()
     }
 
+    @Test
+    fun selectFont_fontSelected() {
+        composeRule.onNodeWithText(context.getString(R.string.settings_font)).performClick()
+        composeRule.onNodeWithText(context.getString(R.string.settings_font_dialog_title))
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.FONT_MONOSPACE_RADIO_BUTTON).performClick()
+        composeRule.onNodeWithText(context.getString(R.string.settings_font_option_monospace))
+            .assertIsDisplayed()
+    }
+
     @Ignore("Not ready , Swipe left/right not working")
     @Test
     fun switchOffThenSwitchOnGreeting_SwitchIsOn() {

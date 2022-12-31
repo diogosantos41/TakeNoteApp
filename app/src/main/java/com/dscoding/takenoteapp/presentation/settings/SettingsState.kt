@@ -5,6 +5,8 @@ import com.dscoding.takenoteapp.common.StringResource
 
 data class SettingsState(
     val showThemeOptionsDialog: Boolean = false,
+    val showFontOptionsDialog: Boolean = false,
     val isUserNameFieldVisible: Boolean = false,
-    val selectedTheme: StringResource = StringResource(resId = R.string.empty_string)
+    val selectedTheme: StringResource = StringResource(resId = R.string.empty_string),
+    val selectedFont: StringResource = StringResource(resId = R.string.empty_string)
 )

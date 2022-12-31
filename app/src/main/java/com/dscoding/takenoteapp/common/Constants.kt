@@ -27,6 +27,8 @@ object Constants {
     const val FIREBASE_ANALYTICS_EVENT_PRIVACY_POLICY = "PRIVACY_POLICY"
     const val FIREBASE_ANALYTICS_EVENT_SWAP_THEME = "SWAP_THEME"
     const val FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM = "SWAP_THEME_PARAM"
+    const val FIREBASE_ANALYTICS_EVENT_SWAP_FONT = "SWAP_FONT"
+    const val FIREBASE_ANALYTICS_EVENT_SWAP_FONT_PARAM = "SWAP_FONT_PARAM"
 
     // Pages URLs
     const val GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.dscoding.takenoteapp"

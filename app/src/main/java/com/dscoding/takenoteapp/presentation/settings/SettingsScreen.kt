@@ -40,6 +40,7 @@ import com.dscoding.takenoteapp.ui.theme.White
 import com.dscoding.takenoteapp.utils.extensions.launchShareAppIntent
 import com.dscoding.takenoteapp.utils.extensions.openGooglePlayAppPage
 import com.dscoding.takenoteapp.utils.extensions.openPrivacyPolicyPage
+import com.dscoding.takenoteapp.utils.geFontsTextList
 import com.dscoding.takenoteapp.utils.geThemesTextList
 
 @Composable
@@ -110,6 +111,12 @@ fun SettingsScreen(
                             onClick = { viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(true)) }
                         )
                         Spacer(modifier = Modifier.height(betweenFieldsMargin))
+                        SettingsField(
+                            stringResource(R.string.settings_font),
+                            state.selectedFont.asString(),
+                            onClick = { viewModel.onEvent(SettingsEvent.ShowFontOptionsDialog(true)) }
+                        )
+                        Spacer(modifier = Modifier.height(betweenFieldsMargin))
                         SwitchField(
                             stringResource(id = R.string.settings_show_greeting),
                             showGreetingState.value.asString(),
@@ -174,6 +181,17 @@ fun SettingsScreen(
                 }
             ) {
                 viewModel.onEvent(SettingsEvent.ShowThemeOptionsDialog(false))
+            }
+            OptionsDialog(
+                title = stringResource(id = R.string.settings_font_dialog_title),
+                options = geFontsTextList(),
+                selected = state.selectedFont.asString(),
+                visible = state.showFontOptionsDialog,
+                onOptionSelected = {
+                    viewModel.onEvent(SettingsEvent.SelectFontOption(it))
+                }
+            ) {
+                viewModel.onEvent(SettingsEvent.ShowFontOptionsDialog(false))
             }
         }
     )

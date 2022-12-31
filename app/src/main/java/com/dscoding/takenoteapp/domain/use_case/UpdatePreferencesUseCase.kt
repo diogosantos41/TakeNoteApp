@@ -12,6 +12,10 @@ class UpdatePreferencesUseCase(private val dataStore: SettingsDataStore) {
         dataStore.setTheme(theme)
     }
 
+    suspend fun setFont(font: Int) {
+        dataStore.setFont(font)
+    }
+
     suspend fun setTwentyFourHourClock(isTwentyFourHourClock: Boolean) {
         dataStore.setTwentyFourHourClock(isTwentyFourHourClock)
     }

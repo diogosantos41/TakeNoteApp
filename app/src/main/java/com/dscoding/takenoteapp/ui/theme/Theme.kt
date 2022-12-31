@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
 
 private val LightColors = lightColorScheme(
@@ -58,14 +59,16 @@ fun getThemeColors(theme: Theme): ColorScheme {
 @Composable
 fun TakeNoteAppTheme(
     theme: Theme = Theme.SystemDefault,
+    font: Font = Font.Montserrat,
     content: @Composable () -> Unit
 ) {
 
     val colors = getThemeColors(theme = theme)
+    val typography = Typography(fontFamily = font.fontFamily)
 
     MaterialTheme(
         colorScheme = colors,
-        typography = Typography,
+        typography = typography,
         shapes = Shapes,
         content = content
     )

@@ -6,6 +6,8 @@ import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_DELETE
 import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_EDIT_NOTE
 import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_PRIVACY_POLICY
 import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_RATE_APP
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_FONT
+import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_FONT_PARAM
 import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME
 import com.dscoding.takenoteapp.common.Constants.FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -40,5 +42,11 @@ fun FirebaseAnalytics.logOpenPrivacyPolicyPage() {
 fun FirebaseAnalytics.logSwapTheme(theme: String) {
     this.logEvent(FIREBASE_ANALYTICS_EVENT_SWAP_THEME) {
         param(FIREBASE_ANALYTICS_EVENT_SWAP_THEME_PARAM, theme)
+    }
+}
+
+fun FirebaseAnalytics.logSwapFont(font: String) {
+    this.logEvent(FIREBASE_ANALYTICS_EVENT_SWAP_FONT) {
+        param(FIREBASE_ANALYTICS_EVENT_SWAP_FONT_PARAM, font)
     }
 }
