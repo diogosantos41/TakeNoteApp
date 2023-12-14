@@ -26,7 +26,8 @@ fun NoteList(
     showGridView: Boolean = false,
     showDeleteButton: Boolean = false,
     onNoteClicked: (Note) -> Unit = {},
-    onDeleteClicked: (Note) -> Unit = {}
+    onDeleteClicked: (Note) -> Unit = {},
+    showAnimations: Boolean = true
 ) {
     val generalMargin = dimensionResource(R.dimen.margin)
 
@@ -35,13 +36,19 @@ fun NoteList(
     } else {
         LazyVerticalStaggeredGrid(
             modifier = Modifier
-                .fillMaxSize()
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioNoBouncy,
-                        stiffness = Spring.StiffnessMedium
-                    )
-                ),
+                .then(
+                    if (showAnimations) {
+                        Modifier.animateContentSize(
+                            animationSpec = spring(
+                                dampingRatio = Spring.DampingRatioNoBouncy,
+                                stiffness = Spring.StiffnessMedium
+                            )
+                        )
+                    } else {
+                        Modifier
+                    }
+                )
+                .fillMaxSize(),
             columns = StaggeredGridCells.Fixed(if (showGridView) 2 else 1),
             verticalArrangement = Arrangement.spacedBy(generalMargin),
             horizontalArrangement = Arrangement.spacedBy(generalMargin)
@@ -51,11 +58,6 @@ fun NoteList(
                     note = note,
                     isLastItem = index == notes.size - 1,
                     modifier = Modifier
-                        /*.animateItemPlacement(
-                            animationSpec = tween(
-                                durationMillis = 300
-                            )
-                        ) */
                         .fillMaxWidth()
                         .clickable { onNoteClicked(note) },
                     showDeleteButton = showDeleteButton,
