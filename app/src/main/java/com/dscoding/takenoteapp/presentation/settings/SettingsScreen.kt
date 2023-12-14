@@ -82,11 +82,12 @@ fun SettingsScreen(
                 elevation = 0.dp
             )
         },
-        content = { _ ->
+        content = { padding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color = MaterialTheme.colorScheme.background)
+                    .padding(padding)
             ) {
                 val settingsColumnModifier = Modifier
                     .fillMaxWidth()

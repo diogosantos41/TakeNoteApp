@@ -3,15 +3,14 @@ package com.dscoding.takenoteapp.presentation.common
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -34,14 +33,16 @@ fun NoteList(
     if (notes.isEmpty()) {
         EmptyListAlert(emptyMessage = emptyMessage)
     } else {
-        LazyVerticalGrid(
-            modifier = Modifier.fillMaxSize().animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessMedium
-                )
-            ),
-            columns = GridCells.Fixed(if (showGridView) 2 else 1),
+        LazyVerticalStaggeredGrid(
+            modifier = Modifier
+                .fillMaxSize()
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioNoBouncy,
+                        stiffness = Spring.StiffnessMedium
+                    )
+                ),
+            columns = StaggeredGridCells.Fixed(if (showGridView) 2 else 1),
             verticalArrangement = Arrangement.spacedBy(generalMargin),
             horizontalArrangement = Arrangement.spacedBy(generalMargin)
         ) {
@@ -50,11 +51,11 @@ fun NoteList(
                     note = note,
                     isLastItem = index == notes.size - 1,
                     modifier = Modifier
-                        .animateItemPlacement(
+                        /*.animateItemPlacement(
                             animationSpec = tween(
                                 durationMillis = 300
                             )
-                        )
+                        ) */
                         .fillMaxWidth()
                         .clickable { onNoteClicked(note) },
                     showDeleteButton = showDeleteButton,
