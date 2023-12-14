@@ -36,6 +36,7 @@ fun NoteList(
     } else {
         LazyVerticalStaggeredGrid(
             modifier = Modifier
+                .fillMaxSize()
                 .then(
                     if (showAnimations) {
                         Modifier.animateContentSize(
@@ -47,8 +48,7 @@ fun NoteList(
                     } else {
                         Modifier
                     }
-                )
-                .fillMaxSize(),
+                ),
             columns = StaggeredGridCells.Fixed(if (showGridView) 2 else 1),
             verticalArrangement = Arrangement.spacedBy(generalMargin),
             horizontalArrangement = Arrangement.spacedBy(generalMargin)
