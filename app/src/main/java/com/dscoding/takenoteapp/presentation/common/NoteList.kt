@@ -32,7 +32,7 @@ fun NoteList(
     val generalMargin = dimensionResource(R.dimen.margin)
 
     if (notes.isEmpty()) {
-        EmptyListAlert(emptyMessage = emptyMessage)
+        EmptyListAlert(emptyMessage = emptyMessage, showAnimations = showAnimations)
     } else {
         LazyVerticalStaggeredGrid(
             modifier = Modifier
