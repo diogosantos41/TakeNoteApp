@@ -25,18 +25,12 @@ import androidx.compose.ui.unit.dp
 import com.dscoding.takenoteapp.R
 
 @Composable
-fun EmptyListAlert(emptyMessage: String, showAnimations: Boolean = true) {
+fun EmptyListAlert(emptyMessage: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .then(
-                if (showAnimations) {
-                    Modifier.animateContentSize()
-                } else {
-                    Modifier
-                }
-            )
+            .animateContentSize()
             .padding(16.dp),
         contentAlignment = Alignment.Center,
     ) {

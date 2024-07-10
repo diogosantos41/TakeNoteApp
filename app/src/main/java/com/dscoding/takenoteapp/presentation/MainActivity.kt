@@ -2,7 +2,6 @@ package com.dscoding.takenoteapp.presentation
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -69,8 +68,6 @@ class MainActivity : ComponentActivity() {
         if (resources.getBoolean(R.bool.portrait_only)) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
             TakeNoteAppTheme(

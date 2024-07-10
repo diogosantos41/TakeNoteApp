@@ -54,7 +54,7 @@ fun SearchNotesScreen(
                     viewModel.onEvent(SearchNotesEvent.CleanSearchText)
                 },
                 onBackPressed = {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 },
                 focusRequester = focusRequester
             )
@@ -79,7 +79,6 @@ fun SearchNotesScreen(
                         emptyMessage = stringResource(id = R.string.notes_search_empty_message),
                         showGridView = false,
                         showDeleteButton = false,
-                        showAnimations = false,
                         onNoteClicked = {
                             navController.safeNavigate(
                                 Screen.AddEditNoteScreen.withArgs(

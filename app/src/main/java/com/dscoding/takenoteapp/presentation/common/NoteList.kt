@@ -27,27 +27,20 @@ fun NoteList(
     showDeleteButton: Boolean = false,
     onNoteClicked: (Note) -> Unit = {},
     onDeleteClicked: (Note) -> Unit = {},
-    showAnimations: Boolean = true
 ) {
     val generalMargin = dimensionResource(R.dimen.margin)
 
     if (notes.isEmpty()) {
-        EmptyListAlert(emptyMessage = emptyMessage, showAnimations = showAnimations)
+        EmptyListAlert(emptyMessage = emptyMessage)
     } else {
         LazyVerticalStaggeredGrid(
             modifier = Modifier
                 .fillMaxSize()
-                .then(
-                    if (showAnimations) {
-                        Modifier.animateContentSize(
-                            animationSpec = spring(
-                                dampingRatio = Spring.DampingRatioNoBouncy,
-                                stiffness = Spring.StiffnessMedium
-                            )
-                        )
-                    } else {
-                        Modifier
-                    }
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioNoBouncy,
+                        stiffness = Spring.StiffnessMedium
+                    )
                 ),
             columns = StaggeredGridCells.Fixed(if (showGridView) 2 else 1),
             verticalArrangement = Arrangement.spacedBy(generalMargin),

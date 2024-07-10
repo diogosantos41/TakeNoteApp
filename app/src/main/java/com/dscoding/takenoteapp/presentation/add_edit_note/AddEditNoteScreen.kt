@@ -47,6 +47,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -100,10 +101,10 @@ fun AddEditNoteScreen(
                     )
                 }
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }
                 is AddEditNoteViewModel.UiEvent.DeleteNote -> {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }
             }
         }
@@ -120,7 +121,7 @@ fun AddEditNoteScreen(
                     )
                 }, navigationIcon = {
                 IconButton(onClick = {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
