@@ -63,6 +63,7 @@
     <string name="settings_theme_option_light">Light</string>
     <string name="settings_theme_option_dark">Dark</string>
     <string name="settings_theme_option_dark_yellow">Dark Yellow</string>
+    <string name="settings_theme_option_pink_blue">Pink and Blue</string>
     <string name="settings_theme_option_dynamic">Dynamic Colors</string>
     <string name="settings_font">Font</string>
     <string name="settings_font_dialog_title">Choose Font</string>

@@ -5,6 +5,8 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 
 val Coral = Color(0xFFFF7F50)
 val Yellow = Color(0xFFFCD535)
+val Pink = Color(0xFFFF8BA7)
+val WhiteBlue = Color(0xFFF0FFFF)
 
 val White = Color(0xFFFFFFFF)
 val DirtyWhite = Color(0xFFFAFAFA)

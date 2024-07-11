@@ -9,7 +9,8 @@ enum class Theme(val id: Int, val stringResource: StringResource) {
     Light(1, StringResource(resId = R.string.settings_theme_option_light)),
     Dark(2, StringResource(resId = R.string.settings_theme_option_dark)),
     DarkYellow(3, StringResource(resId = R.string.settings_theme_option_dark_yellow)),
-    Dynamic(4, StringResource(resId = R.string.settings_theme_option_dynamic))
+    PinkBlue(4, StringResource(resId = R.string.settings_theme_option_pink_blue)),
+    Dynamic(5, StringResource(resId = R.string.settings_theme_option_dynamic))
 }
 
 @Composable
@@ -18,7 +19,8 @@ fun geThemesTextList(): List<String> {
         Theme.SystemDefault.stringResource.asString(),
         Theme.Light.stringResource.asString(),
         Theme.Dark.stringResource.asString(),
-        Theme.DarkYellow.stringResource.asString()
+        Theme.DarkYellow.stringResource.asString(),
+        Theme.PinkBlue.stringResource.asString()
     )
     if (supportDynamicColors()) {
         list.add(Theme.Dynamic.stringResource.asString())

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.dscoding.takenoteapp.utils.Font
 import com.dscoding.takenoteapp.utils.Theme
+import com.dscoding.takenoteapp.utils.supportDynamicColors
 
 private val LightColors = lightColorScheme(
     primary = Coral,
@@ -44,6 +45,16 @@ private val DarkYellowColors = darkColorScheme(
 
 )
 
+private val PinkBlueColors = lightColorScheme(
+    primary = Pink,
+    onPrimary = DarkGrey,
+    secondary = WhiteBlue,
+    background = WhiteBlue,
+    onBackground = DarkGrey,
+    surface = DirtyWhite,
+    onSurface = DarkGrey
+)
+
 @Composable
 fun getThemeColors(theme: Theme): ColorScheme {
     val context = LocalContext.current
@@ -52,7 +63,12 @@ fun getThemeColors(theme: Theme): ColorScheme {
         Theme.Light -> LightColors
         Theme.Dark -> DarkColors
         Theme.DarkYellow -> DarkYellowColors
-        Theme.Dynamic -> if (isSystemInDarkTheme()) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        Theme.PinkBlue -> PinkBlueColors
+        Theme.Dynamic -> if (supportDynamicColors()) {
+            if (isSystemInDarkTheme()) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        } else {
+            if (isSystemInDarkTheme()) DarkColors else LightColors
+        }
     }
 }
 
